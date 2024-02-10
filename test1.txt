@@ -1,0 +1,2 @@
+Ini adalah file test1.txt
+Ini adalah baris baru
