@@ -8,8 +8,13 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+<<<<<<< HEAD
       "cwd": "c:/File Tugas/Kuliah/Semester 2/Proyek 2/File Kelompok/proyek-disdukcapil",
       "program": "c:/File Tugas/Kuliah/Semester 2/Proyek 2/File Kelompok/proyek-disdukcapil/build/Debug/outDebug",
+=======
+      "cwd": "c:/Projects/proyek2-kelompoklima",
+      "program": "c:/Projects/proyek2-kelompoklima/build/Debug/outDebug",
+>>>>>>> 801ea42cf9104c9935b96a433fa1ed8cda8c3e4d
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
