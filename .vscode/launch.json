@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Code/Github/proyek2-kelompoklima-1",
-      "program": "d:/Code/Github/proyek2-kelompoklima-1/build/Debug/outDebug",
+      "cwd": "c:/Projects/proyek2-kelompoklima",
+      "program": "c:/Projects/proyek2-kelompoklima/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
