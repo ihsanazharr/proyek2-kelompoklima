@@ -5,6 +5,5 @@ int main()
 {
 	printf("Tes Program");
 	printf("Tes program 2");
-	registerAdmin();
 	return 1;
 }
