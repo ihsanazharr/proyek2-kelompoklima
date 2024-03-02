@@ -14,6 +14,8 @@ typedef struct{
 } Admin;
 
 void addAdmin();
-void enkripsiPassword(char *password, int jumlahGeser);
+void enkripsiPassword(char *password, int jumlahGeser, char arahGeser);
 void generateAngkaGeser(int *jumlahgeser, char *arahgeser);
 void simpanFileAdmin(Admin admin);
+void loginAdmin();
+void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser);
