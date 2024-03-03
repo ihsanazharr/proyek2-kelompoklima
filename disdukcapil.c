@@ -48,7 +48,7 @@ void enkripsiPassword(char *password, int jumlahgeser, char arahGeser)
             }
             else if (arahGeser == 'L')
             {
-                password[i] = ((password[i] - 'A') - jumlahgeser + 26) % 26 + 'A';
+                password[i] = ((password[i] - 'A') + jumlahgeser + 26) % 26 + 'A';
             }
         }
         else if (password[i] >= 'a' && password[i] <= 'z')
@@ -59,7 +59,7 @@ void enkripsiPassword(char *password, int jumlahgeser, char arahGeser)
             }
             else if (arahGeser == 'L')
             {
-                password[i] = ((password[i] - 'a') - jumlahgeser + 26) % 26 + 'a';
+                password[i] = ((password[i] - 'a') + jumlahgeser + 26) % 26 + 'a';
             }
         }
     }
@@ -100,7 +100,7 @@ void loginAdmin()
         printf("Masukkan Password: ");
         scanf("%s", admin.password);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 50; i++)
         {
             fscanf(file, "%s %s %d %c", usernameCompare, passwordCompare, &admin.jumlahGeser, &admin.arahGeser);
             dekripsiPassword(passwordCompare, admin.jumlahGeser, admin.arahGeser);
@@ -151,30 +151,30 @@ void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser)
 }
 
 // add Data Penduduk
-void addPenduduk() {
+void addPenduduk()
+{
     DataPenduduk dat;
     FILE *file;
     int cek = 0;
-    char fnama[100];
+    char fnama[18];
     int count = 0, a;
+    int keyStr = 18; // Tidak boleh >= 26
+    int keyInt = 7;  // Tidak boleh >= 10
 
     file = fopen("dataPenduduk.txt", "r");
-    if (file != NULL) {
-        for (a = getc(file); a != EOF; a = getc(file)) {
-            if (a == '\n') {
+    if (file != NULL)
+    {
+        for (a = getc(file); a != EOF; a = getc(file))
+        {
+            if (a == '\n')
+            {
                 count = count + 1;
             }
         }
         fclose(file);
     }
 
-    file = fopen("dataPenduduk.txt", "a+");
-    if (file == NULL) {
-        printf("File tidak dapat dibuka\n");
-        return;
-    }
-
-    system("cls");  // Assuming you are using Windows, change to "clear" if on Unix/Linux
+    system("cls"); // Assuming you are using Windows, change to "clear" if on Unix/Linux
     printf("=================================================\n");
     printf("\tINPUT DATA PENDUDUK\n");
     printf("=================================================\n");
@@ -183,8 +183,9 @@ void addPenduduk() {
     scanf("%s", dat.NIK);
     printf("Nama Lengkap: ");
     scanf("%s", dat.nama);
+    fflush(stdin);
     printf("Jenis Kelamin (L/P): ");
-    scanf("%s", dat.jk);
+    scanf("%c", &dat.jk);
     printf("Alamat: ");
     scanf("%s", dat.alamat);
     printf("Tempat Lahir: ");
@@ -195,18 +196,81 @@ void addPenduduk() {
     scanf("%s", dat.status);
     printf("=================================================\n");
 
-    while (fscanf(file, "%s", fnama) != EOF) {
-        if (strcmp(fnama, dat.NIK) == 0) {
+    enkripsiInteger(dat.NIK, keyInt);
+    file = fopen("dataPenduduk.txt", "r");
+    while (fscanf(file, "%s", fnama) != EOF)
+    {
+        if (strcmp(dat.NIK, fnama) == 0)
+        {
             cek = 1;
             break;
         }
     }
+    fclose(file);
 
-    if (cek == 1) {
+    if (cek == 1)
+    {
         printf("Data Duplikat\n");
-    } else {
-        fprintf(file, "%d %s %s %s %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        return;
+    }
+    else
+    {
+        file = fopen("dataPenduduk.txt", "a");
+        enkripsiHuruf(dat.alamat, keyStr);
+        fprintf(file, "%d %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
     }
 }
+
+void enkripsiHuruf(char *kalimat, int key)
+{
+    for (int i = 0; kalimat[i] != '\0'; i++)
+    {
+        if (kalimat[i] >= 'A' && kalimat[i] <= 'Z')
+        {
+            kalimat[i] = 'A' + ((kalimat[i] - 'A' + key) % 26);
+        }
+        else if (kalimat[i] >= 'a' && kalimat[i] <= 'z')
+        {
+            kalimat[i] = 'a' + ((kalimat[i] - 'a' + key) % 26);
+        }
+    }
+}
+
+void dekripsiHuruf(char *kalimat, int key)
+{
+    for (int i = 0; kalimat[i] != '\0'; i++)
+    {
+        if (kalimat[i] >= 'A' && kalimat[i] <= 'Z')
+        {
+            kalimat[i] = 'A' + ((kalimat[i] - 'A' - key + 26) % 26);
+        }
+        else if (kalimat[i] >= 'a' && kalimat[i] <= 'z')
+        {
+            kalimat[i] = 'a' + ((kalimat[i] - 'a' - key + 26) % 26);
+        }
+    }
+}
+
+void enkripsiInteger(char *num, int key)
+{
+    for (int i = 0; num[i] != '\0'; i++)
+    {
+        if (num[i] >= '0' && num[i] <= '9')
+        {
+            num[i] = '0' + ((num[i] - '0' + key) % 10);
+        }
+    }
+}
+
+// void dekripsiInteger(char *num, int key)
+// {
+//     for (int i = 0; num[i] != '\0'; i++)
+//     {
+//         if (num[i] >= '0' && num[i] <= '9')
+//         {
+//             num[i] = '0' + ((num[i] - '0' - key + 10) % 10);
+//         }
+//     }
+// } Prosedur masih belum dipakai

@@ -10,7 +10,8 @@ int main()
         printf("Menu:\n");
         printf("1. Register Admin\n");
         printf("2. Login Admin\n");
-        printf("3. Keluar\n");
+        printf("3. Add Penduduk\n");
+        printf("4. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
@@ -23,7 +24,10 @@ int main()
             loginAdmin();
             break;
         case 3:
-            printf("Keluar dari program.");
+            addPenduduk();
+            break;
+        case 4:
+            printf("Program Keluar");
             break;
         default:
             printf("Masukkan tidak valid, coba kembali.\n");
