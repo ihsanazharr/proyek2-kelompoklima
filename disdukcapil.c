@@ -328,3 +328,80 @@ void deleteData()
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
 
+//edit data penduduk
+
+void editPenduduk()
+{
+    FILE *file, *temp;
+    DataPenduduk data;
+    char userInput[20];
+    char userInputCpy[20];
+    char userChoose;
+    bool found = false;
+
+    file = fopen("dataPenduduk.txt", "r");
+    temp = fopen("tempDataPenduduk.txt", "w");
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error membuka/membuat file!");
+        exit(1);
+    }
+
+    printf("Masukkan NIK data yang ingin diedit: ");
+    scanf("%s", userInput);
+    strcpy(userInputCpy, userInput);
+    enkripsiInteger(userInput, keyInt);
+
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    {
+        if (strcmp(userInput, data.NIK) != 0)
+        {
+            fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+        }
+        else
+        {
+            found = true;
+            printf("Data dengan NIK %s telah ditemukan, yakin ingin mengeditnya? [Y/N]", userInputCpy);
+            fflush(stdin);
+            scanf("%c", &userChoose);
+            if (userChoose == 'Y' || userChoose == 'y')
+            {
+                // Implementasi pengeditan data
+                printf("Masukkan data yang baru:\n");
+                printf("Nama Lengkap: ");
+                scanf("%s", data.nama);
+                fflush(stdin);
+                printf("Jenis Kelamin (L/P): ");
+                scanf("%c", &data.jk);
+                printf("Alamat: ");
+                scanf("%s", data.alamat);
+                printf("Tempat Lahir: ");
+                scanf("%s", data.tempat_lahir);
+                printf("Agama: ");
+                scanf("%s", data.agama);
+                printf("Status: ");
+                scanf("%s", data.status);
+                enkripsiHuruf(data.alamat, keyStr);
+                fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+                printf("Data berhasil diubah!\n");
+            }
+            else
+            {
+                fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+            }
+        }
+    }
+
+    if (!found)
+    {
+        printf("NIK Tidak Ditemukan\n");
+    }
+
+    fclose(file);
+    fclose(temp);
+    remove("dataPenduduk.txt");
+    rename("tempDataPenduduk.txt", "dataPenduduk.txt");
+}
+
+
+

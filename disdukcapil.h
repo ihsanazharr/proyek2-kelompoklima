@@ -44,3 +44,8 @@ void enkripsiInteger(char *num, int key);
 // deleteData
 void deleteData();
 
+// editdatapenduduk
+void editPenduduk();
+
+
+
