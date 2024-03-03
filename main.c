@@ -31,12 +31,13 @@ int main()
             deleteData();
             break;
         case 5:
+            printf("Program Keluar");
             break;
         default:
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 6);
+    } while (pilihan != 5);
 
     return 0;
 }
