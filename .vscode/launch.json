@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": []
-=======
   "version": "0.2.0",
   "configurations": [
     {
@@ -15,13 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-<<<<<<< HEAD
-      "cwd": "c:/File Tugas/Kuliah/Semester 2/Proyek 2/File Kelompok/proyek-disdukcapil",
-      "program": "c:/File Tugas/Kuliah/Semester 2/Proyek 2/File Kelompok/proyek-disdukcapil/build/Debug/outDebug",
-=======
-      "cwd": "c:/Projects/proyek2-kelompoklima",
-      "program": "c:/Projects/proyek2-kelompoklima/build/Debug/outDebug",
->>>>>>> 801ea42cf9104c9935b96a433fa1ed8cda8c3e4d
+      "cwd": "c:/Users/LENOVO/Documents/POLBAN/SEMESTER 2/PROYEK 2/proyek2-kelompoklima",
+      "program": "c:/Users/LENOVO/Documents/POLBAN/SEMESTER 2/PROYEK 2/proyek2-kelompoklima/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -33,5 +21,4 @@
       ]
     }
   ]
->>>>>>> 58ca0be4dba52b3223357340f0165b4ba7950cfa
 }
