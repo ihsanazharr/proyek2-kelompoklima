@@ -11,7 +11,8 @@ int main()
         printf("1. Register Admin\n");
         printf("2. Login Admin\n");
         printf("3. Add Penduduk\n");
-        printf("4. Keluar\n");
+        printf("4. Delete Data Penduduk\n");
+        printf("5. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
@@ -27,13 +28,15 @@ int main()
             addPenduduk();
             break;
         case 4:
-            printf("Program Keluar");
+            deleteData();
+            break;
+        case 5:
             break;
         default:
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 4);
+    } while (pilihan != 6);
 
     return 0;
 }
