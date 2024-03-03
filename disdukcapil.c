@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+int keyStr = 18; // Tidak boleh >= 26
+int keyInt = 7;  // Tidak boleh >= 10
 // Procedure tambah admin
 void addAdmin()
 {
@@ -158,8 +160,6 @@ void addPenduduk()
     int cek = 0;
     char fnama[18];
     int count = 0, a;
-    int keyStr = 18; // Tidak boleh >= 26
-    int keyInt = 7;  // Tidak boleh >= 10
 
     file = fopen("dataPenduduk.txt", "r");
     if (file != NULL)
@@ -274,3 +274,57 @@ void enkripsiInteger(char *num, int key)
 //         }
 //     }
 // } Prosedur masih belum dipakai
+
+void deleteData()
+{
+    system("cls");
+    FILE *file, *temp;
+    DataPenduduk data;
+    char userInput[20];
+    char userInputCpy[20];
+    char userChoose;
+    bool found = false;
+
+    file = fopen("dataPenduduk.txt", "r");
+    temp = fopen("tempDataPenduduk.txt", "w");
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error membuka/membuat file!");
+        exit(1);
+    }
+
+    printf("Masukkan NIK data yang ingin dihapus: ");
+    scanf("%s", userInput);
+    strcpy(userInputCpy, userInput);
+    enkripsiInteger(userInput, keyInt);
+
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    {
+        if (strcmp(userInput, data.NIK) != 0)
+        {
+            fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+        }
+        else
+        {
+            found = true;
+            printf("Data dengan NIK %s telah ditemukan, yakin ingin menghapusnya? [Y/N]", userInputCpy);
+            fflush(stdin);
+            scanf("%c", &userChoose);
+            if (userChoose == 'N' || userChoose == 'n')
+            {
+                fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+            }
+        }
+    }
+    if (!found){
+        printf("NIK Tidak Ditemukan\n");
+    }
+
+    if (userChoose == 'Y' || userChoose == 'y'){
+        printf("Data Berhasil Dihapus!\n");
+    }
+    fclose(file);
+    fclose(temp);
+    remove("dataPenduduk.txt");
+    rename("tempDataPenduduk.txt", "dataPenduduk.txt");
+}

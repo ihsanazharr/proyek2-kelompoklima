@@ -40,3 +40,6 @@ void enkripsiHuruf(char *kalimat, int key);
 void dekripsiHuruf(char *kalimat, int key);
 void enkripsiInteger(char *num, int key);
 // void dekripsiInteger(char *num, int key); Belum terpakai
+
+// deleteData
+void deleteData();
