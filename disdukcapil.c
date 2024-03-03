@@ -319,6 +319,10 @@ void deleteData()
     if (!found){
         printf("NIK Tidak Ditemukan\n");
     }
+
+    if (userChoose == 'Y' || userChoose == 'y'){
+        printf("Data Berhasil Dihapus!\n");
+    }
     fclose(file);
     fclose(temp);
     remove("dataPenduduk.txt");
