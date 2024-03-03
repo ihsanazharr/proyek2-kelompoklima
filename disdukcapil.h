@@ -6,25 +6,27 @@
 #define MAX_USERNAME_LENGTH 50
 #define MAX_PASSWORD_LENGTH 50
 
-typedef struct{
+typedef struct
+{
     char username[MAX_USERNAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
-    int jumlahGeser;//tambahan subvar untuk jumlah geser & arah geser
+    int jumlahGeser; // tambahan subvar untuk jumlah geser & arah geser
     char arahGeser;
 } Admin;
 
-typedef struct{
+typedef struct
+{
     int id;
-    char NIK[16];
+    char NIK[18];
     char nama[50];
-    char jk[1];
+    char jk;
     char alamat[50];
     char tempat_lahir[20];
     char agama[20];
-    char status[20];   
+    char status[20];
 } DataPenduduk;
 
-//admin
+// admin
 void addAdmin();
 void enkripsiPassword(char *password, int jumlahGeser, char arahGeser);
 void generateAngkaGeser(int *jumlahgeser, char *arahgeser);
@@ -32,5 +34,9 @@ void simpanFileAdmin(Admin admin);
 void loginAdmin();
 void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser);
 
-//adddatapenduduk
+// adddatapenduduk
 void addPenduduk();
+void enkripsiHuruf(char *kalimat, int key);
+void dekripsiHuruf(char *kalimat, int key);
+void enkripsiInteger(char *num, int key);
+// void dekripsiInteger(char *num, int key); Belum terpakai
