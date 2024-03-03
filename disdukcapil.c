@@ -274,3 +274,139 @@ void enkripsiInteger(char *num, int key)
 //         }
 //     }
 // } Prosedur masih belum dipakai
+
+// Implementasi fungsi editPenduduk
+void editPenduduk()
+{
+    FILE *file;
+    DataPenduduk dat;
+    char targetNIK[18];
+    char temp[50];
+    int found = 0;
+
+    printf("Masukkan NIK penduduk yang akan diedit: ");
+    scanf("%s", targetNIK);
+
+    // Proses dekripsi file sebelum pembacaan data
+    dekripsiFilePenduduk();
+
+    file = fopen("dataPenduduk.txt", "r+");
+    if (file == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
+
+    while (fscanf(file, "%d %s %s %c %s %s %s %s",
+                  &dat.id, dat.NIK, dat.nama, &dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status) != EOF)
+    {
+        // Proses dekripsi pada NIK untuk pencocokan
+        dekripsiInteger(dat.NIK, 7);
+
+        if (strcmp(targetNIK, dat.NIK) == 0)
+        {
+            printf("Data ditemukan. Masukkan perubahan:\n");
+            printf("Nama Lengkap: ");
+            scanf("%s", dat.nama);
+            printf("Jenis Kelamin (L/P): ");
+            scanf(" %c", &dat.jk);
+            printf("Alamat: ");
+            scanf("%s", dat.alamat);
+            printf("Tempat Lahir: ");
+            scanf("%s", dat.tempat_lahir);
+            printf("Agama: ");
+            scanf("%s", dat.agama);
+            printf("Status: ");
+            scanf("%s", dat.status);
+
+            // Proses enkripsi NIK sebelum penyimpanan
+            enkripsiInteger(dat.NIK, 7);
+
+            // Posisi kursor dipindahkan ke awal data yang akan diubah
+            fseek(file, -1 * (strlen(dat.NIK) + strlen(dat.nama) + 6), SEEK_CUR);
+
+            // Menulis perubahan ke file
+            fprintf(file, "%d %s %s %c %s %s %s %s",
+                    dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+
+            found = 1;
+            break;
+        }
+    }
+
+    fclose(file);
+
+    if (!found)
+    {
+        printf("Data dengan NIK %s tidak ditemukan.\n", targetNIK);
+    }
+
+    // Proses enkripsi file setelah penyimpanan
+    enkripsiFilePenduduk();
+}
+
+// Fungsi untuk melakukan enkripsi pada seluruh data di file dataPenduduk.txt
+void enkripsiFilePenduduk()
+{
+    FILE *fileInput, *fileOutput;
+    DataPenduduk dat;
+
+    fileInput = fopen("dataPenduduk.txt", "r");
+    fileOutput = fopen("tempDataPenduduk.txt", "w");
+
+    if (fileInput == NULL || fileOutput == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
+
+    while (fscanf(fileInput, "%d %s %s %c %s %s %s %s",
+                  &dat.id, dat.NIK, dat.nama, &dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status) != EOF)
+    {
+        // Proses enkripsi pada NIK sebelum penyimpanan
+        enkripsiInteger(dat.NIK, 7);
+
+        fprintf(fileOutput, "%d %s %s %c %s %s %s %s\n",
+                dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+    }
+
+    fclose(fileInput);
+    fclose(fileOutput);
+
+    // Menghapus file asli dan mengganti dengan file yang telah dienkripsi
+    remove("dataPenduduk.txt");
+    rename("tempDataPenduduk.txt", "dataPenduduk.txt");
+}
+
+// Fungsi untuk melakukan dekripsi pada seluruh data di file dataPenduduk.txt
+void dekripsiFilePenduduk()
+{
+    FILE *fileInput, *fileOutput;
+    DataPenduduk dat;
+
+    fileInput = fopen("dataPenduduk.txt", "r");
+    fileOutput = fopen("tempDataPenduduk.txt", "w");
+
+    if (fileInput == NULL || fileOutput == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
+
+    while (fscanf(fileInput, "%d %s %s %c %s %s %s %s",
+                  &dat.id, dat.NIK, dat.nama, &dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status) != EOF)
+    {
+        // Proses dekripsi pada NIK sebelum pembacaan
+        dekripsiInteger(dat.NIK, 7);
+
+        fprintf(fileOutput, "%d %s %s %c %s %s %s %s\n",
+                dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+    }
+
+    fclose(fileInput);
+    fclose(fileOutput);
+
+    // Menghapus file asli dan mengganti dengan file yang telah didekripsi
+    remove("dataPenduduk.txt");
+    rename("tempDataPenduduk.txt", "dataPenduduk.txt");
+}
