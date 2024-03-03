@@ -264,16 +264,18 @@ void enkripsiInteger(char *num, int key)
     }
 }
 
-// void dekripsiInteger(char *num, int key)
-// {
-//     for (int i = 0; num[i] != '\0'; i++)
-//     {
-//         if (num[i] >= '0' && num[i] <= '9')
-//         {
-//             num[i] = '0' + ((num[i] - '0' - key + 10) % 10);
-//         }
-//     }
-// } Prosedur masih belum dipakai
+void dekripsiInteger(char *num, int key)
+{
+    for (int i = 0; num[i] != '\0'; i++)
+    {
+        if (num[i] >= '0' && num[i] <= '9')
+        {
+            num[i] = '0' + ((num[i] - '0' - key + 10) % 10);
+        }
+    }
+} 
+// Prosedur masih belum dipakai
+
 void deleteData()
 {
     system("cls");
@@ -346,7 +348,9 @@ void editPenduduk()
         printf("Error membuka/membuat file!");
         exit(1);
     }
-
+    
+    system("cls");
+    displayDecryptedNikList();
     printf("Masukkan NIK data yang ingin diedit: ");
     scanf("%s", userInput);
     strcpy(userInputCpy, userInput);
@@ -402,6 +406,54 @@ void editPenduduk()
     remove("dataPenduduk.txt");
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
+
+void displayNikList()
+{
+    FILE *file = fopen("dataPenduduk.txt", "r");
+    if (file == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
+
+    DataPenduduk data;
+    printf("=================================================\n");
+    printf("\tDaftar NIK Penduduk\n");
+    printf("=================================================\n");
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    {
+        printf("%s\n", data.NIK);
+    }
+    printf("=================================================\n");
+
+    fclose(file);
+}
+
+void displayDecryptedNikList()
+{
+    FILE *file = fopen("dataPenduduk.txt", "r");
+    if (file == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
+
+    DataPenduduk data;
+    printf("=================================================\n");
+    printf("\tDaftar NIK Penduduk (Terdekripsi)\n");
+    printf("=================================================\n");
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    {
+        char decryptedNik[18];
+        strcpy(decryptedNik, data.NIK);
+        dekripsiInteger(decryptedNik, keyInt);
+        printf("%s (Normal: %s)\n", decryptedNik, data.NIK);
+    }
+    printf("=================================================\n");
+
+    fclose(file);
+}
+
 
 
 

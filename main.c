@@ -33,7 +33,7 @@ int main()
             break;
         case 4:
             editPenduduk();
-            system("cls");
+            // system("cls");
             break;
         case 5:
             deleteData();

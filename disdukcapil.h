@@ -46,6 +46,9 @@ void deleteData();
 
 // editdatapenduduk
 void editPenduduk();
+void displayNikList();
+void displayDecryptedNikList();
+
 
 
 
