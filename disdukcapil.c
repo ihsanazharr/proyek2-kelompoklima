@@ -149,16 +149,6 @@ void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser)
         }
     }
 }
-typedef struct{
-    int id;
-    char NIK[16];
-    char nama[50];
-    char jk[1];
-    char alamat[50];
-    char tempat_lahir[20];
-    char agama[20];
-    char status[20];   
-} DataPenduduk;
 
 // add Data Penduduk
 void addPenduduk() {
