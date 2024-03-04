@@ -1,23 +1,86 @@
 #include "disdukcapil.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <conio.h>
+#include <stdio.h>
+#include <math.h>
+#include <windows.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 int keyStr = 18; // Tidak boleh >= 26
 int keyInt = 7;  // Tidak boleh >= 10
 // Procedure tambah admin
+
+void gotoxy(int x, int y) {
+    COORD coord;
+
+    coord.X = x;
+    coord.Y = y;
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void loading(){
+	system("cls");
+    system("color F1");
+
+		gotoxy(30,9); printf("              =======================");
+		gotoxy(30,10);printf("               MOHON TUNGGU SEBENTAR");
+		gotoxy(30,12);printf("              =======================");
+
+		Sleep(500);
+		gotoxy(30,11);printf("                     . ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+}
+
+int pilihanMenuAwal()
+{
+	loading();
+    int input;
+	system("cls");
+	char terminate;
+
+	gotoxy(30,2); printf("                     SELAMAT DATANG                         \n");
+	gotoxy(30,3); printf("                           DI                               \n");
+    gotoxy(30,4); printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
+    gotoxy(30,5); printf("               ===========================                   \n\n");
+    gotoxy(30,7);printf("                1. MASUK                             \n");
+    gotoxy(30,8);printf("                2. KELUAR                            \n");
+
+
+    gotoxy(30,11); printf("          PILIHAN	: ");
+    scanf("%d", &input);
+    scanf("%c", &terminate);
+
+    switch(input){
+		case 1:
+            loginAdmin();
+			break;
+
+		case 2:
+            system("cls");
+			break;
+	}
+}
+
 void addAdmin()
 {
     // membungkus password&username menjadi struct
     Admin admin;
 
     // input username
-    printf("Masukkan username admin : ");
+    printf("Masukkan Username : ");
     scanf("%s", admin.username);
 
     // input password
-    printf("Masukkan password admin : ");
+    printf("Masukkan Password : ");
     scanf("%s", admin.password);
 
     // proses enkripsi sebelum masuk ke file
@@ -96,7 +159,10 @@ void loginAdmin()
 
     while (!loginBerhasil)
     {
-
+        system("cls"); // Assuming you are using Windows, change to "clear" if on Unix/Linux
+    	printf("==============================\n");
+    	printf("======  SILAHKAN LOGIN  ======\n");
+    	printf("==============================\n\n");
         printf("Masukkan Username: ");
         scanf("%s", admin.username);
         printf("Masukkan Password: ");
@@ -109,17 +175,62 @@ void loginAdmin()
 
             if (strcmp(admin.username, usernameCompare) == 0 && strcmp(admin.password, passwordCompare) == 0)
             {
-                printf("Login Berhasil!\n\n");
                 loginBerhasil = true;
+                menuAwal();
                 break;
             }
         }
-        if (!loginBerhasil)
+        if (loginBerhasil != true)
         {
             printf("Username atau Password Salah, silakan coba lagi.\n");
             rewind(file);
         }
     }
+}
+
+void menuAwal()
+{
+    int pilihan;
+    do
+    {
+    	loading();
+        system("cls");
+        printf("Menu:\n");
+        printf("1. Add Penduduk\n");
+        printf("2. Edit Penduduk\n");
+        printf("3. Delete Data Penduduk\n");
+        printf("4. Tambah Admin\n");
+        printf("5. Keluar\n");
+        printf("Pilih menu: ");
+        scanf("%d", &pilihan);
+
+        switch (pilihan)
+        {
+        case 1:
+            addPenduduk();
+            system("cls");
+            break;
+        case 2:
+            editPenduduk();
+            system("cls");
+            break;
+        case 3:
+            deleteData();
+            system("cls");
+            break;
+        case 4:
+            addAdmin();
+            // system("cls");
+            break;
+        case 5:
+            pilihanMenuAwal();
+            system("cls");
+            break;
+        default:
+            printf("Masukkan tidak valid, coba kembali.\n");
+            break;
+        }
+    } while (pilihan != 5);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser)
@@ -220,6 +331,7 @@ void addPenduduk()
         fprintf(file, "%d %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
+        menuAwal();
     }
 }
 

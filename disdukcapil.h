@@ -27,6 +27,8 @@ typedef struct
 } DataPenduduk;
 
 // admin
+void gotoxy(int x, int y);
+int pilihanMenuAwal();
 void addAdmin();
 void enkripsiPassword(char *password, int jumlahGeser, char arahGeser);
 void generateAngkaGeser(int *jumlahgeser, char *arahgeser);
