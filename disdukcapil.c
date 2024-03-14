@@ -22,7 +22,7 @@ void gotoxy(int x, int y) {
 
 void loading(){
 	system("cls");
-    system("color F1");
+    system("color B");
 
 		gotoxy(30,9); printf("              =======================");
 		gotoxy(30,10);printf("               MOHON TUNGGU SEBENTAR");
@@ -565,7 +565,6 @@ void displayDecryptedNikList()
 
     fclose(file);
 }
-
 
 
 
