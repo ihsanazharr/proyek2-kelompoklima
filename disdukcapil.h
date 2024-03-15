@@ -10,8 +10,7 @@ typedef struct
 {
     char username[MAX_USERNAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
-    int jumlahGeser; // tambahan subvar untuk jumlah geser & arah geser
-    char arahGeser;
+    int jumlahGeser; // tambahan subvar untuk jumlah geser
 } Admin;
 
 typedef struct
@@ -27,12 +26,14 @@ typedef struct
 } DataPenduduk;
 
 // admin
+void gotoxy(int x, int y);
+int pilihanMenuAwal();
 void addAdmin();
-void enkripsiPassword(char *password, int jumlahGeser, char arahGeser);
-void generateAngkaGeser(int *jumlahgeser, char *arahgeser);
+void enkripsiPassword(char *password, int jumlahGeser);
+void generateAngkaGeser(int *jumlahgeser);
 void simpanFileAdmin(Admin admin);
 void loginAdmin();
-void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser);
+void dekripsiPassword(char *passwordCompare, int jumlahGeser);
 
 // adddatapenduduk
 void addPenduduk();
@@ -48,7 +49,6 @@ void deleteData();
 void editPenduduk();
 void displayNikList();
 void displayDecryptedNikList();
-
 
 
 

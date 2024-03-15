@@ -1,68 +1,107 @@
 #include "disdukcapil.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <conio.h>
+#include <stdio.h>
+#include <math.h>
+#include <windows.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
 int keyStr = 18; // Tidak boleh >= 26
 int keyInt = 7;  // Tidak boleh >= 10
 // Procedure tambah admin
-void addAdmin()
+
+void gotoxy(int x, int y) {
+    COORD coord;
+
+    coord.X = x;
+    coord.Y = y;
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void loading(){
+	system("cls");
+    system("color B");
+
+		gotoxy(30,9); printf("              =======================");
+		gotoxy(30,10);printf("               MOHON TUNGGU SEBENTAR");
+		gotoxy(30,12);printf("              =======================");
+
+		Sleep(500);
+		gotoxy(30,11);printf("                     . ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+		Sleep(500);
+		printf(". ");
+}
+
+int pilihanMenuAwal()
 {
-    // membungkus password&username menjadi struct
+	loading();
+    int input;
+	system("cls");
+	char terminate;
+
+	gotoxy(30,2); printf("                     SELAMAT DATANG                         \n");
+	gotoxy(30,3); printf("                           DI                               \n");
+    gotoxy(30,4); printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
+    gotoxy(30,5); printf("               ===========================                   \n\n");
+    gotoxy(30,7);printf("                1. MASUK                             \n");
+    gotoxy(30,8);printf("                2. KELUAR                            \n");
+
+
+    gotoxy(30,11); printf("          PILIHAN	: ");
+    scanf("%d", &input);
+    scanf("%c", &terminate);
+
+    switch(input){
+		case 1:
+            loginAdmin();
+			break;
+
+		case 2:
+            system("cls");
+			break;
+	}
+}
+
+void addAdmin() {
+    //Membungkus password & username menjadi struct
     Admin admin;
 
-    // input username
-    printf("Masukkan username admin : ");
+    //input username
+    printf("Masukkan Username : ");
     scanf("%s", admin.username);
-
-    // input password
-    printf("Masukkan password admin : ");
+    //input password
+    printf("Masukkan Password : ");
     scanf("%s", admin.password);
 
-    // proses enkripsi sebelum masuk ke file
-    generateAngkaGeser(&admin.jumlahGeser, &admin.arahGeser);             // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
-    enkripsiPassword(admin.password, admin.jumlahGeser, admin.arahGeser); // Enkripsi password dengan parameter input password dan jumlahgeser sebelumnya
-    simpanFileAdmin(admin);                                               // Menyimpan hasil username,password(enkripsi),jumlahgeser,arahgeser
+    //proses enkripsi sebelum masuk file
+    generateAngkaGeser(&admin.jumlahGeser);             // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
+    enkripsiPassword(admin.password, admin.jumlahGeser); // Enkripsi password dengan parameter input password dan jumlahgeser sebelumnya
+    simpanFileAdmin(admin);  
 }
 
 // Function untuk generate kunci random & arah random
-void generateAngkaGeser(int *jumlahgeser, char *arahgeser)
-{
+void generateAngkaGeser(int *jumlahgeser) {
     // Inisialisasi seed/nilai acak berdasarkan waktu saat ini
     srand(time(NULL));
     // Menghasilkan nilai acak untuk pergeseran
     *jumlahgeser = rand() % 26 + 1;
-    // Menghasilkan nilai acak untur arah kiri atau kanan
-    *arahgeser = rand() % 2 == 0 ? 'L' : 'R';
 }
 
 // Proses enkripsi
-void enkripsiPassword(char *password, int jumlahgeser, char arahGeser)
-{
-    for (int i = 0; i < strlen(password); i++)
-    {
-        if (password[i] >= 'A' && password[i] <= 'Z')
-        {
-            if (arahGeser == 'R')
-            {
-                password[i] = ((password[i] - 'A') + jumlahgeser) % 26 + 'A';
-            }
-            else if (arahGeser == 'L')
-            {
-                password[i] = ((password[i] - 'A') + jumlahgeser + 26) % 26 + 'A';
-            }
-        }
-        else if (password[i] >= 'a' && password[i] <= 'z')
-        {
-            if (arahGeser == 'R')
-            {
-                password[i] = ((password[i] - 'a') + jumlahgeser) % 26 + 'a';
-            }
-            else if (arahGeser == 'L')
-            {
-                password[i] = ((password[i] - 'a') + jumlahgeser + 26) % 26 + 'a';
-            }
+void enkripsiPassword(char *password, int jumlahgeser) {
+    for (int i = 0; i < strlen(password); i++) {
+        if (password[i] >= 'A' && password[i] <= 'Z') {
+            password[i] = ((password[i] - 'A') + jumlahgeser) % 26 + 'A';
+        } else if (password[i] >= 'a' && password[i] <= 'z') {
+            password[i] = ((password[i] - 'a') + jumlahgeser) % 26 + 'a';
         }
     }
 }
@@ -76,7 +115,7 @@ void simpanFileAdmin(Admin admin)
         exit(1);
     }
 
-    fprintf(file, "%s %s %d %c\n", admin.username, admin.password, admin.jumlahGeser, admin.arahGeser);
+    fprintf(file, "%s %s %d\n", admin.username, admin.password, admin.jumlahGeser);
     fclose(file); // menutup file
 }
 
@@ -96,7 +135,10 @@ void loginAdmin()
 
     while (!loginBerhasil)
     {
-
+        system("cls"); // Assuming you are using Windows, change to "clear" if on Unix/Linux
+    	printf("==============================\n");
+    	printf("======  SILAHKAN LOGIN  ======\n");
+    	printf("==============================\n\n");
         printf("Masukkan Username: ");
         scanf("%s", admin.username);
         printf("Masukkan Password: ");
@@ -104,17 +146,17 @@ void loginAdmin()
 
         for (int i = 0; i < 50; i++)
         {
-            fscanf(file, "%s %s %d %c", usernameCompare, passwordCompare, &admin.jumlahGeser, &admin.arahGeser);
-            dekripsiPassword(passwordCompare, admin.jumlahGeser, admin.arahGeser);
+            fscanf(file, "%s %s %d", usernameCompare, passwordCompare, &admin.jumlahGeser);
+            dekripsiPassword(passwordCompare, admin.jumlahGeser);
 
             if (strcmp(admin.username, usernameCompare) == 0 && strcmp(admin.password, passwordCompare) == 0)
             {
-                printf("Login Berhasil!\n\n");
                 loginBerhasil = true;
+                menuAwal();
                 break;
             }
         }
-        if (!loginBerhasil)
+        if (loginBerhasil != true)
         {
             printf("Username atau Password Salah, silakan coba lagi.\n");
             rewind(file);
@@ -122,32 +164,58 @@ void loginAdmin()
     }
 }
 
-void dekripsiPassword(char *passwordCompare, int jumlahGeser, char arahGeser)
+void menuAwal()
 {
-    int i;
-    for (i = 0; i < strlen(passwordCompare); i++)
+    int pilihan;
+    do
     {
-        if (passwordCompare[i] >= 'A' && passwordCompare[i] <= 'Z')
+    	loading();
+        system("cls");
+        printf("Menu:\n");
+        printf("1. Add Penduduk\n");
+        printf("2. Edit Penduduk\n");
+        printf("3. Delete Data Penduduk\n");
+        printf("4. Tambah Admin\n");
+        printf("5. Keluar\n");
+        printf("Pilih menu: ");
+        scanf("%d", &pilihan);
+
+        switch (pilihan)
         {
-            if (arahGeser == 'R')
-            {
-                passwordCompare[i] = ((passwordCompare[i] - 'A') - jumlahGeser) % 26 + 'A';
-            }
-            else if (arahGeser == 'L')
-            {
-                passwordCompare[i] = ((passwordCompare[i] - 'A') - jumlahGeser + 26) % 26 + 'A';
-            }
+        case 1:
+            addPenduduk();
+            system("cls");
+            break;
+        case 2:
+            editPenduduk();
+            system("cls");
+            break;
+        case 3:
+            deleteData();
+            system("cls");
+            break;
+        case 4:
+            addAdmin();
+            // system("cls");
+            break;
+        case 5:
+            pilihanMenuAwal();
+            system("cls");
+            break;
+        default:
+            printf("Masukkan tidak valid, coba kembali.\n");
+            break;
         }
-        else if (passwordCompare[i] >= 'a' && passwordCompare[i] <= 'z')
-        {
-            if (arahGeser == 'R')
-            {
-                passwordCompare[i] = ((passwordCompare[i] - 'a') - jumlahGeser) % 26 + 'a';
-            }
-            else if (arahGeser == 'L')
-            {
-                passwordCompare[i] = ((passwordCompare[i] - 'a') - jumlahGeser + 26) % 26 + 'a';
-            }
+    } while (pilihan != 5);
+}
+
+void dekripsiPassword(char *passwordCompare, int jumlahGeser) {
+    int i;
+    for (i = 0; i < strlen(passwordCompare); i++) {
+        if (passwordCompare[i] >= 'A' && passwordCompare[i] <= 'Z') {
+            passwordCompare[i] = ((passwordCompare[i] - 'A') - jumlahGeser + 26) % 26 + 'A';
+        } else if (passwordCompare[i] >= 'a' && passwordCompare[i] <= 'z') {
+            passwordCompare[i] = ((passwordCompare[i] - 'a') - jumlahGeser + 26) % 26 + 'a';
         }
     }
 }
@@ -181,23 +249,34 @@ void addPenduduk()
     dat.id = count;
     printf("NIK: ");
     scanf("%s", dat.NIK);
+    fflush(stdin);
     printf("Nama Lengkap: ");
-    scanf("%s", dat.nama);
+    fgets(dat.nama, sizeof(dat.nama), stdin);
+    dat.nama[strcspn(dat.nama, "\n")] = '\0'; // Menghilangkan karakter newline jika ada
     fflush(stdin);
     printf("Jenis Kelamin (L/P): ");
     scanf("%c", &dat.jk);
+    fflush(stdin);
     printf("Alamat: ");
-    scanf("%s", dat.alamat);
+    fgets(dat.alamat, sizeof(dat.alamat), stdin);
+    dat.alamat[strcspn(dat.alamat, "\n")] = '\0'; // Menghilangkan karakter newline jika ada
+    fflush(stdin);
     printf("Tempat Lahir: ");
-    scanf("%s", dat.tempat_lahir);
+    fgets(dat.tempat_lahir, sizeof(dat.tempat_lahir), stdin);
+    dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0'; // Menghilangkan karakter newline jika ada
+    fflush(stdin);
     printf("Agama: ");
-    scanf("%s", dat.agama);
+    fgets(dat.agama, sizeof(dat.agama), stdin);
+    dat.agama[strcspn(dat.agama, "\n")] = '\0'; // Menghilangkan karakter newline jika ada
+    fflush(stdin);
     printf("Status: ");
-    scanf("%s", dat.status);
+    fgets(dat.status, sizeof(dat.status), stdin);
+    dat.status[strcspn(dat.status, "\n")] = '\0'; // Menghilangkan karakter newline jika ada
+    fflush(stdin);
     printf("=================================================\n");
 
     enkripsiInteger(dat.NIK, keyInt);
-    file = fopen("dataPenduduk.txt", "r");
+    file = fopen("dataPenduduk.txt", "a");
     while (fscanf(file, "%s", fnama) != EOF)
     {
         if (strcmp(dat.NIK, fnama) == 0)
@@ -217,11 +296,14 @@ void addPenduduk()
     {
         file = fopen("dataPenduduk.txt", "a");
         enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        fprintf(file, "%d %s %s %c %s %s %s %s", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
+        menuAwal();
     }
 }
+
+
 
 void enkripsiHuruf(char *kalimat, int key)
 {
@@ -367,18 +449,19 @@ void editPenduduk()
             found = true;
             printf("Data dengan NIK %s telah ditemukan, yakin ingin mengeditnya? [Y/N]", userInputCpy);
             fflush(stdin);
-            scanf("%c", &userChoose);
+            scanf(" %c", &userChoose); // Menggunakan " %c" untuk menangani newline dari input sebelumnya
             if (userChoose == 'Y' || userChoose == 'y')
             {
                 // Implementasi pengeditan data
                 printf("Masukkan data yang baru:\n");
                 printf("Nama Lengkap: ");
-                scanf("%s", data.nama);
                 fflush(stdin);
+                fgets(data.nama, sizeof(data.nama), stdin); // Menggunakan fgets untuk membaca input string dengan spasi
                 printf("Jenis Kelamin (L/P): ");
-                scanf("%c", &data.jk);
+                scanf(" %c", &data.jk); // Menggunakan " %c" untuk menangani newline dari input sebelumnya
                 printf("Alamat: ");
-                scanf("%s", data.alamat);
+                fflush(stdin);
+                fgets(data.alamat, sizeof(data.alamat), stdin); // Menggunakan fgets untuk membaca input string dengan spasi
                 printf("Tempat Lahir: ");
                 scanf("%s", data.tempat_lahir);
                 printf("Agama: ");
@@ -453,7 +536,6 @@ void displayDecryptedNikList()
 
     fclose(file);
 }
-
 
 
 
