@@ -1,0 +1,74 @@
+[Sat Mar 16 00:00:00 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:00:23 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 8888888889
+[Sat Mar 16 00:04:42 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:06:41 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:11:13 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:11:52 2024
+] Pengguna ihsan melakukan edit pada data dengan NIK: 3217511019
+[Sat Mar 16 00:16:13 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:16:58 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908212
+[Sat Mar 16 00:18:58 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:23:38 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:29:39 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:31:28 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:32:26 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:36:56 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:37:43 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:38:04 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288786
+[Sat Mar 16 00:39:04 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:42:44 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:43:24 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231545
+[Sat Mar 16 00:43:40 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231545
+[Sat Mar 16 00:44:10 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:44:44 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 1111222233334444
+[Sat Mar 16 00:45:29 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:45:48 2024
+] Pengguna ihsan melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288786
+[Sat Mar 16 00:46:14 2024
+] Pengguna ihsan melakukan edit pada data dengan NIK: 231511019
+[Sat Mar 16 00:48:30 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:48:56 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231511019
+[Sat Mar 16 00:50:34 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:51:03 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231511019
+[Sat Mar 16 00:52:37 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:53:13 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231511019
+[Sat Mar 16 00:53:26 2024
+] Pengguna admin melakukan edit pada data dengan NIK: 231511019
+[Sat Mar 16 00:53:53 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 00:54:16 2024
+] Pengguna ihsan melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288778
+[Sat Mar 16 00:56:33 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:57:06 2024
+] Pengguna admin melakukan login.
+[Sat Mar 16 00:58:58 2024
+] Pengguna admin melakukan login.

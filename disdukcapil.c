@@ -6,12 +6,18 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
+#define MAX_LINE_LENGTH 1000
 
 int keyStr = 18; // Tidak boleh >= 26
 int keyInt = 7;  // Tidak boleh >= 10
 // Procedure tambah admin
 
-void gotoxy(int x, int y) {
+AktivitasPengguna aktifPengguna;
+
+void gotoxy(int x, int y)
+{
     COORD coord;
 
     coord.X = x;
@@ -20,75 +26,89 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void loading(){
-	system("cls");
+void loading()
+{
+    system("cls");
     system("color B");
 
-		gotoxy(30,9); printf("              =======================");
-		gotoxy(30,10);printf("               MOHON TUNGGU SEBENTAR");
-		gotoxy(30,12);printf("              =======================");
+    gotoxy(30, 9);
+    printf("              =======================");
+    gotoxy(30, 10);
+    printf("               MOHON TUNGGU SEBENTAR");
+    gotoxy(30, 12);
+    printf("              =======================");
 
-		Sleep(500);
-		gotoxy(30,11);printf("                     . ");
-		Sleep(500);
-		printf(". ");
-		Sleep(500);
-		printf(". ");
-		Sleep(500);
-		printf(". ");
-		Sleep(500);
-		printf(". ");
+    Sleep(500);
+    gotoxy(30, 11);
+    printf("                     . ");
+    Sleep(500);
+    printf(". ");
+    Sleep(500);
+    printf(". ");
+    Sleep(500);
+    printf(". ");
+    Sleep(500);
+    printf(". ");
 }
 
 int pilihanMenuAwal()
 {
-	loading();
+    loading();
     int input;
-	system("cls");
-	char terminate;
+    system("cls");
+    char terminate;
 
-	gotoxy(30,2); printf("                     SELAMAT DATANG                         \n");
-	gotoxy(30,3); printf("                           DI                               \n");
-    gotoxy(30,4); printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
-    gotoxy(30,5); printf("               ===========================                   \n\n");
-    gotoxy(30,7);printf("                1. MASUK                             \n");
-    gotoxy(30,8);printf("                2. KELUAR                            \n");
+    gotoxy(30, 2);
+    printf("                     SELAMAT DATANG                         \n");
+    gotoxy(30, 3);
+    printf("                           DI                               \n");
+    gotoxy(30, 4);
+    printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
+    gotoxy(30, 5);
+    printf("               ===========================                   \n\n");
+    gotoxy(30, 7);
+    printf("                1. MASUK                             \n");
+    gotoxy(30, 8);
+    printf("                2. KELUAR                            \n");
 
-
-    gotoxy(30,11); printf("          PILIHAN	: ");
+    gotoxy(30, 11);
+    printf("          PILIHAN	: ");
     scanf("%d", &input);
     scanf("%c", &terminate);
 
-    switch(input){
-		case 1:
-            loginAdmin();
-			break;
+    switch (input)
+    {
+    case 1:
+        loginAdmin();
+        break;
 
-		case 2:
-            system("cls");
-			break;
-	}
+    case 2:
+        system("cls");
+        break;
+    }
 }
 
-void addAdmin() {
-    //Membungkus password & username menjadi struct
+void addAdmin()
+{
+    // Membungkus password & username menjadi struct
     Admin admin;
 
-    //input username
+    // input username
     printf("Masukkan Username : ");
     scanf("%s", admin.username);
-    //input password
+    // input password
     printf("Masukkan Password : ");
     scanf("%s", admin.password);
 
-    //proses enkripsi sebelum masuk file
-    generateAngkaGeser(&admin.jumlahGeser);             // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
+    // proses enkripsi sebelum masuk file
+    generateAngkaGeser(&admin.jumlahGeser);              // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
     enkripsiPassword(admin.password, admin.jumlahGeser); // Enkripsi password dengan parameter input password dan jumlahgeser sebelumnya
-    simpanFileAdmin(admin);  
+    simpanFileAdmin(admin);
 }
 
 // Function untuk generate kunci random & arah random
-void generateAngkaGeser(int *jumlahgeser) {
+void generateAngkaGeser(int *jumlahgeser)
+{
     // Inisialisasi seed/nilai acak berdasarkan waktu saat ini
     srand(time(NULL));
     // Menghasilkan nilai acak untuk pergeseran
@@ -96,11 +116,16 @@ void generateAngkaGeser(int *jumlahgeser) {
 }
 
 // Proses enkripsi
-void enkripsiPassword(char *password, int jumlahgeser) {
-    for (int i = 0; i < strlen(password); i++) {
-        if (password[i] >= 'A' && password[i] <= 'Z') {
+void enkripsiPassword(char *password, int jumlahgeser)
+{
+    for (int i = 0; i < strlen(password); i++)
+    {
+        if (password[i] >= 'A' && password[i] <= 'Z')
+        {
             password[i] = ((password[i] - 'A') + jumlahgeser) % 26 + 'A';
-        } else if (password[i] >= 'a' && password[i] <= 'z') {
+        }
+        else if (password[i] >= 'a' && password[i] <= 'z')
+        {
             password[i] = ((password[i] - 'a') + jumlahgeser) % 26 + 'a';
         }
     }
@@ -136,9 +161,9 @@ void loginAdmin()
     while (!loginBerhasil)
     {
         system("cls"); // Assuming you are using Windows, change to "clear" if on Unix/Linux
-    	printf("==============================\n");
-    	printf("======  SILAHKAN LOGIN  ======\n");
-    	printf("==============================\n\n");
+        printf("==============================\n");
+        printf("======  SILAHKAN LOGIN  ======\n");
+        printf("==============================\n\n");
         printf("Masukkan Username: ");
         scanf("%s", admin.username);
         printf("Masukkan Password: ");
@@ -152,6 +177,9 @@ void loginAdmin()
             if (strcmp(admin.username, usernameCompare) == 0 && strcmp(admin.password, passwordCompare) == 0)
             {
                 loginBerhasil = true;
+                strcpy(aktifPengguna.username, admin.username);
+                aktifPengguna.loggedIn = true;
+                catatLogin(); // Mencatat aktivitas login
                 menuAwal();
                 break;
             }
@@ -169,7 +197,7 @@ void menuAwal()
     int pilihan;
     do
     {
-    	loading();
+        loading();
         system("cls");
         printf("Menu:\n");
         printf("1. Add Penduduk\n");
@@ -209,12 +237,17 @@ void menuAwal()
     } while (pilihan != 5);
 }
 
-void dekripsiPassword(char *passwordCompare, int jumlahGeser) {
+void dekripsiPassword(char *passwordCompare, int jumlahGeser)
+{
     int i;
-    for (i = 0; i < strlen(passwordCompare); i++) {
-        if (passwordCompare[i] >= 'A' && passwordCompare[i] <= 'Z') {
+    for (i = 0; i < strlen(passwordCompare); i++)
+    {
+        if (passwordCompare[i] >= 'A' && passwordCompare[i] <= 'Z')
+        {
             passwordCompare[i] = ((passwordCompare[i] - 'A') - jumlahGeser + 26) % 26 + 'A';
-        } else if (passwordCompare[i] >= 'a' && passwordCompare[i] <= 'z') {
+        }
+        else if (passwordCompare[i] >= 'a' && passwordCompare[i] <= 'z')
+        {
             passwordCompare[i] = ((passwordCompare[i] - 'a') - jumlahGeser + 26) % 26 + 'a';
         }
     }
@@ -296,14 +329,14 @@ void addPenduduk()
     {
         file = fopen("dataPenduduk.txt", "a");
         enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %c %s %s %s %s", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        fprintf(file, "%d %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
-        menuAwal();
+
+        // Catat aktivitas pengguna
+        catatAktivitas("Menambahkan data penduduk", dat.NIK);
     }
 }
-
-
 
 void enkripsiHuruf(char *kalimat, int key)
 {
@@ -355,7 +388,7 @@ void dekripsiInteger(char *num, int key)
             num[i] = '0' + ((num[i] - '0' - key + 10) % 10);
         }
     }
-} 
+}
 // Prosedur masih belum dipakai
 
 void deleteData()
@@ -399,12 +432,17 @@ void deleteData()
             }
         }
     }
-    if (!found){
+    if (!found)
+    {
         printf("NIK Tidak Ditemukan\n");
     }
 
-    if (userChoose == 'Y' || userChoose == 'y'){
+    if (userChoose == 'Y' || userChoose == 'y')
+    {
         printf("Data Berhasil Dihapus!\n");
+
+        // Catat aktivitas pengguna
+        catatAktivitas("Menghapus data penduduk", userInputCpy);
     }
     fclose(file);
     fclose(temp);
@@ -412,7 +450,7 @@ void deleteData()
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
 
-//edit data penduduk
+// edit data penduduk
 
 void editPenduduk()
 {
@@ -449,19 +487,18 @@ void editPenduduk()
             found = true;
             printf("Data dengan NIK %s telah ditemukan, yakin ingin mengeditnya? [Y/N]", userInputCpy);
             fflush(stdin);
-            scanf(" %c", &userChoose); // Menggunakan " %c" untuk menangani newline dari input sebelumnya
+            scanf("%c", &userChoose);
             if (userChoose == 'Y' || userChoose == 'y')
             {
                 // Implementasi pengeditan data
                 printf("Masukkan data yang baru:\n");
                 printf("Nama Lengkap: ");
+                scanf("%s", data.nama);
                 fflush(stdin);
-                fgets(data.nama, sizeof(data.nama), stdin); // Menggunakan fgets untuk membaca input string dengan spasi
                 printf("Jenis Kelamin (L/P): ");
-                scanf(" %c", &data.jk); // Menggunakan " %c" untuk menangani newline dari input sebelumnya
+                scanf("%c", &data.jk);
                 printf("Alamat: ");
-                fflush(stdin);
-                fgets(data.alamat, sizeof(data.alamat), stdin); // Menggunakan fgets untuk membaca input string dengan spasi
+                scanf("%s", data.alamat);
                 printf("Tempat Lahir: ");
                 scanf("%s", data.tempat_lahir);
                 printf("Agama: ");
@@ -490,28 +527,6 @@ void editPenduduk()
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
 
-void displayNikList()
-{
-    FILE *file = fopen("dataPenduduk.txt", "r");
-    if (file == NULL)
-    {
-        printf("File tidak dapat dibuka!");
-        exit(1);
-    }
-
-    DataPenduduk data;
-    printf("=================================================\n");
-    printf("\tDaftar NIK Penduduk\n");
-    printf("=================================================\n");
-    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
-    {
-        printf("%s\n", data.NIK);
-    }
-    printf("=================================================\n");
-
-    fclose(file);
-}
-
 void displayDecryptedNikList()
 {
     FILE *file = fopen("dataPenduduk.txt", "r");
@@ -522,11 +537,15 @@ void displayDecryptedNikList()
     }
 
     DataPenduduk data;
+    char line[MAX_LINE_LENGTH];
     printf("=================================================\n");
     printf("\tDaftar NIK Penduduk (Terdekripsi)\n");
     printf("=================================================\n");
-    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+
+    while (fgets(line, sizeof(line), file) != NULL)
     {
+        // Menggunakan sscanf untuk membaca data dari satu baris
+        sscanf(line, "%d %s %[^\n]s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
         char decryptedNik[18];
         strcpy(decryptedNik, data.NIK);
         dekripsiInteger(decryptedNik, keyInt);
@@ -537,5 +556,47 @@ void displayDecryptedNikList()
     fclose(file);
 }
 
+void catatAktivitas(char *aksi, char *NIK)
+{
+    FILE *logFile = fopen("history.txt", "a");
+    if (logFile == NULL)
+    {
+        printf("Gagal membuka file log.\n");
+        return;
+    }
 
+    time_t now;
+    time(&now);
+    fprintf(logFile, "[%s] Pengguna %s melakukan aksi: %s pada data dengan NIK: %s\n", ctime(&now), aktifPengguna.username, aksi, NIK);
+    fclose(logFile);
+}
 
+void catatLogin()
+{
+    FILE *logFile = fopen("history.txt", "a");
+    if (logFile == NULL)
+    {
+        printf("Gagal membuka file log.\n");
+        return;
+    }
+
+    time_t now;
+    time(&now);
+    fprintf(logFile, "[%s] Pengguna %s melakukan login.\n", ctime(&now), aktifPengguna.username);
+    fclose(logFile);
+}
+
+void catatEdit(char *NIK)
+{
+    FILE *logFile = fopen("history.txt", "a");
+    if (logFile == NULL)
+    {
+        printf("Gagal membuka file log.\n");
+        return;
+    }
+
+    time_t now;
+    time(&now);
+    fprintf(logFile, "[%s] Pengguna %s melakukan edit pada data dengan NIK: %s\n", ctime(&now), aktifPengguna.username, NIK);
+    fclose(logFile);
+}
