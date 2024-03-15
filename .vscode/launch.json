@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": true,
       "cwd": "c:/Users/LENOVO/Documents/POLBAN/SEMESTER 2/PROYEK 2/proyek2-kelompoklima",
-      "program": "c:/Users/LENOVO/Documents/POLBAN/SEMESTER 2/PROYEK 2/proyek2-kelompoklima/build/Release/outRelease",
+      "program": "c:/Users/LENOVO/Documents/POLBAN/SEMESTER 2/PROYEK 2/proyek2-kelompoklima/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
