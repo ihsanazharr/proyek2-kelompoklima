@@ -450,7 +450,7 @@ void deleteData()
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
 
-// edit data penduduk
+// edit data pendudukks
 
 void editPenduduk()
 {
