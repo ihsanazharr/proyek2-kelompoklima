@@ -18,7 +18,7 @@ typedef struct
 typedef struct
 {
     int id;
-    char NIK[18];
+    char NIK[50];
     char nama[MAX_NAMA_LENGTH];
     char jk;
     char alamat[50];

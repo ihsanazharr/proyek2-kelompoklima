@@ -200,18 +200,19 @@ void menuAwal()
         loading();
         system("cls");
         printf("Menu:\n");
-        printf("1. Add Penduduk\n");
+        printf("1. Lihat Data Penduduk\n");
         printf("2. Edit Penduduk\n");
-        printf("3. Delete Data Penduduk\n");
-        printf("4. Tambah Admin\n");
-        printf("5. Keluar\n");
+        printf("3. Add Penduduk\n");
+        printf("4. Delete Data Penduduk\n");
+        printf("5. Tambah Admin\n");
+        printf("6. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
         switch (pilihan)
         {
         case 1:
-            addPenduduk();
+            showPenduduk();
             system("cls");
             break;
         case 2:
@@ -219,14 +220,18 @@ void menuAwal()
             system("cls");
             break;
         case 3:
-            deleteData();
+            addPenduduk();
             system("cls");
             break;
         case 4:
+            deleteData();
+            system("cls");
+            break;
+        case 5:
             addAdmin();
             // system("cls");
             break;
-        case 5:
+        case 6:
             pilihanMenuAwal();
             system("cls");
             break;
@@ -451,24 +456,22 @@ void deleteData()
 }
 
 // edit data pendudukks
-
-void editPenduduk()
-{
+void editPenduduk() {
     FILE *file, *temp;
     DataPenduduk data;
-    char userInput[20];
-    char userInputCpy[20];
+    char userInput[50];
+    char userInputCpy[50];
     char userChoose;
     bool found = false;
 
     file = fopen("dataPenduduk.txt", "r");
-    temp = fopen("tempDataPenduduk.txt", "w");
-    if (file == NULL || temp == NULL)
-    {
+    temp = fopen("tempDataPenduduk.txt", "w"); 
+
+    if (file == NULL || temp == NULL) {
         printf("Error membuka/membuat file!");
         exit(1);
     }
-    
+
     system("cls");
     displayDecryptedNikList();
     printf("Masukkan NIK data yang ingin diedit: ");
@@ -476,56 +479,86 @@ void editPenduduk()
     strcpy(userInputCpy, userInput);
     enkripsiInteger(userInput, keyInt);
 
-    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
-    {
-        if (strcmp(userInput, data.NIK) != 0)
-        {
-            fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
-        }
-        else
-        {
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+        if (strcmp(userInput, data.NIK) == 0) {
             found = true;
             printf("Data dengan NIK %s telah ditemukan, yakin ingin mengeditnya? [Y/N]", userInputCpy);
             fflush(stdin);
-            scanf("%c", &userChoose);
-            if (userChoose == 'Y' || userChoose == 'y')
-            {
-                // Implementasi pengeditan data
+            scanf(" %c", &userChoose);
+            if (userChoose == 'Y' || userChoose == 'y') {
                 printf("Masukkan data yang baru:\n");
                 printf("Nama Lengkap: ");
-                scanf("%s", data.nama);
-                fflush(stdin);
+                scanf(" %[^\n]", data.nama);
+                getchar();
                 printf("Jenis Kelamin (L/P): ");
-                scanf("%c", &data.jk);
+                scanf(" %c", &data.jk);
                 printf("Alamat: ");
-                scanf("%s", data.alamat);
+                scanf(" %[^\n]", data.alamat);
+                getchar();
                 printf("Tempat Lahir: ");
-                scanf("%s", data.tempat_lahir);
+                scanf(" %[^\n]", data.tempat_lahir);
+                getchar();
                 printf("Agama: ");
-                scanf("%s", data.agama);
+                scanf(" %[^\n]", data.agama);
+                getchar();
                 printf("Status: ");
-                scanf("%s", data.status);
-                enkripsiHuruf(data.alamat, keyStr);
+                scanf(" %[^\n]", data.status);
+                getchar();
+
                 fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
                 printf("Data berhasil diubah!\n");
-            }
-            else
-            {
+
+                // Catat aktivitas pengguna
+                catatAktivitas("Mengedit data penduduk", data.NIK);
+            } else {
                 fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
             }
+        } else {
+            fprintf(temp, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
         }
     }
 
-    if (!found)
-    {
+    if (!found) {
         printf("NIK Tidak Ditemukan\n");
     }
-
+    
     fclose(file);
     fclose(temp);
     remove("dataPenduduk.txt");
     rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 }
+
+void showPenduduk() {
+    system("cls");
+    FILE *file;
+    DataPenduduk data;
+    char userChoose;
+
+    file = fopen("dataPenduduk.txt", "r");
+    if (file == NULL) {
+        printf("File tidak dapat dibuka\n");
+        return;
+    }
+
+    printf("====================================================================================================\n");
+    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status");
+    printf("====================================================================================================\n");
+
+    while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+    }
+
+    printf("====================================================================================================\n");
+
+    fclose(file);
+
+    printf("Apakah anda ingin kembali ke menu? [Y/N] : ");
+    scanf(" %c", &userChoose); 
+    if(userChoose == 'Y' || userChoose == 'y' ) {
+        menuAwal();
+    }
+}
+
 
 void displayDecryptedNikList()
 {
@@ -599,4 +632,13 @@ void catatEdit(char *NIK)
     time(&now);
     fprintf(logFile, "[%s] Pengguna %s melakukan edit pada data dengan NIK: %s\n", ctime(&now), aktifPengguna.username, NIK);
     fclose(logFile);
+}
+
+void replaceSpaceWithUnderscore(char *str) {
+    while (*str) {
+        if (*str == ' ') {
+            *str = '_';
+        }
+        str++;
+    }
 }
