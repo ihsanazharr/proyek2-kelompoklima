@@ -80,3 +80,7 @@
 ] Pengguna admin melakukan login.
 [Sat Mar 16 10:36:35 2024
 ] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288383
+[Sat Mar 16 10:48:57 2024
+] Pengguna ihsan melakukan login.
+[Sat Mar 16 10:49:14 2024
+] Pengguna ihsan melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 90828313
