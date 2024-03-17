@@ -104,6 +104,9 @@ void addAdmin()
     generateAngkaGeser(&admin.jumlahGeser);              // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
     enkripsiPassword(admin.password, admin.jumlahGeser); // Enkripsi password dengan parameter input password dan jumlahgeser sebelumnya
     simpanFileAdmin(admin);
+
+    // Memberikan keterangan bahwa penambahan admin berhasil
+    printf("Admin dengan username %s berhasil ditambahkan.\n", admin.username);
 }
 
 // Function untuk generate kunci random & arah random
