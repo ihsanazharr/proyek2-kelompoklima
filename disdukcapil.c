@@ -524,13 +524,13 @@ void editPenduduk() {
     char NIK[50];
     char userChoice;
 
-	displayDecryptedNikList();
+    displayDecryptedNikList();
     printf("Masukkan NIK penduduk yang akan diedit: ");
     scanf("%s", NIK);
     fflush(stdin);
     enkripsiInteger(NIK, keyInt);
 
-    FILE *file = fopen("dataPenduduk.txt", "r+");
+    FILE *file = fopen("dataPenduduk.txt", "r");
     if (file == NULL) {
         printf("File tidak dapat dibuka\n");
         return;
@@ -540,6 +540,13 @@ void editPenduduk() {
     int found = 0;
 
     // Membaca dan mencari data berdasarkan NIK
+    FILE *tempFile = fopen("tempDataPenduduk.txt", "w");
+    if (tempFile == NULL) {
+        printf("File sementara tidak dapat dibuat\n");
+        fclose(file);
+        return;
+    }
+
     while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
         if (strcmp(data.NIK, NIK) == 0) {
             printf("Data ditemukan. Silakan masukkan data yang baru.\n");
@@ -548,11 +555,11 @@ void editPenduduk() {
             printf("Nama Lengkap: ");
             fgets(data.nama, sizeof(data.nama), stdin);
             data.nama[strcspn(data.nama, "\n")] = '\0'; // Remove newline character if any
-            for (int i = 0; data.nama[i]; i++) { // Replace spaces with underscores
-                if (data.nama[i] == ' ') {
-                    data.nama[i] = '_';
-                }
-            }
+    		for (int i = 0; data.nama[i]; i++) { // Replace spaces with underscores
+	        	if (data.nama[i] == ' ') {
+	            data.nama[i] = '_';
+	        	}
+    		}
             fflush(stdin);
             printf("Jenis Kelamin (L/P): ");
             scanf(" %c", &data.jk);
@@ -560,52 +567,58 @@ void editPenduduk() {
             printf("Alamat: ");
             fgets(data.alamat, sizeof(data.alamat), stdin);
             data.alamat[strcspn(data.alamat, "\n")] = '\0'; // Remove newline character if any
-            for (int i = 0; data.alamat[i]; i++) { // Replace spaces with underscores
-                if (data.alamat[i] == ' ') {
-                    data.alamat[i] = '_';
-                }
-            }
+    		for (int i = 0; data.alamat[i]; i++) { // Replace spaces with underscores
+	        	if (data.alamat[i] == ' ') {
+	            data.alamat[i] = '_';
+	        	}
+    		}
             fflush(stdin);
             printf("Tempat Lahir: ");
             fgets(data.tempat_lahir, sizeof(data.tempat_lahir), stdin);
             data.tempat_lahir[strcspn(data.tempat_lahir, "\n")] = '\0'; // Remove newline character if any
-            for (int i = 0; data.tempat_lahir[i]; i++) { // Replace spaces with underscores
-                if (data.tempat_lahir[i] == ' ') {
-                    data.tempat_lahir[i] = '_';
-                }
-            }
+    		for (int i = 0; data.tempat_lahir[i]; i++) { // Replace spaces with underscores
+	        	if (data.tempat_lahir[i] == ' ') {
+	            data.tempat_lahir[i] = '_';
+	        	}
+    		}
             fflush(stdin);
             printf("Agama: ");
             fgets(data.agama, sizeof(data.agama), stdin);
             data.agama[strcspn(data.agama, "\n")] = '\0'; // Remove newline character if any
-            for (int i = 0; data.agama[i]; i++) { // Replace spaces with underscores
-                if (data.agama[i] == ' ') {
-                    data.agama[i] = '_';
-                }
-            }
+    		for (int i = 0; data.agama[i]; i++) { // Replace spaces with underscores
+	        	if (data.agama[i] == ' ') {
+	            data.agama[i] = '_';
+	        	}
+    		}
             fflush(stdin);
             printf("Status: ");
             fgets(data.status, sizeof(data.status), stdin);
             data.status[strcspn(data.status, "\n")] = '\0'; // Remove newline character if any
-            for (int i = 0; data.status[i]; i++) { // Replace spaces with underscores
-                if (data.status[i] == ' ') {
-                    data.status[i] = '_';
-                }
-            }
+    		for (int i = 0; data.status[i]; i++) { // Replace spaces with underscores
+	        	if (data.status[i] == ' ') {
+	            data.status[i] = '_';
+	        	}
+    		}
             fflush(stdin);
-            printf("Data berhasil diupdate\n");
+
+            fprintf(tempFile, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
             found = 1;
-            
-            // Catat aktivitas pengguna
-            catatAktivitas("Mengedit data penduduk", data.NIK);
-            break;
+        } else {
+            fprintf(tempFile, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
         }
     }
 
     fclose(file);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    remove("dataPenduduk.txt");
+    rename("tempDataPenduduk.txt", "dataPenduduk.txt");
 
     if (!found) {
         printf("Data dengan NIK tersebut tidak ditemukan.\n");
+    } else {
+        printf("Data berhasil diubah\n"); // Pesan ketika berhasil mengedit data
     }
 
     printf("\nApakah Anda ingin mengedit data lagi? (Y/N): ");
@@ -615,51 +628,129 @@ void editPenduduk() {
     }
 }
 
+
 void showPenduduk() {
     system("cls"); // Clear screen
 
     FILE *file;
     DataPenduduk data;
+    DataPenduduk penduduk[100]; // Assuming a maximum of 100 records
 
     file = fopen("dataPenduduk.txt", "r");
     if (file == NULL) {
         printf("File tidak dapat dibuka\n");
         return;
     }
-    
-    
+
+    int count = 0;
+    while (fscanf(file, "%d %s %s %c %s %s %s %s",
+                  &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+        dekripsiHuruf(data.alamat, keyStr);
+        penduduk[count++] = data;
+    }
+
+    fclose(file);
+
+    if (count == 0) {
+        printf("Tidak ada data yang tersedia.\n");
+        return;
+    }
+
+    // Sorting
+    bubbleSort(penduduk, count);
+
     printf("====================================================================================================\n");
     printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status");
     printf("====================================================================================================\n");
 
-    // Membaca dan menampilkan setiap baris data dari file
-    if (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) == EOF) {
-        printf("Tidak ada data yang tersedia.\n");
-    } else {
-        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
-        // Membaca dan menampilkan data tambahan jika ada
-        while (fscanf(file, "%d %s %s %c %s %s %s %s", &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
-            printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
-        }
+    for (int i = 0; i < count; i++) {
+        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status);
     }
 
     printf("====================================================================================================\n");
 
-    fclose(file);
-
-    // Meminta pengguna untuk kembali ke menu
+    // Meminta pengguna untuk mencari data berdasarkan nama atau kembali ke menu
     char userChoice;
-    printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+    printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y') {
-        menuAwal();
+        searchByName(penduduk, count);
     } else {
-        printf("Terima kasih.\n");
+        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+        scanf(" %c", &userChoice);
+        if (userChoice == 'Y' || userChoice == 'y') {
+            menuAwal();
+        } else {
+            printf("Terima kasih.\n");
+        }
+    }
+}
+
+void searchByName(DataPenduduk penduduk[], int count) {
+    char searchName[50];
+    printf("Masukkan nama (huruf yang diinginkan): ");
+    scanf("%s", searchName);
+
+    printf("====================================================================================================\n");
+    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status");
+    printf("====================================================================================================\n");
+
+    int found = 0;
+    for (int i = 0; i < count; i++) {
+        char result[100]; // Menyimpan hasil pencarian nama
+        strcasestr_custom(penduduk[i].nama, searchName, result); // Pencarian tanpa case sensitive
+        if (result[0] != '\0') {
+            printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status);
+            found = 1;
+        }
+    }
+
+    if (!found) {
+        printf("Data dengan nama yang mengandung \"%s\" tidak ditemukan.\n", searchName);
+    }
+
+    // Meminta pengguna untuk kembali ke menu
+     printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
+    char userChoice;
+    scanf(" %c", &userChoice);
+    if (userChoice == 'Y' || userChoice == 'y') {
+        searchByName(penduduk, count);
+    } else {
+        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+        scanf(" %c", &userChoice);
+        if (userChoice == 'Y' || userChoice == 'y') {
+            menuAwal();
+        } else {
+            printf("Terima kasih.\n");
+        }
     }
 }
 
 
+// Prosedur pencarian yang tidak case-sensitive
+void strcasestr_custom(const char *haystack, const char *needle, char *result) {
+    if (*needle == '\0') {
+        strcpy(result, haystack);
+        return;
+    }
 
+    const char *p1 = haystack;
+    while (*p1 != '\0') {
+        const char *p1_copy = p1;
+        const char *p2 = needle;
+
+        while (tolower((unsigned char)*p1_copy) == tolower((unsigned char)*p2)) {
+            ++p1_copy;
+            ++p2;
+            if (*p2 == '\0') {
+                strcpy(result, p1);
+                return;
+            }
+        }
+        ++p1;
+    }
+    strcpy(result, "");
+}
 
 
 void displayDecryptedNikList()
@@ -690,6 +781,7 @@ void displayDecryptedNikList()
 
     fclose(file);
 }
+
 
 void catatAktivitas(char *aksi, char *NIK)
 {
@@ -780,5 +872,19 @@ void tampilkanHistory() {
         menuAwal();
     } else {
         printf("Terima kasih.\n");
+    }
+}
+
+void bubbleSort(DataPenduduk arr[], int n) {
+    int i, j;
+    DataPenduduk temp;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (strcmp(arr[j].nama, arr[j + 1].nama) > 0) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
     }
 }
