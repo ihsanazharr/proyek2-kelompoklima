@@ -83,7 +83,7 @@ int pilihanMenuAwal()
         break;
 
     case 2:
-        system("cls");
+        exit(1);
         break;
     }
 }
@@ -189,7 +189,9 @@ void loginAdmin()
         }
         if (loginBerhasil != true)
         {
+        	system("cls");
             printf("Username atau Password Salah, silakan coba lagi.\n");
+            Sleep(2000);
             rewind(file);
         }
     }
@@ -555,11 +557,11 @@ void editPenduduk() {
             printf("Nama Lengkap: ");
             fgets(data.nama, sizeof(data.nama), stdin);
             data.nama[strcspn(data.nama, "\n")] = '\0'; // Remove newline character if any
-    		for (int i = 0; data.nama[i]; i++) { // Replace spaces with underscores
-	        	if (data.nama[i] == ' ') {
-	            data.nama[i] = '_';
-	        	}
-    		}
+            for (int i = 0; data.nama[i]; i++) { // Replace spaces with underscores
+                if (data.nama[i] == ' ') {
+                    data.nama[i] = '_';
+                }
+            }
             fflush(stdin);
             printf("Jenis Kelamin (L/P): ");
             scanf(" %c", &data.jk);
@@ -567,38 +569,34 @@ void editPenduduk() {
             printf("Alamat: ");
             fgets(data.alamat, sizeof(data.alamat), stdin);
             data.alamat[strcspn(data.alamat, "\n")] = '\0'; // Remove newline character if any
-    		for (int i = 0; data.alamat[i]; i++) { // Replace spaces with underscores
-	        	if (data.alamat[i] == ' ') {
-	            data.alamat[i] = '_';
-	        	}
-    		}
+            enkripsiHuruf(data.alamat, keyInt); // Encrypting the address
             fflush(stdin);
             printf("Tempat Lahir: ");
             fgets(data.tempat_lahir, sizeof(data.tempat_lahir), stdin);
             data.tempat_lahir[strcspn(data.tempat_lahir, "\n")] = '\0'; // Remove newline character if any
-    		for (int i = 0; data.tempat_lahir[i]; i++) { // Replace spaces with underscores
-	        	if (data.tempat_lahir[i] == ' ') {
-	            data.tempat_lahir[i] = '_';
-	        	}
-    		}
+            for (int i = 0; data.tempat_lahir[i]; i++) { // Replace spaces with underscores
+                if (data.tempat_lahir[i] == ' ') {
+                    data.tempat_lahir[i] = '_';
+                }
+            }
             fflush(stdin);
             printf("Agama: ");
             fgets(data.agama, sizeof(data.agama), stdin);
             data.agama[strcspn(data.agama, "\n")] = '\0'; // Remove newline character if any
-    		for (int i = 0; data.agama[i]; i++) { // Replace spaces with underscores
-	        	if (data.agama[i] == ' ') {
-	            data.agama[i] = '_';
-	        	}
-    		}
+            for (int i = 0; data.agama[i]; i++) { // Replace spaces with underscores
+                if (data.agama[i] == ' ') {
+                    data.agama[i] = '_';
+                }
+            }
             fflush(stdin);
             printf("Status: ");
             fgets(data.status, sizeof(data.status), stdin);
             data.status[strcspn(data.status, "\n")] = '\0'; // Remove newline character if any
-    		for (int i = 0; data.status[i]; i++) { // Replace spaces with underscores
-	        	if (data.status[i] == ' ') {
-	            data.status[i] = '_';
-	        	}
-    		}
+            for (int i = 0; data.status[i]; i++) { // Replace spaces with underscores
+                if (data.status[i] == ' ') {
+                    data.status[i] = '_';
+                }
+            }
             fflush(stdin);
 
             fprintf(tempFile, "%d %s %s %c %s %s %s %s\n", data.id, data.NIK, data.nama, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
@@ -619,6 +617,9 @@ void editPenduduk() {
         printf("Data dengan NIK tersebut tidak ditemukan.\n");
     } else {
         printf("Data berhasil diubah\n"); // Pesan ketika berhasil mengedit data
+        
+        // Catat aktivitas pengguna
+        catatAktivitas("Mengedit data penduduk", data.NIK);
     }
 
     printf("\nApakah Anda ingin mengedit data lagi? (Y/N): ");
