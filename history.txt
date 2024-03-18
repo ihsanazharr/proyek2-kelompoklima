@@ -20,3 +20,9 @@
 ] Pengguna admin melakukan aksi: Mengedit data penduduk pada data dengan NIK: 8901890189018901
 [Mon Mar 18 09:02:48 2024
 ] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 109810981098
+[Mon Mar 18 09:27:23 2024
+] Pengguna admin melakukan login.
+[Mon Mar 18 09:27:43 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288787
+[Mon Mar 18 09:28:17 2024
+] Pengguna admin melakukan aksi: Menghapus data penduduk pada data dengan NIK: 231511010

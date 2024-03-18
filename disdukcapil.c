@@ -437,6 +437,7 @@ void deleteData()
     char userInputCpy[20];
     char userChoose;
     bool found = false;
+    int n;
 
     file = fopen("dataPenduduk.txt", "r");
     temp = fopen("tempDataPenduduk.txt", "w");
@@ -501,6 +502,7 @@ void deleteData()
             catatAktivitas("Menghapus data penduduk", userInputCpy);
         } else {
             printf("Penghapusan data dibatalkan.\n");
+            n = 1;
             Sleep(2000);
         }
     }
@@ -510,6 +512,14 @@ void deleteData()
         fclose(temp);
         remove("tempDataPenduduk.txt");
         printf("Data tidak ditemukan!!!");
+        Sleep(2000);
+        return;
+    }
+    
+    if (n == 1){
+        fclose(file);
+        fclose(temp);
+        remove("tempDataPenduduk.txt");
         Sleep(2000);
         return;
     }
