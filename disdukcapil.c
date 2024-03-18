@@ -437,7 +437,7 @@ void deleteData()
     char userInputCpy[20];
     char userChoose;
     bool found = false;
-    int n;
+    int n = 0;
 
     file = fopen("dataPenduduk.txt", "r");
     temp = fopen("tempDataPenduduk.txt", "w");
