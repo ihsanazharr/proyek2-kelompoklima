@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-
 #define MAX_LINE_LENGTH 1000
 
 int keyStr = 18; // Tidak boleh >= 26
@@ -447,6 +446,7 @@ void deleteData()
         exit(1);
     }
 
+	displayDecryptedNikList();
     printf("Masukkan NIK data yang ingin dihapus: ");
     scanf("%s", userInput);
     strcpy(userInputCpy, userInput);
