@@ -15,6 +15,23 @@ int keyInt = 7;  // Tidak boleh >= 10
 
 AktivitasPengguna aktifPengguna;
 
+DataPenduduk* createNewNode(char* NIK, char* nama, char jk, char* alamat, char* tempat_lahir, char* agama, char* status, char* noKK) {
+    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
+    newNode->id = -1;
+    strcpy(newNode->NIK, NIK);
+    strcpy(newNode->nama, nama);
+    newNode->jk = jk;
+    strcpy(newNode->alamat, alamat);
+    strcpy(newNode->tempat_lahir, tempat_lahir);
+    strcpy(newNode->agama, agama);
+    strcpy(newNode->status, status);
+    strcpy(newNode->noKK, noKK); // Set KK number
+    newNode->parent = NULL;
+    newNode->firstChild = NULL;
+    newNode->nextSibling = NULL;
+    return newNode;
+}
+
 void gotoxy(int x, int y)
 {
     COORD coord;
@@ -94,10 +111,15 @@ void addAdmin()
 
     // input username
     printf("Masukkan Username : ");
-    scanf("%s", admin.username);
+    fgets(admin.username, sizeof(admin.username), stdin);
+    // Remove newline character from input
+    admin.username[strcspn(admin.username, "\n")] = '\0';
+
     // input password
     printf("Masukkan Password : ");
-    scanf("%s", admin.password);
+    fgets(admin.password, sizeof(admin.password), stdin);
+    // Remove newline character from input
+    admin.password[strcspn(admin.password, "\n")] = '\0';
 
     // proses enkripsi sebelum masuk file
     generateAngkaGeser(&admin.jumlahGeser);              // Sebelum disimpan ke file, generate key terlebih dahulu untuk disimpan ke struct
@@ -208,7 +230,8 @@ void menuAwal() {
         printf("4. Delete Data Penduduk\n");
         printf("5. Tambah Admin\n");
         printf("6. Tampilkan History\n"); // Opsi baru untuk menampilkan history
-        printf("7. Keluar\n");
+        printf("7. Tampilkan Tree\n");
+        printf("8. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
@@ -237,6 +260,9 @@ void menuAwal() {
                 tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
                 break;
             case 7:
+                tampilkanTree(); // Menampilkan history saat opsi 6 dipilih
+                break;
+            case 8:
                 pilihanMenuAwal();
                 system("cls");
                 break;
@@ -244,7 +270,7 @@ void menuAwal() {
                 printf("Masukkan tidak valid, coba kembali.\n");
                 break;
         }
-    } while (pilihan != 7);
+    } while (pilihan != 8);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
@@ -281,7 +307,7 @@ void addPenduduk() {
         fclose(file);
     }
 
-    system("cls"); // Clear screen
+    system("cls");
     printf("=================================================\n");
     printf("\tINPUT DATA PENDUDUK\n");
     printf("=================================================\n");
@@ -291,8 +317,8 @@ void addPenduduk() {
     fflush(stdin);
     printf("Nama Lengkap: ");
     fgets(dat.nama, sizeof(dat.nama), stdin);
-    dat.nama[strcspn(dat.nama, "\n")] = '\0'; // Remove newline character if any
-    for (int i = 0; dat.nama[i]; i++) { // Replace spaces with underscores
+    dat.nama[strcspn(dat.nama, "\n")] = '\0';
+    for (int i = 0; dat.nama[i]; i++) {
         if (dat.nama[i] == ' ') {
             dat.nama[i] = '_';
         }
@@ -303,8 +329,8 @@ void addPenduduk() {
     fflush(stdin);
     printf("Alamat: ");
     fgets(dat.alamat, sizeof(dat.alamat), stdin);
-    dat. alamat[strcspn(dat.alamat, "\n")] = '\0'; // Remove newline character if any
-    for (int i = 0; dat.alamat[i]; i++) { // Replace spaces with underscores
+    dat.alamat[strcspn(dat.alamat, "\n")] = '\0';
+    for (int i = 0; dat.alamat[i]; i++) {
         if (dat.alamat[i] == ' ') {
             dat.alamat[i] = '_';
         }
@@ -312,8 +338,8 @@ void addPenduduk() {
     fflush(stdin);
     printf("Tempat Lahir: ");
     fgets(dat.tempat_lahir, sizeof(dat.tempat_lahir), stdin);
-    dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0'; // Remove newline character if any
-    for (int i = 0; dat.tempat_lahir[i]; i++) { // Replace spaces with underscores
+    dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0';
+    for (int i = 0; dat.tempat_lahir[i]; i++) {
         if (dat.tempat_lahir[i] == ' ') {
             dat.tempat_lahir[i] = '_';
         }
@@ -321,8 +347,8 @@ void addPenduduk() {
     fflush(stdin);
     printf("Agama: ");
     fgets(dat.agama, sizeof(dat.agama), stdin);
-    dat.agama[strcspn(dat.agama, "\n")] = '\0'; // Remove newline character if any
-    for (int i = 0; dat.agama[i]; i++) { // Replace spaces with underscores
+    dat.agama[strcspn(dat.agama, "\n")] = '\0';
+    for (int i = 0; dat.agama[i]; i++) {
         if (dat.agama[i] == ' ') {
             dat.agama[i] = '_';
         }
@@ -330,12 +356,16 @@ void addPenduduk() {
     fflush(stdin);
     printf("Status: ");
     fgets(dat.status, sizeof(dat.status), stdin);
-    dat.status[strcspn(dat.status, "\n")] = '\0'; // Remove newline character if any
-    for (int i = 0; dat.status[i]; i++) { // Replace spaces with underscores
+    dat.status[strcspn(dat.status, "\n")] = '\0';
+    for (int i = 0; dat.status[i]; i++) {
         if (dat.status[i] == ' ') {
             dat.status[i] = '_';
         }
     }
+    
+    fflush(stdin);
+    printf("No. KK: "); // Added KK number input
+    scanf("%s", dat.noKK);
     fflush(stdin);
     printf("=================================================\n");
 
@@ -343,6 +373,14 @@ void addPenduduk() {
     file = fopen("dataPenduduk.txt", "a");
     while (fscanf(file, "%s", fnama) != EOF) {
         if (strcmp(dat.NIK, fnama) == 0) {
+            cek = 1;
+            break;
+        }
+    }
+    enkripsiInteger(dat.noKK, keyInt);
+    file = fopen("dataPenduduk.txt", "a");
+    while (fscanf(file, "%s", fnama) != EOF) {
+        if (strcmp(dat.noKK, fnama) == 0) {
             cek = 1;
             break;
         }
@@ -356,7 +394,7 @@ void addPenduduk() {
     else {
         file = fopen("dataPenduduk.txt", "a");
         enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        fprintf(file, "%d %s %s %s %c %s %s %s %s\n", dat.id,dat.noKK ,dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
 
@@ -654,9 +692,10 @@ void showPenduduk() {
     }
 
     int count = 0;
-    while (fscanf(file, "%d %s %s %c %s %s %s %s",
-                  &data.id, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+    while (fscanf(file, "%d %s %s %s %c %s %s %s %s", &data.id, data.noKK, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
         dekripsiHuruf(data.alamat, keyStr);
+        dekripsiInteger(data.NIK, keyInt);
+        dekripsiInteger(data.noKK, keyInt);
         penduduk[count++] = data;
     }
 
@@ -670,15 +709,15 @@ void showPenduduk() {
     // Sorting
     bubbleSort(penduduk, count);
 
-    printf("====================================================================================================\n");
-    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status");
-    printf("====================================================================================================\n");
+    printf("===================================================================================================================================================================\n");
+    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status", "No. KK");
+    printf("===================================================================================================================================================================\n");
 
     for (int i = 0; i < count; i++) {
-        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status);
+        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status, penduduk[i].noKK);
     }
 
-    printf("====================================================================================================\n");
+    printf("===================================================================================================================================================================\n");
 
     // Meminta pengguna untuk mencari data berdasarkan nama atau kembali ke menu
     char userChoice;

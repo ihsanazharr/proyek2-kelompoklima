@@ -1,3 +1,5 @@
+#ifndef DISDUKCAPIL_H
+#define DISDUKCAPIL_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +9,6 @@
 #define MAX_NAMA_LENGTH 50
 #define MAX_USERNAME_LENGTH 50
 #define MAX_PASSWORD_LENGTH 50
-
 typedef struct
 {
     char username[MAX_USERNAME_LENGTH];
@@ -15,16 +16,19 @@ typedef struct
     int jumlahGeser; // tambahan subvar untuk jumlah geser
 } Admin;
 
-typedef struct
-{
+typedef struct FamilyTreeNode {
     int id;
     char NIK[50];
     char nama[MAX_NAMA_LENGTH];
     char jk;
-    char alamat[50];
-    char tempat_lahir[20];
+    char alamat[90];
+    char tempat_lahir[50];
     char agama[20];
     char status[20];
+    char noKK[50]; // Added KK number field
+    struct FamilyTreeNode* parent;
+    struct FamilyTreeNode* firstChild;
+    struct FamilyTreeNode* nextSibling;
 } DataPenduduk;
 
 typedef struct {
@@ -63,3 +67,4 @@ void catatLogin();
 void catatEdit();
 
 
+#endif
