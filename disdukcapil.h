@@ -25,7 +25,7 @@ typedef struct FamilyTreeNode {
     char tempat_lahir[50];
     char agama[20];
     char status[20];
-    char noKK[50]; // Added KK number field
+    char noKK[50]; // Tambah no KK
     struct FamilyTreeNode* parent;
     struct FamilyTreeNode* firstChild;
     struct FamilyTreeNode* nextSibling;
@@ -36,6 +36,7 @@ typedef struct {
     bool loggedIn;
 } AktivitasPengguna;
 
+
 // admin
 void gotoxy(int x, int y);
 int pilihanMenuAwal();
@@ -45,6 +46,7 @@ void generateAngkaGeser(int *jumlahgeser);
 void simpanFileAdmin(Admin admin);
 void loginAdmin();
 void dekripsiPassword(char *passwordCompare, int jumlahGeser);
+void tampilkanTree();
 
 // adddatapenduduk
 void addPenduduk();

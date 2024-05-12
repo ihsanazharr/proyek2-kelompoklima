@@ -1,4 +1,5 @@
 #include "disdukcapil.h"
+#include "ilham/ilham.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -260,7 +261,7 @@ void menuAwal() {
                 tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
                 break;
             case 7:
-                tampilkanTree(); // Menampilkan history saat opsi 6 dipilih
+                tampilkanTree(); // struktur tree
                 break;
             case 8:
                 pilihanMenuAwal();

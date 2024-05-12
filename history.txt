@@ -240,3 +240,9 @@
 ] Pengguna admin melakukan login.
 [Sun May 12 19:32:03 2024
 ] Pengguna admin melakukan login.
+[Mon May 13 00:13:37 2024
+] Pengguna admin melakukan login.
+[Mon May 13 00:22:53 2024
+] Pengguna admin melakukan login.
+[Mon May 13 00:23:38 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 9506879605

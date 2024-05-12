@@ -6,6 +6,6 @@
 
 int main(){
 	printf("Tes Output");
-	return 0	
+	return 0;
 }
 

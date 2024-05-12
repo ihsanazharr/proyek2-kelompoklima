@@ -1,4 +1,4 @@
-#include "disdukcapil.h"
+#include "../disdukcapil.h"
 
 typedef struct Node {
     DataPenduduk data;
@@ -6,7 +6,7 @@ typedef struct Node {
     struct Node *sibling;
 } Node;
 
-extern char keyStr;
+extern int keyStr;
 extern int keyInt;
 
 // Fungsi rekursif untuk menambahkan penduduk ke pohon
