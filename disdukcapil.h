@@ -26,6 +26,7 @@ typedef struct FamilyTreeNode {
     char agama[20];
     char status[20];
     char noKK[50]; // Tambah no KK
+    char tanggalLahir[50];
     struct FamilyTreeNode* parent;
     struct FamilyTreeNode* firstChild;
     struct FamilyTreeNode* nextSibling;
