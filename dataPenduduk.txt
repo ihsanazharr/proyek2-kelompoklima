@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+0 0940599685006665 5960519065886665 Raimu_Cik L Bsos Jawa None Kawin
+1 889012345 890123456787 Firly L Tsfvmfy Bandung Islam Belum_Menikah
+2 asd da d s skv sad sad a
+3 908288787 890123456787 Args L Tsfvmfy Bandung Islam Menikah
+4 888888 999999 firly L tvy bdg islam bk
+=======
+0 0940766905990985 08706511669901698 Ilham_Darma 22/01/2023 L Ksjaesvm_Laemj Bandung None Belum_Kawin
+1 059604649191 08706511669901698 Test 22/22/2222 L Cvgso dkoAWokd KDOwa dkoaw
+2 0659687996857779 69596879506667869 Gugun 23/01/2005 L Bsvsf Badung None None
+>>>>>>> 1fc04033245e21d78b723329683ff93a38aea807

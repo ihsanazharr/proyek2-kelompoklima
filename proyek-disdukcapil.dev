@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=2
 CompilerSettings=00000000a0000000100000000
-UnitCount=4
+UnitCount=7
 
 [VersionInfo]
 Major=1
@@ -82,6 +82,36 @@ BuildCmd=
 
 [Unit4]
 FileName=disdukcapil.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=maul\addKK.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit6]
+FileName=ilham.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit7]
+FileName=ihsan\ihsan.c
 CompileCpp=0
 Folder=
 Compile=1
