@@ -71,7 +71,7 @@ void tampilkanTree() {
         return;
     }
 
-    while (fscanf(file, "%d %s %s %s %c %s %s %s %s", &data.id, data.noKK, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+    while (fscanf(file, "%d %s %s %s %c %s %s %s %s", &data.id, data.NIK,data.noKK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
         dekripsiHuruf(data.alamat, keyStr);
         dekripsiInteger(data.NIK, keyInt);
         dekripsiInteger(data.noKK, keyInt);

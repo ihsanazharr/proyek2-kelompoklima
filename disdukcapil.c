@@ -395,7 +395,7 @@ void addPenduduk() {
     else {
         file = fopen("dataPenduduk.txt", "a");
         enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %s %c %s %s %s %s\n", dat.id,dat.noKK ,dat.NIK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        fprintf(file, "%d %s %s %s %c %s %s %s %s\n", dat.id ,dat.NIK,dat.noKK, dat.nama, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
 
@@ -693,7 +693,7 @@ void showPenduduk() {
     }
 
     int count = 0;
-    while (fscanf(file, "%d %s %s %s %c %s %s %s %s", &data.id, data.noKK, data.NIK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+    while (fscanf(file, "%d %s %s %s %c %s %s %s %s", &data.id, data.NIK,data.noKK, data.nama, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
         dekripsiHuruf(data.alamat, keyStr);
         dekripsiInteger(data.NIK, keyInt);
         dekripsiInteger(data.noKK, keyInt);
