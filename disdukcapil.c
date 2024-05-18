@@ -1,5 +1,6 @@
 #include "disdukcapil.h"
 #include "ilham/ilham.c"
+#include "rindi/rindi.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -231,9 +232,10 @@ void menuAwal() {
         printf("3. Add Penduduk\n");
         printf("4. Delete Data Penduduk\n");
         printf("5. Tambah Admin\n");
-        printf("6. Tampilkan History\n"); // Opsi baru untuk menampilkan history
+        printf("6. Tampilkan History\n");
         printf("7. Tampilkan Tree\n");
-        printf("8. Keluar\n");
+        printf("8. Persentase Demografis\n"); // Tambah opsi untuk menampilkan persentase demografis
+        printf("9. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
@@ -247,7 +249,7 @@ void menuAwal() {
                 system("cls");
                 break;
             case 3:
-                addPenduduk();
+                addPenduduk(rootFamilyTree);
                 system("cls");
                 break;
             case 4:
@@ -256,15 +258,17 @@ void menuAwal() {
                 break;
             case 5:
                 addAdmin();
-                // system("cls");
                 break;
             case 6:
-                tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
+                tampilkanHistory();
                 break;
             case 7:
-                tampilkanTree(); // struktur tree
+                tampilkanTree();
                 break;
             case 8:
+                menu(); // Panggil fungsi untuk menampilkan persentase demografis
+                break;
+            case 9:
                 pilihanMenuAwal();
                 system("cls");
                 break;
@@ -272,7 +276,7 @@ void menuAwal() {
                 printf("Masukkan tidak valid, coba kembali.\n");
                 break;
         }
-    } while (pilihan != 8);
+    } while (pilihan != 9);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
@@ -292,12 +296,18 @@ void dekripsiPassword(char *passwordCompare, int jumlahGeser)
 }
 
 // add Data Penduduk
-void addPenduduk() {
+void addPenduduk(FamilyTreeNode* rootFamilyTree) {
     DataPenduduk dat;
     FILE *file;
     int cek = 0;
     char fnama[100];
     int count = 0, a;
+
+   FILE* familyFile = fopen("familyTree.txt", "r");
+    if (familyFile != NULL) {
+        rootFamilyTree = deserializeFamilyTree(familyFile);
+        fclose(familyFile);
+    }
 
     file = fopen("dataPenduduk.txt", "r");
     if (file != NULL) {
@@ -309,112 +319,125 @@ void addPenduduk() {
         fclose(file);
     }
 
-    system("cls");
-    printf("=================================================\n");
-    printf("\tINPUT DATA PENDUDUK\n");
-    printf("=================================================\n");
-    dat.id = count;
-    printf("NIK: ");
-    scanf("%s", dat.NIK);
-    fflush(stdin);
-    printf("No. KK: "); // Tambah input no KK
-    scanf("%s", dat.noKK);
-    fflush(stdin);
-    printf("Nama Lengkap: ");
-    fgets(dat.nama, sizeof(dat.nama), stdin);
-    dat.nama[strcspn(dat.nama, "\n")] = '\0';
-    for (int i = 0; dat.nama[i]; i++) {
-        if (dat.nama[i] == ' ') {
-            dat.nama[i] = '_';
-        }
-    }
-    fflush(stdin);
-    printf("Tanggal Lahir(dd/mm/yyyy): "); // Tambah input tanggal lahir
-    scanf("%s", dat.tanggalLahir);
-
-    fflush(stdin);
-    printf("Jenis Kelamin (L/P): ");
-    scanf(" %c", &dat.jk);
-    fflush(stdin);
-    printf("Alamat: ");
-    fgets(dat.alamat, sizeof(dat.alamat), stdin);
-    dat.alamat[strcspn(dat.alamat, "\n")] = '\0';
-    for (int i = 0; dat.alamat[i]; i++) {
-        if (dat.alamat[i] == ' ') {
-            dat.alamat[i] = '_';
-        }
-    }
-    fflush(stdin);
-    printf("Tempat Lahir: ");
-    fgets(dat.tempat_lahir, sizeof(dat.tempat_lahir), stdin);
-    dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0';
-    for (int i = 0; dat.tempat_lahir[i]; i++) {
-        if (dat.tempat_lahir[i] == ' ') {
-            dat.tempat_lahir[i] = '_';
-        }
-    }
-    fflush(stdin);
-    printf("Agama: ");
-    fgets(dat.agama, sizeof(dat.agama), stdin);
-    dat.agama[strcspn(dat.agama, "\n")] = '\0';
-    for (int i = 0; dat.agama[i]; i++) {
-        if (dat.agama[i] == ' ') {
-            dat.agama[i] = '_';
-        }
-    }
-    fflush(stdin);
-    printf("Status: ");
-    fgets(dat.status, sizeof(dat.status), stdin);
-    dat.status[strcspn(dat.status, "\n")] = '\0';
-    for (int i = 0; dat.status[i]; i++) {
-        if (dat.status[i] == ' ') {
-            dat.status[i] = '_';
-        }
-    }
-    
-    
-    printf("=================================================\n");
-
-    enkripsiInteger(dat.NIK, keyInt);
-    file = fopen("dataPenduduk.txt", "a");
-    while (fscanf(file, "%s", fnama) != EOF) {
-        if (strcmp(dat.NIK, fnama) == 0) {
-            cek = 1;
-            break;
-        }
-    }
-    enkripsiInteger(dat.noKK, keyInt);
-    file = fopen("dataPenduduk.txt", "a");
-    while (fscanf(file, "%s", fnama) != EOF) {
-        if (strcmp(dat.noKK, fnama) == 0) {
-            cek = 1;
-            break;
-        }
-    }
-    fclose(file);
-
-    if (cek == 1) {
-        printf("Data Duplikat\n");
-        return;
-    }
-    else {
-        file = fopen("dataPenduduk.txt", "a");
-        enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", dat.id ,dat.NIK,dat.noKK, dat.nama,dat.tanggalLahir, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
-        fclose(file);
-        printf("Data berhasil tersimpan\n");
-
-        // Catat aktivitas pengguna
-        catatAktivitas("Menambahkan data penduduk", dat.NIK);
-    }
-
-    // Pilihan untuk menambah data lagi
     char userChoice;
-    printf("\nApakah Anda ingin menambah data lagi? (Y/N): ");
-    scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y') {
-        addPenduduk(); // Rekursif untuk menambah data lagi jika dipilih
-    }
+    do {
+        system("cls");
+        printf("=================================================\n");
+        printf("\tINPUT DATA PENDUDUK\n");
+        printf("=================================================\n");
+        dat.id = count;
+        printf("NIK: ");
+        scanf("%s", dat.NIK);
+        fflush(stdin);
+        printf("No. KK: ");
+        scanf("%s", dat.noKK);
+        fflush(stdin);
+        printf("Nama Lengkap: ");
+        fgets(dat.nama, sizeof(dat.nama), stdin);
+        dat.nama[strcspn(dat.nama, "\n")] = '\0';
+        for (int i = 0; dat.nama[i]; i++) {
+            if (dat.nama[i] == ' ') {
+                dat.nama[i] = '_';
+            }
+        }
+        fflush(stdin);
+        printf("Tanggal Lahir(dd/mm/yyyy): ");
+        scanf("%s", dat.tanggalLahir);
+        fflush(stdin);
+        printf("Jenis Kelamin (L/P): ");
+        scanf(" %c", &dat.jk);
+        fflush(stdin);
+        printf("Alamat: ");
+        fgets(dat.alamat, sizeof(dat.alamat), stdin);
+        dat.alamat[strcspn(dat.alamat, "\n")] = '\0';
+        for (int i = 0; dat.alamat[i]; i++) {
+            if (dat.alamat[i] == ' ') {
+                dat.alamat[i] = '_';
+            }
+        }
+        fflush(stdin);
+        printf("Tempat Lahir: ");
+        fgets(dat.tempat_lahir, sizeof(dat.tempat_lahir), stdin);
+        dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0';
+        for (int i = 0; dat.tempat_lahir[i]; i++) {
+            if (dat.tempat_lahir[i] == ' ') {
+                dat.tempat_lahir[i] = '_';
+            }
+        }
+        fflush(stdin);
+        printf("Agama: ");
+        fgets(dat.agama, sizeof(dat.agama), stdin);
+        dat.agama[strcspn(dat.agama, "\n")] = '\0';
+        for (int i = 0; dat.agama[i]; i++) {
+            if (dat.agama[i] == ' ') {
+                dat.agama[i] = '_';
+            }
+        }
+        fflush(stdin);
+        printf("Status: ");
+        fgets(dat.status, sizeof(dat.status), stdin);
+        dat.status[strcspn(dat.status, "\n")] = '\0';
+        for (int i = 0; dat.status[i]; i++) {
+            if (dat.status[i] == ' ') {
+                dat.status[i] = '_';
+            }
+        }
+        
+        printf("=================================================\n");
+
+        enkripsiInteger(dat.NIK, 123); // Placeholder untuk keyInt
+        file = fopen("dataPenduduk.txt", "a");
+        while (fscanf(file, "%s", fnama) != EOF) {
+            if (strcmp(dat.NIK, fnama) == 0) {
+                cek = 1;
+                break;
+            }
+        }
+        enkripsiInteger(dat.noKK, 123); // Placeholder untuk keyInt
+        file = fopen("dataPenduduk.txt", "a");
+        while (fscanf(file, "%s", fnama) != EOF) {
+            if (strcmp(dat.noKK, fnama) == 0) {
+                cek = 1;
+                break;
+            }
+        }
+        fclose(file);
+
+        if (cek == 1) {
+            printf("Data Duplikat\n");
+            return;
+        } else {
+            file = fopen("dataPenduduk.txt", "a");
+            enkripsiHuruf(dat.alamat, 123); // Placeholder untuk keyStr
+            fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", dat.id, dat.NIK, dat.noKK, dat.nama, dat.tanggalLahir, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+            fclose(file);
+            printf("Data berhasil tersimpan\n");
+
+            // Catat aktivitas pengguna
+            catatAktivitas("Menambahkan data penduduk", dat.NIK);
+
+            // Tambahkan data ke tree
+            FamilyTreeNode* newNode = createFamilyTreeNode(dat);
+            if (rootFamilyTree == NULL) {
+                rootFamilyTree = newNode;
+            } else {
+                addChildToFamilyTree(rootFamilyTree, newNode);
+            }
+            FILE* filebiasa = fopen("familyTree.txt", "w");
+            fclose(filebiasa);
+            FILE* familyFile = fopen("familyTree.txt", "a");
+            familyFile = fopen("familyTree.txt", "a");
+            if (familyFile != NULL) {
+                serializeFamilyTree(rootFamilyTree, familyFile);
+                fclose(familyFile);
+            }
+            // Serialisasi pohon keluarga ke file
+        }
+
+        // Pilihan untuk menambah data lagi
+        printf("\nApakah Anda ingin menambah data lagi? (Y/N): ");
+        scanf(" %c", &userChoice);
+    } while (userChoice == 'Y' || userChoice == 'y');
 }
 
 

@@ -16,7 +16,7 @@ typedef struct
     int jumlahGeser; // tambahan subvar untuk jumlah geser
 } Admin;
 
-typedef struct FamilyTreeNode {
+typedef struct DataPenduduk {
     int id;
     char NIK[50];
     char nama[MAX_NAMA_LENGTH];
@@ -25,12 +25,32 @@ typedef struct FamilyTreeNode {
     char tempat_lahir[50];
     char agama[20];
     char status[20];
-    char noKK[50]; // Tambah no KK
+    char noKK[50];
     char tanggalLahir[50];
     struct FamilyTreeNode* parent;
     struct FamilyTreeNode* firstChild;
     struct FamilyTreeNode* nextSibling;
 } DataPenduduk;
+
+typedef struct FamilyTreeNode {
+    DataPenduduk data;
+    struct FamilyTreeNode* parent;
+    struct FamilyTreeNode* firstChild;
+    struct FamilyTreeNode* nextSibling;
+} FamilyTreeNode;
+
+typedef struct FamilyTree {
+    FamilyTreeNode* root;
+} FamilyTree;
+
+typedef struct Node {
+    DataPenduduk data;
+    struct Node *parent;
+    struct Node *child;
+    struct Node *sibling;
+} Node; //Dari file menjadi tree
+
+char serializedData[1000]; 
 
 typedef struct {
     char username[MAX_USERNAME_LENGTH];
@@ -48,6 +68,7 @@ void simpanFileAdmin(Admin admin);
 void loginAdmin();
 void dekripsiPassword(char *passwordCompare, int jumlahGeser);
 void tampilkanTree();
+FamilyTreeNode* findNodeByNIK(FamilyTreeNode* root, char* NIK);
 
 // adddatapenduduk
 void addPenduduk();
@@ -69,5 +90,6 @@ void catatAktivitas(char *aksi, char *NIK);
 void catatLogin();
 void catatEdit();
 
-
+void menu();
+void hitungDanTampilkanLaporanDemografis();
 #endif

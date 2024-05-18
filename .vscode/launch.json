@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/ilham/proyek2-kelompoklima",
-      "program": "c:/ilham/proyek2-kelompoklima/build/Debug/outDebug",
+      "cwd": "c:/coba tumbal",
+      "program": "c:/coba tumbal/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
