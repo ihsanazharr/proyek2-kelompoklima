@@ -4,8 +4,4 @@
 #include <time.h>
 #include <stdbool.h>
 
-int main(){
-	printf("Tes Output");
-	return 0;
-}
 

@@ -16,23 +16,40 @@ int keyInt = 7;  // Tidak boleh >= 10
 
 AktivitasPengguna aktifPengguna;
 
-DataPenduduk* createNewNode(char* NIK, char* noKK, char* nama, char* tanggalLahir ,char jk, char* alamat, char* tempat_lahir, char* agama, char* status) {
-    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
-    newNode->id = -1;
-    strcpy(newNode->NIK, NIK);
-    strcpy(newNode->nama, nama);
-    newNode->jk = jk;
-    strcpy(newNode->alamat, alamat);
-    strcpy(newNode->tempat_lahir, tempat_lahir);
-    strcpy(newNode->agama, agama);
-    strcpy(newNode->status, status);
-    strcpy(newNode->noKK, noKK); // Set KK number
-    strcpy(newNode->tanggalLahir, tanggalLahir);//Set tanggal lahir
-    newNode->parent = NULL;
-    newNode->firstChild = NULL;
-    newNode->nextSibling = NULL;
-    return newNode;
-}
+//DataPenduduk* createNewNode(char* NIK, char* noKK, char* nama, char* tanggalLahir ,char jk, char* alamat, char* tempat_lahir, char* agama, char* status) {
+//    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
+//    newNode->id = -1;
+//    strcpy(newNode->NIK, NIK);
+//    strcpy(newNode->nama, nama);
+//    newNode->jk = jk;
+//    strcpy(newNode->alamat, alamat);
+//    strcpy(newNode->tempat_lahir, tempat_lahir);
+//    strcpy(newNode->agama, agama);
+//    strcpy(newNode->status, status);
+//    strcpy(newNode->noKK, noKK); // Set KK number
+//    strcpy(newNode->tanggalLahir, tanggalLahir);//Set tanggal lahir
+//    newNode->parent = NULL;
+//    newNode->firstChild = NULL;
+//    newNode->nextSibling = NULL;
+//    return newNode;
+//}
+//DataKota* createNodeKota(char* namaKota, char* status) {
+//    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
+//    newNode->id = -1;
+//    strcpy(newNode->NIK, NIK);
+//    strcpy(newNode->nama, nama);
+//    newNode->jk = jk;
+//    strcpy(newNode->alamat, alamat);
+//    strcpy(newNode->tempat_lahir, tempat_lahir);
+//    strcpy(newNode->agama, agama);
+//    strcpy(newNode->status, status);
+//    strcpy(newNode->noKK, noKK); // Set KK number
+//    strcpy(newNode->tanggalLahir, tanggalLahir);//Set tanggal lahir
+//    newNode->parent = NULL;
+//    newNode->firstChild = NULL;
+//    newNode->nextSibling = NULL;
+//    return newNode;
+//}
 
 void gotoxy(int x, int y)
 {
@@ -222,6 +239,9 @@ void loginAdmin()
 
 void menuAwal() {
     int pilihan;
+    DataProvinsi provinsi;
+    provinsi.firstChild = NULL;
+    
     do {
         loading();
         system("cls");
@@ -232,7 +252,7 @@ void menuAwal() {
         printf("4. Delete Data Penduduk\n");
         printf("5. Tambah Admin\n");
         printf("6. Tampilkan History\n"); // Opsi baru untuk menampilkan history
-        printf("7. Tampilkan Tree\n");
+        printf("7. Tambah Kota\n");
         printf("8. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -247,7 +267,12 @@ void menuAwal() {
                 system("cls");
                 break;
             case 3:
-                addPenduduk();
+                if (provinsi.firstChild == NULL) {
+            		printf("Tidak ada kota yang tersedia. Tambahkan kota terlebih dahulu.\n");
+         	   		break;
+        		}
+        		DataKota* kota = provinsi.firstChild;
+        		addPenduduk(kota);
                 system("cls");
                 break;
             case 4:
@@ -262,7 +287,7 @@ void menuAwal() {
                 tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
                 break;
             case 7:
-                tampilkanTree(); // struktur tree
+                tambahKota(&provinsi); // struktur tree
                 break;
             case 8:
                 pilihanMenuAwal();
@@ -292,8 +317,8 @@ void dekripsiPassword(char *passwordCompare, int jumlahGeser)
 }
 
 // add Data Penduduk
-void addPenduduk() {
-    DataPenduduk dat;
+void addPenduduk(DataKota* kota) {
+    DataPenduduk* dat = (DataPenduduk*)malloc(sizeof(DataPenduduk));
     FILE *file;
     int cek = 0;
     char fnama[100];
@@ -313,80 +338,79 @@ void addPenduduk() {
     printf("=================================================\n");
     printf("\tINPUT DATA PENDUDUK\n");
     printf("=================================================\n");
-    dat.id = count;
+    dat->id = count;
     printf("NIK: ");
-    scanf("%s", dat.NIK);
+    scanf("%s", dat->NIK);
     fflush(stdin);
-    printf("No. KK: "); // Tambah input no KK
-    scanf("%s", dat.noKK);
+    printf("No. KK: ");
+    scanf("%s", dat->noKK);
     fflush(stdin);
     printf("Nama Lengkap: ");
-    fgets(dat.nama, sizeof(dat.nama), stdin);
-    dat.nama[strcspn(dat.nama, "\n")] = '\0';
-    for (int i = 0; dat.nama[i]; i++) {
-        if (dat.nama[i] == ' ') {
-            dat.nama[i] = '_';
+    fgets(dat->nama, sizeof(dat->nama), stdin);
+    dat->nama[strcspn(dat->nama, "\n")] = '\0';
+    for (int i = 0; dat->nama[i]; i++) {
+        if (dat->nama[i] == ' ') {
+            dat->nama[i] = '_';
         }
     }
     fflush(stdin);
-    printf("Tanggal Lahir(dd/mm/yyyy): "); // Tambah input tanggal lahir
-    scanf("%s", dat.tanggalLahir);
+    printf("Tanggal Lahir(dd/mm/yyyy): ");
+    scanf("%s", dat->tanggalLahir);
 
     fflush(stdin);
     printf("Jenis Kelamin (L/P): ");
-    scanf(" %c", &dat.jk);
+    scanf(" %c", &dat->jk);
     fflush(stdin);
     printf("Alamat: ");
-    fgets(dat.alamat, sizeof(dat.alamat), stdin);
-    dat.alamat[strcspn(dat.alamat, "\n")] = '\0';
-    for (int i = 0; dat.alamat[i]; i++) {
-        if (dat.alamat[i] == ' ') {
-            dat.alamat[i] = '_';
+    fgets(dat->alamat, sizeof(dat->alamat), stdin);
+    dat->alamat[strcspn(dat->alamat, "\n")] = '\0';
+    for (int i = 0; dat->alamat[i]; i++) {
+        if (dat->alamat[i] == ' ') {
+            dat->alamat[i] = '_';
         }
     }
     fflush(stdin);
     printf("Tempat Lahir: ");
-    fgets(dat.tempat_lahir, sizeof(dat.tempat_lahir), stdin);
-    dat.tempat_lahir[strcspn(dat.tempat_lahir, "\n")] = '\0';
-    for (int i = 0; dat.tempat_lahir[i]; i++) {
-        if (dat.tempat_lahir[i] == ' ') {
-            dat.tempat_lahir[i] = '_';
+    fgets(dat->tempat_lahir, sizeof(dat->tempat_lahir), stdin);
+    dat->tempat_lahir[strcspn(dat->tempat_lahir, "\n")] = '\0';
+    for (int i = 0; dat->tempat_lahir[i]; i++) {
+        if (dat->tempat_lahir[i] == ' ') {
+            dat->tempat_lahir[i] = '_';
         }
     }
     fflush(stdin);
     printf("Agama: ");
-    fgets(dat.agama, sizeof(dat.agama), stdin);
-    dat.agama[strcspn(dat.agama, "\n")] = '\0';
-    for (int i = 0; dat.agama[i]; i++) {
-        if (dat.agama[i] == ' ') {
-            dat.agama[i] = '_';
+    fgets(dat->agama, sizeof(dat->agama), stdin);
+    dat->agama[strcspn(dat->agama, "\n")] = '\0';
+    for (int i = 0; dat->agama[i]; i++) {
+        if (dat->agama[i] == ' ') {
+            dat->agama[i] = '_';
         }
     }
     fflush(stdin);
     printf("Status: ");
-    fgets(dat.status, sizeof(dat.status), stdin);
-    dat.status[strcspn(dat.status, "\n")] = '\0';
-    for (int i = 0; dat.status[i]; i++) {
-        if (dat.status[i] == ' ') {
-            dat.status[i] = '_';
+    fgets(dat->status, sizeof(dat->status), stdin);
+    dat->status[strcspn(dat->status, "\n")] = '\0';
+    for (int i = 0; dat->status[i]; i++) {
+        if (dat->status[i] == ' ') {
+            dat->status[i] = '_';
         }
     }
-    
-    
+
     printf("=================================================\n");
 
-    enkripsiInteger(dat.NIK, keyInt);
+    enkripsiInteger(dat->NIK, keyInt);
     file = fopen("dataPenduduk.txt", "a");
     while (fscanf(file, "%s", fnama) != EOF) {
-        if (strcmp(dat.NIK, fnama) == 0) {
+        if (strcmp(dat->NIK, fnama) == 0) {
             cek = 1;
             break;
         }
     }
-    enkripsiInteger(dat.noKK, keyInt);
+    enkripsiInteger(dat->noKK, keyInt);
     file = fopen("dataPenduduk.txt", "a");
     while (fscanf(file, "%s", fnama) != EOF) {
-        if (strcmp(dat.noKK, fnama) == 0) {
+        if (strcmp(dat->noKK, fnama) == 0) {
             cek = 1;
             break;
         }
@@ -399,23 +423,57 @@ void addPenduduk() {
     }
     else {
         file = fopen("dataPenduduk.txt", "a");
-        enkripsiHuruf(dat.alamat, keyStr);
-        fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", dat.id ,dat.NIK,dat.noKK, dat.nama,dat.tanggalLahir, dat.jk, dat.alamat, dat.tempat_lahir, dat.agama, dat.status);
+        enkripsiHuruf(dat->alamat, keyStr);
+        fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", dat->id ,dat->NIK,dat->noKK, dat->nama,dat->tanggalLahir, dat->jk, dat->alamat, dat->tempat_lahir, dat->agama, dat->status);
         fclose(file);
         printf("Data berhasil tersimpan\n");
 
+        // Tambahkan dat sebagai anak dari kota
+        dat->parent = kota;
+        dat->nextSibling = kota->firstChild;
+        kota->firstChild = dat;
+
         // Catat aktivitas pengguna
-        catatAktivitas("Menambahkan data penduduk", dat.NIK);
+        catatAktivitas("Menambahkan data penduduk", dat->NIK);
     }
 
     // Pilihan untuk menambah data lagi
-    char userChoice;
+    char pilihanUser;
     printf("\nApakah Anda ingin menambah data lagi? (Y/N): ");
-    scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y') {
-        addPenduduk(); // Rekursif untuk menambah data lagi jika dipilih
+    scanf(" %c", &pilihanUser);
+    if (pilihanUser == 'Y' || pilihanUser == 'y') {
+        addPenduduk(kota); // Rekursif untuk menambah data lagi jika dipilih
     }
 }
+
+
+void tambahKota(DataProvinsi* provinsi) {
+    DataKota* kota = (DataKota*)malloc(sizeof(DataKota));
+    kota->parent = provinsi;
+    kota->firstChild = NULL;
+    kota->nextSibling = NULL;
+
+    printf("Masukkan ID Kota: ");
+    scanf("%d", &kota->id);
+    fflush(stdin);
+    printf("Masukkan Nama Kota: ");
+    fgets(kota->namaKota, sizeof(kota->namaKota), stdin);
+    kota->namaKota[strcspn(kota->namaKota, "\n")] = '\0';
+
+    // Tambahkan kota sebagai anak pertama atau sebagai saudara dari anak yang sudah ada
+    if (provinsi->firstChild == NULL) {
+        provinsi->firstChild = kota;
+    } else {
+        DataKota* temp = provinsi->firstChild;
+        while (temp->nextSibling != NULL) {
+            temp = temp->nextSibling;
+        }
+        temp->nextSibling = kota;
+    }
+
+    printf("Kota berhasil ditambahkan di provinsi %s.\n", provinsi->namaProvinsi);
+}
+
 
 
 void enkripsiHuruf(char *kalimat, int key)

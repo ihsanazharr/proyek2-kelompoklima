@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=ilham.c
+FileName=ihsan\ihsan.c
 CompileCpp=0
 Folder=
 Compile=1
@@ -111,7 +111,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit7]
-FileName=ihsan\ihsan.c
+FileName=ilham\ilham.c
 CompileCpp=0
 Folder=
 Compile=1

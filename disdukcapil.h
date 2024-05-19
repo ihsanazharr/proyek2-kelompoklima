@@ -16,6 +16,22 @@ typedef struct
     int jumlahGeser; // tambahan subvar untuk jumlah geser
 } Admin;
 
+typedef struct ProvinsiTreeNode {
+    int id;
+    char namaProvinsi[50];
+    struct ProvinsiTreeNode* parent;
+    struct kotaTreeNode* firstChild;
+    struct ProvinsiTreeNode* nextSibling;
+} DataProvinsi;
+
+typedef struct KotaTreeNode {
+    int id;
+    char namaKota[50];
+    struct ProvinsiTreeNode* parent;
+    struct kotaTreeNode* firstChild;
+    struct FamilyTreeNode* nextSibling;
+} DataKota;
+
 typedef struct FamilyTreeNode {
     int id;
     char NIK[50];
@@ -27,7 +43,7 @@ typedef struct FamilyTreeNode {
     char status[20];
     char noKK[50]; // Tambah no KK
     char tanggalLahir[50];
-    struct FamilyTreeNode* parent;
+    struct KotaTreeNode* parent;
     struct FamilyTreeNode* firstChild;
     struct FamilyTreeNode* nextSibling;
 } DataPenduduk;

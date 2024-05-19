@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o disdukcapil.o maul/addKK.o ilham.o
-LINKOBJ  = main.o disdukcapil.o maul/addKK.o ilham.o
+OBJ      = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o
+LINKOBJ  = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -pg
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -33,5 +33,8 @@ disdukcapil.o: disdukcapil.c
 maul/addKK.o: maul/addKK.c
 	$(CC) -c maul/addKK.c -o maul/addKK.o $(CFLAGS)
 
-ilham.o: ilham.c
-	$(CC) -c ilham.c -o ilham.o $(CFLAGS)
+ihsan/ihsan.o: ihsan/ihsan.c
+	$(CC) -c ihsan/ihsan.c -o ihsan/ihsan.o $(CFLAGS)
+
+ilham/ilham.o: ilham/ilham.c
+	$(CC) -c ilham/ilham.c -o ilham/ilham.o $(CFLAGS)
