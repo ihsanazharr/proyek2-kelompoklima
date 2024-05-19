@@ -58,17 +58,17 @@ int pilihanMenuAwal()
     char terminate;
 
     gotoxy(30, 2);
-    printf("                     SELAMAT DATANG                         \n");
+    printf("                                 SELAMAT DATANG                         \n");
     gotoxy(30, 3);
-    printf("                           DI                               \n");
+    printf("                                       DI                               \n");
     gotoxy(30, 4);
-    printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
+    printf("             SISTEM ADMINISTRASI KEPENDUDUKAN dan PENCATATAN SIPIL (AKSI)                 \n\n");
     gotoxy(30, 5);
-    printf("               ===========================                   \n\n");
+    printf("               ======================================================                   \n\n");
     gotoxy(30, 7);
-    printf("                1. MASUK                             \n");
+    printf("                                   1. MASUK                             \n");
     gotoxy(30, 8);
-    printf("                2. KELUAR                            \n");
+    printf("                                   2. KELUAR                            \n");
 
     gotoxy(30, 11);
     printf("          PILIHAN	: ");
