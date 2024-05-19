@@ -274,42 +274,6 @@
 ] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940599685006665
 [Mon May 13 08:09:40 2024
 ] Pengguna admin melakukan login.
-<<<<<<< HEAD
-[Mon May 13 08:56:58 2024
-] Pengguna admin melakukan login.
-[Mon May 13 09:31:08 2024
-] Pengguna admin melakukan login.
-[Mon May 13 09:32:11 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 889012345
-[Mon May 13 09:33:16 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: asd
-[Mon May 13 09:34:06 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 908288787
-[Mon May 13 11:21:15 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:23:51 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:25:34 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:34:14 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:35:56 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:36:20 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 888888
-[Mon May 13 11:38:57 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:42:26 2024
-] Pengguna admin melakukan login.
-[Mon May 13 11:44:37 2024
-] Pengguna admin melakukan login.
-[Mon May 13 12:16:01 2024
-] Pengguna admin melakukan login.
-[Mon May 13 12:16:41 2024
-] Pengguna admin melakukan login.
-[Mon May 13 12:17:20 2024
-] Pengguna admin melakukan login.
-=======
 [Mon May 13 08:50:14 2024
 ] Pengguna admin melakukan login.
 [Mon May 13 08:56:57 2024
@@ -328,4 +292,61 @@
 ] Pengguna admin melakukan login.
 [Mon May 13 10:00:19 2024
 ] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0659687996857779
->>>>>>> 1fc04033245e21d78b723329683ff93a38aea807
+[Sun May 19 01:22:43 2024
+] Pengguna admin melakukan login.
+[Sun May 19 01:24:35 2024
+] Pengguna admin melakukan login.
+[Sun May 19 01:25:46 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0944799279727770
+[Sun May 19 01:28:27 2024
+] Pengguna admin melakukan login.
+[Sun May 19 08:41:33 2024
+] Pengguna admin melakukan login.
+[Sun May 19 08:42:07 2024
+] Pengguna admin melakukan login.
+[Sun May 19 08:42:40 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 098109109109171
+[Sun May 19 10:04:39 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:15:15 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:24:55 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:25:53 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:27:32 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:29:14 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0944799279727779
+<<<<<<< HEAD
+[Sun May 19 12:12:08 2024
+=======
+[Sun May 19 10:33:08 2024
+] Pengguna admin melakukan login.
+[Sun May 19 10:48:01 2024
+] Pengguna admin melakukan login.
+[Sun May 19 11:09:03 2024
+] Pengguna admin melakukan login.
+[Sun May 19 11:09:13 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: Tsfvmfy
+[Sun May 19 11:17:05 2024
+] Pengguna admin melakukan login.
+[Sun May 19 11:17:22 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: Uaesza
+[Sun May 19 11:25:02 2024
+] Pengguna admin melakukan login.
+[Sun May 19 11:28:03 2024
+] Pengguna admin melakukan login.
+[Sun May 19 11:30:18 2024
+] Pengguna admin melakukan login.
+[Sun May 19 12:14:57 2024
+] Pengguna admin melakukan login.
+[Sun May 19 12:15:51 2024
+>>>>>>> 93151cb1c9651b14008551cce4ec44695e2c7251
+] Pengguna admin melakukan login.
+[Sun May 19 22:07:36 2024
+] Pengguna admin melakukan login.
+[Sun May 19 22:08:10 2024
+] Pengguna admin melakukan aksi: Menghapus data penduduk pada data dengan NIK: 3273099238223218
+[Mon May 20 00:54:12 2024
+] Pengguna admin melakukan login.

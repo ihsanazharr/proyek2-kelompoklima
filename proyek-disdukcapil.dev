@@ -28,8 +28,8 @@ Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=2
-CompilerSettings=00000000a0000000100000000
-UnitCount=7
+CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0
+UnitCount=9
 
 [VersionInfo]
 Major=1
@@ -101,7 +101,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit6]
-FileName=ilham.c
+FileName=ihsan\ihsan.c
 CompileCpp=0
 Folder=
 Compile=1
@@ -111,7 +111,27 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit7]
-FileName=ihsan\ihsan.c
+FileName=ilham\ilham.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=Untitled1
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit9]
+FileName=firly\firly.c
 CompileCpp=0
 Folder=
 Compile=1
