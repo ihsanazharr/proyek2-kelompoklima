@@ -1,5 +1,6 @@
 #include "disdukcapil.h"
 #include "ihsan/ihsan.c"
+#include "rindi/rindi.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -213,10 +214,11 @@ void menuAwal() {
         printf("2. Edit Penduduk\n");
         printf("3. Add Penduduk\n");
         printf("4. Delete Data Penduduk\n");
-        printf("5. Tambah Admin\n");
-        printf("6. Tampilkan History\n"); // Opsi baru untuk menampilkan history
-        printf("7. Tambah Kota\n");
-        printf("8. Lihat Kota\n");
+        printf("5. Hitung Presentase Demografis\n");
+        printf("6. Tambah Admin\n");
+        printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
+        printf("8. Tambah Kota\n");
+        printf("9. Lihat Kota\n");
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -244,16 +246,19 @@ void menuAwal() {
                 system("cls");
                 break;
             case 5:
-                addAdmin();
-                // system("cls");
+                menu();
+                system("cls");
                 break;
             case 6:
-                tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
+                addAdmin();
                 break;
             case 7:
-                tambahKota(&provinsi); // struktur tree
+                tampilkanHistory(); // Menampilkan history saat opsi 7 dipilih
                 break;
             case 8:
+                tambahKota(&provinsi); // struktur tree
+                break;
+            case 9:
                 showKota();
                 system("cls");
                 break;
@@ -265,7 +270,7 @@ void menuAwal() {
                 printf("Masukkan tidak valid, coba kembali.\n");
                 break;
         }
-    } while (pilihan != 8);
+    } while (pilihan != 9);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
