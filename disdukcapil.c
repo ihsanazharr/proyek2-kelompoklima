@@ -214,11 +214,11 @@ void menuAwal() {
         printf("2. Edit Penduduk\n");
         printf("3. Add Penduduk\n");
         printf("4. Delete Data Penduduk\n");
-        printf("5. Hitung Presentase Demografis\n");
-        printf("6. Tambah Admin\n");
-        printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
+        printf("5. Statistik Penduduk\n");
+        printf("6. Add Admin\n");
+        printf("7. Log Aktivitas\n"); // Opsi baru untuk menampilkan history
         printf("8. Tambah Kota\n");
-        printf("9. Lihat Kota\n");
+        printf("9. Daftar Kota\n");
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
