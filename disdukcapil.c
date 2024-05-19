@@ -1,5 +1,5 @@
 #include "disdukcapil.h"
-#include "ilham/ilham.c"
+#include "ihsan/ihsan.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -10,46 +10,9 @@
 #include <string.h>
 #define MAX_LINE_LENGTH 1000
 
-int keyStr = 18; // Tidak boleh >= 26
-int keyInt = 7;  // Tidak boleh >= 10
 // Procedure tambah admin
 
 AktivitasPengguna aktifPengguna;
-
-//DataPenduduk* createNewNode(char* NIK, char* noKK, char* nama, char* tanggalLahir ,char jk, char* alamat, char* tempat_lahir, char* agama, char* status) {
-//    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
-//    newNode->id = -1;
-//    strcpy(newNode->NIK, NIK);
-//    strcpy(newNode->nama, nama);
-//    newNode->jk = jk;
-//    strcpy(newNode->alamat, alamat);
-//    strcpy(newNode->tempat_lahir, tempat_lahir);
-//    strcpy(newNode->agama, agama);
-//    strcpy(newNode->status, status);
-//    strcpy(newNode->noKK, noKK); // Set KK number
-//    strcpy(newNode->tanggalLahir, tanggalLahir);//Set tanggal lahir
-//    newNode->parent = NULL;
-//    newNode->firstChild = NULL;
-//    newNode->nextSibling = NULL;
-//    return newNode;
-//}
-//DataKota* createNodeKota(char* namaKota, char* status) {
-//    DataPenduduk* newNode = (DataPenduduk*)malloc(sizeof(DataPenduduk));
-//    newNode->id = -1;
-//    strcpy(newNode->NIK, NIK);
-//    strcpy(newNode->nama, nama);
-//    newNode->jk = jk;
-//    strcpy(newNode->alamat, alamat);
-//    strcpy(newNode->tempat_lahir, tempat_lahir);
-//    strcpy(newNode->agama, agama);
-//    strcpy(newNode->status, status);
-//    strcpy(newNode->noKK, noKK); // Set KK number
-//    strcpy(newNode->tanggalLahir, tanggalLahir);//Set tanggal lahir
-//    newNode->parent = NULL;
-//    newNode->firstChild = NULL;
-//    newNode->nextSibling = NULL;
-//    return newNode;
-//}
 
 void gotoxy(int x, int y)
 {
@@ -253,7 +216,8 @@ void menuAwal() {
         printf("5. Tambah Admin\n");
         printf("6. Tampilkan History\n"); // Opsi baru untuk menampilkan history
         printf("7. Tambah Kota\n");
-        printf("8. Keluar\n");
+        printf("8. Lihat Kota\n");
+        printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
 
@@ -290,6 +254,10 @@ void menuAwal() {
                 tambahKota(&provinsi); // struktur tree
                 break;
             case 8:
+                showKota();
+                system("cls");
+                break;
+            case 0:
                 pilihanMenuAwal();
                 system("cls");
                 break;
@@ -339,11 +307,14 @@ void addPenduduk(DataKota* kota) {
     printf("\tINPUT DATA PENDUDUK\n");
     printf("=================================================\n");
     dat->id = count;
+    
     printf("NIK: ");
     scanf("%s", dat->NIK);
+    
     fflush(stdin);
     printf("No. KK: ");
     scanf("%s", dat->noKK);
+    
     fflush(stdin);
     printf("Nama Lengkap: ");
     fgets(dat->nama, sizeof(dat->nama), stdin);
@@ -353,6 +324,7 @@ void addPenduduk(DataKota* kota) {
             dat->nama[i] = '_';
         }
     }
+    
     fflush(stdin);
     printf("Tanggal Lahir(dd/mm/yyyy): ");
     scanf("%s", dat->tanggalLahir);
@@ -445,36 +417,6 @@ void addPenduduk(DataKota* kota) {
         addPenduduk(kota); // Rekursif untuk menambah data lagi jika dipilih
     }
 }
-
-
-void tambahKota(DataProvinsi* provinsi) {
-    DataKota* kota = (DataKota*)malloc(sizeof(DataKota));
-    kota->parent = provinsi;
-    kota->firstChild = NULL;
-    kota->nextSibling = NULL;
-
-    printf("Masukkan ID Kota: ");
-    scanf("%d", &kota->id);
-    fflush(stdin);
-    printf("Masukkan Nama Kota: ");
-    fgets(kota->namaKota, sizeof(kota->namaKota), stdin);
-    kota->namaKota[strcspn(kota->namaKota, "\n")] = '\0';
-
-    // Tambahkan kota sebagai anak pertama atau sebagai saudara dari anak yang sudah ada
-    if (provinsi->firstChild == NULL) {
-        provinsi->firstChild = kota;
-    } else {
-        DataKota* temp = provinsi->firstChild;
-        while (temp->nextSibling != NULL) {
-            temp = temp->nextSibling;
-        }
-        temp->nextSibling = kota;
-    }
-
-    printf("Kota berhasil ditambahkan di provinsi %s.\n", provinsi->namaProvinsi);
-}
-
-
 
 void enkripsiHuruf(char *kalimat, int key)
 {

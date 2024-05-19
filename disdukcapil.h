@@ -9,6 +9,8 @@
 #define MAX_NAMA_LENGTH 50
 #define MAX_USERNAME_LENGTH 50
 #define MAX_PASSWORD_LENGTH 50
+
+
 typedef struct
 {
     char username[MAX_USERNAME_LENGTH];
@@ -66,11 +68,14 @@ void dekripsiPassword(char *passwordCompare, int jumlahGeser);
 void tampilkanTree();
 
 // adddatapenduduk
-void addPenduduk();
+void addPenduduk(DataKota* kota);
 void enkripsiHuruf(char *kalimat, int key);
 void dekripsiHuruf(char *kalimat, int key);
 void enkripsiInteger(char *num, int key);
-// void dekripsiInteger(char *num, int key); Belum terpakai
+ void dekripsiInteger(char *num, int key); 
+
+//Add Kota
+void tambahKota(DataProvinsi* provinsi);
 
 // deleteData
 void deleteData();
