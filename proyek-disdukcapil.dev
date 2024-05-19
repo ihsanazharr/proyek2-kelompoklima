@@ -28,8 +28,8 @@ Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=2
-CompilerSettings=00000000a0000000100000000
-UnitCount=7
+CompilerSettings=0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0
+UnitCount=8
 
 [VersionInfo]
 Major=1
@@ -112,6 +112,16 @@ BuildCmd=
 
 [Unit7]
 FileName=ilham\ilham.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit8]
+FileName=rindi.c
 CompileCpp=0
 Folder=
 Compile=1
