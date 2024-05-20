@@ -2,6 +2,7 @@
 #include "ihsan/ihsan.c"
 #include "firly/firly.c"
 #include "rindi/rindi.c"
+#include "ilham/ilham.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -223,6 +224,7 @@ void menuAwal()
         printf("8. Tambah Kota\n");
         printf("9. Lihat Kota\n");
         printf("10. Kejadian Penting\n");
+        printf("11. Tampilkan Tree\n");
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -272,6 +274,10 @@ void menuAwal()
             kejadianPenting();
             system("cls");
             break;
+        case 11:
+            tampilkanTree();
+            system("cls");
+            break;
         case 0:
             pilihanMenuAwal();
             system("cls");
@@ -280,7 +286,7 @@ void menuAwal()
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 8);
+    } while (pilihan != 11);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
