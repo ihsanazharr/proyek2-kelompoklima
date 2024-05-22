@@ -94,6 +94,10 @@ void addAdmin()
     // Membungkus password & username menjadi struct
     Admin admin;
 
+    // Clear the input buffer
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
+
     // input username
     printf("Masukkan Username : ");
     fgets(admin.username, sizeof(admin.username), stdin);

@@ -94,6 +94,6 @@ void tampilkanTree() {
     if (userChoice == 'Y' || userChoice == 'y') {
         menuAwal();
     } else {
-        printf("Terima kasih.\n");
+        tampilkanTree();
     }
 }
