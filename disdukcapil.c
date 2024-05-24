@@ -230,7 +230,7 @@ void menuAwal()
         printf("9. Lihat Kota\n");
         printf("10. Kejadian Penting\n");
         printf("11. Tampilkan Tree\n");
-        printf("12. Tambah KKs\n");  // Tambahkan opsi ini
+        printf("12. Tambah KK\n");  // Tambahkan opsi ini
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);

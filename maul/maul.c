@@ -73,41 +73,21 @@ void tambahKK(DataKota* kota) {
         return;
     } else {
         file = fopen("dataKK.txt", "a");
-        // enkripsiInteger(kk->noKK, keyint);
         if (file == NULL) {
             printf("Gagal membuka dataKK.txt untuk penulisan\n");
             free(kk);
             return;
         }
-        
 
-        // Log Debugging
-        printf("Debug: Menambahkan KK ke kota\n");
-        printf("Debug: kota->firstChild sebelum: %p\n", (void*)kota->firstChild);
-
-        if (kota->firstChild == NULL) {
-            kota->firstChild = kk;
-            printf("Debug: kota->firstChild diatur ke KK baru: %p\n", (void*)kota->firstChild);
-        } else {
-            DataKK* temp = kota->firstChild;
-            // Log Debugging lebih lanjut
-            printf("Debug: Melintasi sibling\n");
-            while (temp->nextSibling != NULL) {
-                printf("Debug: Sibling saat ini: %p, nextSibling: %p\n", (void*)temp, (void*)temp->nextSibling);
-                temp = temp->nextSibling;
-            }
-            temp->nextSibling = kk;
-            printf("Debug: Menambahkan KK sebagai nextSibling: %p\n", (void*)temp->nextSibling);
+        if (fprintf(file, "%d %s\n", kk->id, kk->noKK) < 0) {
+            printf("Gagal menulis ke file\n");
+            fclose(file); // Tutup file sebelum keluar dari fungsi
+            free(kk);
+            return;
         }
 
-        printf("Debug: kota->firstChild sesudah: %p\n", (void*)kota->firstChild);
-        printf("Debug: kk ditambahkan: %p\n", (void*)kk);
-
-        fprintf(file, "%d %s\n", kk->id, kk->noKK);
-        fclose(file);
+        fclose(file); // Tutup file setelah selesai menulis
         printf("KK berhasil Tersimpan\n");
-
-        // catatAktivitas("Menambahkan Kartu Keluarga", kk->noKK);
     }
 
     char pilihUser;
