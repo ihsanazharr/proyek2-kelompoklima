@@ -1,6 +1,7 @@
 #include "disdukcapil.h"
 #include "ihsan/ihsan.c"
 #include "firly/firly.c"
+#include "maul/addKK.c"
 #include "rindi/rindi.c"
 #include <stdlib.h>
 #include <conio.h>
@@ -222,7 +223,8 @@ void menuAwal()
         printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
         printf("8. Tambah Kota\n");
         printf("9. Lihat Kota\n");
-        printf("10. Kejadian Penting\n");
+        printf("10. Tambah KK\n");
+        printf("11. Kejadian Penting\n");
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -269,6 +271,10 @@ void menuAwal()
             system("cls");
             break;
         case 10:
+            tambahKK(&provinsi);
+            system("cls");
+            break;
+        case 11:
             kejadianPenting();
             system("cls");
             break;

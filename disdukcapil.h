@@ -107,4 +107,11 @@ void Pernikahan();
 void Kematian();
 void Kelahiran();
 
-#endif
+// tambah KK
+void tambahKK(DataProvinsi* provinsi);
+void tambahAnggotaKK(DataPenduduk* kk);
+void simpanKKkeFile(DataPenduduk* kk);
+void simpanAnggotakeFile(DataPenduduk* anggota, FILE* file);
+DataKota* cariKotaById(DataKota* root, int id);
+
+#endif // DISDUKCAPIL_H
