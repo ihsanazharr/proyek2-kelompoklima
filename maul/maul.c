@@ -7,6 +7,7 @@
 static int keyint = 7;
 
 void tambahKK(DataKota* kota) {
+    system("cls");
     if (kota == NULL) {
         printf("Error: kota is NULL\n");
         return;
@@ -50,8 +51,6 @@ void tambahKK(DataKota* kota) {
         }
     }
 
-    printf("=================================================\n");
-
     // Cek duplikasi No KK
     file = fopen("dataKK.txt", "r");
     if (file != NULL) {
@@ -73,6 +72,7 @@ void tambahKK(DataKota* kota) {
         return;
     } else {
         file = fopen("dataKK.txt", "a");
+        enkripsiInteger(kk->noKK, keyint);
         if (file == NULL) {
             printf("Gagal membuka dataKK.txt untuk penulisan\n");
             free(kk);
@@ -87,7 +87,8 @@ void tambahKK(DataKota* kota) {
         }
 
         fclose(file); // Tutup file setelah selesai menulis
-        printf("KK berhasil Tersimpan\n");
+        catatAktivitas("Menambahkan data kk", kk->noKK); // Pindahkan ini ke sini
+        printf("KK berhasil Tersimpan\n"); // Pesan pemberitahuan
     }
 
     char pilihUser;

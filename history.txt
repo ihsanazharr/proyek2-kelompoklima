@@ -529,3 +529,35 @@
 ] Pengguna admin melakukan login.
 [Sat May 25 01:11:24 2024
 ] Pengguna admin melakukan login.
+[Sat May 25 01:16:42 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:17:17 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 8529637419648
+[Sat May 25 01:17:28 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 78451236585
+[Sat May 25 01:20:50 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:20:58 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 454545454545454
+[Sat May 25 01:21:12 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 232323232323232
+[Sat May 25 01:22:34 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:22:45 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 03030303030303
+[Sat May 25 01:22:52 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 929292929292929
+[Sat May 25 01:23:02 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 151515151515151
+[Sat May 25 01:23:16 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 444444444444444
+[Sat May 25 01:23:32 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 982829123982451
+[Sat May 25 01:25:15 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:25:56 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:26:14 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 223325214562352
+[Sat May 25 01:26:39 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 454126354125236
