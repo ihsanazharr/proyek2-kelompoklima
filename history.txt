@@ -561,3 +561,9 @@
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 223325214562352
 [Sat May 25 01:26:39 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 454126354125236
+[Sat May 25 01:28:13 2024
+] Pengguna admin melakukan login.
+[Sat May 25 01:28:23 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 5645653215289032
+[Sat May 25 01:28:33 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 835214563219032

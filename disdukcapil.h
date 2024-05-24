@@ -34,7 +34,7 @@ typedef struct KotaTreeNode {
 
 typedef struct KKTreeNode {
     int id;
-    char noKK[16];
+    char noKK[20];
     struct KotaTreeNode *parent;
     struct FamilyTreeNode *firstChild;
     struct KKTreeNode *nextSibling;
