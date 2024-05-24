@@ -3,6 +3,7 @@
 #include "firly/firly.c"
 #include "maul/addKK.c"
 #include "rindi/rindi.c"
+#include "ilham/ilham.c"
 #include <stdlib.h>
 #include <conio.h>
 #include <stdio.h>
@@ -93,6 +94,10 @@ void addAdmin()
 {
     // Membungkus password & username menjadi struct
     Admin admin;
+
+    // Clear the input buffer
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
 
     // input username
     printf("Masukkan Username : ");
@@ -223,8 +228,13 @@ void menuAwal()
         printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
         printf("8. Tambah Kota\n");
         printf("9. Lihat Kota\n");
+<<<<<<< HEAD
         printf("10. Tambah KK\n");
         printf("11. Kejadian Penting\n");
+=======
+        printf("10. Kejadian Penting\n");
+        printf("11. Tampilkan Tree\n");
+>>>>>>> e14a8f9b59108fa19ae8b1700b7dada42c72f6ab
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -278,6 +288,10 @@ void menuAwal()
             kejadianPenting();
             system("cls");
             break;
+        case 11:
+            tampilkanTree();
+            system("cls");
+            break;
         case 0:
             pilihanMenuAwal();
             system("cls");
@@ -286,7 +300,7 @@ void menuAwal()
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 8);
+    } while (pilihan != 11);
 }
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)

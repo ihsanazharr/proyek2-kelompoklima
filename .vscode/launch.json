@@ -8,8 +8,13 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+<<<<<<< HEAD
       "cwd": "c:/Users/LENOVO/Documents/POLBAN/New folder/proyek2-kelompoklima",
       "program": "c:/Users/LENOVO/Documents/POLBAN/New folder/proyek2-kelompoklima/build/Debug/outDebug",
+=======
+      "cwd": "c:/TUGAS PROJEK 2/proyek2-kelompoklima",
+      "program": "c:/TUGAS PROJEK 2/proyek2-kelompoklima/build/Debug/outDebug",
+>>>>>>> e14a8f9b59108fa19ae8b1700b7dada42c72f6ab
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
