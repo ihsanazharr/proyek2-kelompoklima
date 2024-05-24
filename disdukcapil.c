@@ -1,7 +1,7 @@
 #include "disdukcapil.h"
 #include "ihsan/ihsan.c"
 #include "firly/firly.c"
-#include "maul/addKK.c"
+#include "maul/maul.c"
 #include "rindi/rindi.c"
 #include "ilham/ilham.c"
 #include <stdlib.h>
@@ -225,16 +225,12 @@ void menuAwal()
         printf("4. Delete Data Penduduk\n");
         printf("5. Tambah Admin\n");
         printf("6. Statistik Penduduk\n");
-        printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
+        printf("7. Tampilkan History\n");
         printf("8. Tambah Kota\n");
         printf("9. Lihat Kota\n");
-<<<<<<< HEAD
-        printf("10. Tambah KK\n");
-        printf("11. Kejadian Penting\n");
-=======
         printf("10. Kejadian Penting\n");
         printf("11. Tampilkan Tree\n");
->>>>>>> e14a8f9b59108fa19ae8b1700b7dada42c72f6ab
+        printf("12. Tambah KKs\n");  // Tambahkan opsi ini
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -271,7 +267,7 @@ void menuAwal()
             menu(); // Menampilkan history saat opsi 6 dipilih
             break;
         case 7:
-            tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
+            tampilkanHistory(); // Menampilkan history saat opsi 7 dipilih
             break;
         case 8:
             tambahKota(&provinsi); // struktur tree
@@ -281,15 +277,15 @@ void menuAwal()
             system("cls");
             break;
         case 10:
-            tambahKK(&provinsi);
-            system("cls");
-            break;
-        case 11:
             kejadianPenting();
             system("cls");
             break;
         case 11:
             tampilkanTree();
+            system("cls");
+            break;
+        case 12:
+            tambahKK(&kota);  // Panggil fungsi addkk saat opsi 12 dipilih
             system("cls");
             break;
         case 0:
@@ -300,8 +296,9 @@ void menuAwal()
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 11);
+    } while (pilihan != 0);
 }
+
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
 {

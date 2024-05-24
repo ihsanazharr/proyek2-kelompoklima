@@ -81,7 +81,7 @@ void tambahKota(DataProvinsi* provinsi) {
 
 
 void showKota() {
-    system("cls"); // Clear screen
+    // system("cls"); // Clear screen
 
     FILE *file;
     DataKota data;
@@ -120,20 +120,20 @@ void showKota() {
     printf("=============================================================================================================================================================================================\n");
 
     // Meminta pengguna untuk mencari data berdasarkan nama atau kembali ke menu
-    char userChoice;
-    printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
-    scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y') {
-        searchByName(kota, count);
-    } else {
-        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
-        scanf(" %c", &userChoice);
-        if (userChoice == 'Y' || userChoice == 'y') {
-            menuAwal();
-        } else {
-            printf("Terima kasih.\n");
-        }
-    }
+    // char userChoice;
+    // printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
+    // scanf(" %c", &userChoice);
+    // if (userChoice == 'Y' || userChoice == 'y') {
+    //     searchByName(kota, count);
+    // } else {
+    //     printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+    //     scanf(" %c", &userChoice);
+    //     if (userChoice == 'Y' || userChoice == 'y') {
+    //         menuAwal();
+    //     } else {
+    //         printf("Terima kasih.\n");
+    //     }
+    // }
 }
 
 
