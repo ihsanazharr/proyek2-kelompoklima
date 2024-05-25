@@ -12,13 +12,12 @@ int bacaDataPenduduk(DataPenduduk penduduk[], int maxPenduduk, int* totalPendudu
         printf("Error: Tidak bisa membuka file\n");
         return 0;
     }
-
     int count = 0;
-    while (count < maxPenduduk && fscanf(file, "%d %s %s %s %s %c %s %s %s %s",
+    while (count < maxPenduduk && fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s",
               &penduduk[count].id, penduduk[count].NIK, penduduk[count].noKK,
               penduduk[count].nama, penduduk[count].tanggalLahir, &penduduk[count].jk,
               penduduk[count].alamat, penduduk[count].tempat_lahir, penduduk[count].agama,
-              penduduk[count].status) == 10) {
+              penduduk[count].status, penduduk[count].namaKota) == 11) {
         // Menghitung jumlah penduduk berdasarkan jenis kelamin
         if (penduduk[count].jk == 'L') {
             (*laki_laki)++;
@@ -67,29 +66,39 @@ int bacaDataPenduduk(DataPenduduk penduduk[], int maxPenduduk, int* totalPendudu
     return count;
 }
 
+// Fungsi untuk menghitung dan mencetak persentase demografis
+void hitungPersentaseDemografis(int total, int laki_laki, int perempuan, int islam, int kristen, int katolik, int hindu, int buddha, int konghucu, int kawin, int belum_kawin, int cerai_hidup, int cerai_mati) {
+    printf("Laporan Data Demografis:\n");
+    printf("Total penduduk: %d\n", total);
+
+    printf("Laki-laki: %d (%.2f%%)\n", laki_laki, (100.0 * laki_laki / total));
+    printf("Perempuan: %d (%.2f%%)\n\n", perempuan, (100.0 * perempuan / total));
+    
+    printf("Laporan Data Agama di Provinsi Jawa Barat:\n"); 
+    printf("Total penduduk: %d\n", total);
+
+    printf("Islam: %d (%.2f%%)\n", islam, (100.0 * islam / total));
+    printf("Kristen: %d (%.2f%%)\n", kristen, (100.0 * kristen / total));
+    printf("Katolik: %d (%.2f%%)\n", katolik, (100.0 * katolik / total));
+    printf("Hindu: %d (%.2f%%)\n", hindu, (100.0 * hindu / total));
+    printf("Buddha: %d (%.2f%%)\n", buddha, (100.0 * buddha / total));
+    printf("Konghucu: %d (%.2f%%)\n\n", konghucu, (100.0 * konghucu / total));
+
+    printf("Laporan Data Status Perkawinan di Provinsi Jawa Barat:\n");
+    printf("Total penduduk: %d\n", total);
+    printf("Belum Kawin: %d (%.2f%%)\n", belum_kawin, (total > 0) ? (100.0 * belum_kawin / total) : 0);
+    printf("Kawin: %d (%.2f%%)\n", kawin, (total > 0) ? (100.0 * kawin / total) : 0);
+    printf("Cerai Hidup: %d (%.2f%%)\n", cerai_hidup, (total > 0) ? (100.0 * cerai_hidup / total) : 0);
+    printf("Cerai Mati: %d (%.2f%%)\n", cerai_mati, (total > 0) ? (100.0 * cerai_mati / total) : 0);
+}
+
+// Fungsi utama yang menjalankan menu program
 void menu() {
     const int MAX_PENDUDUK = 1000;
     DataPenduduk penduduk[MAX_PENDUDUK];
     int jumlahPenduduk = 0;
     int pilihan;
 
-    int total = 0;//Total Penduduk
-
-    int laki_laki = 0;//Total Gender
-    int perempuan = 0;
-
-    int islam = 0;//Total Agama
-    int kristen = 0;
-    int katolik = 0;
-    int hindu = 0;
-    int buddha = 0;
-    int konghucu = 0;
-
-    int belum_kawin = 0;//Total Status Perkawinan
-    int kawin = 0;
-    int cerai_hidup = 0;
-    int cerai_mati = 0;
-    
     do {
         printf("Menu Utama:\n");
         printf("1. Baca Data Penduduk\n");
@@ -100,7 +109,23 @@ void menu() {
         getchar();  // Menangani newline setelah scanf
 
         switch (pilihan) {
-            case 1:
+            case 1: {
+                // Reset statistik sebelum membaca data baru
+                jumlahPenduduk = 0;
+                int total = 0;
+                int laki_laki = 0;
+                int perempuan = 0;
+                int islam = 0;
+                int kristen = 0;
+                int katolik = 0;
+                int hindu = 0;
+                int buddha = 0;
+                int konghucu = 0;
+                int belum_kawin = 0;
+                int kawin = 0;
+                int cerai_hidup = 0;
+                int cerai_mati = 0;
+                
                 jumlahPenduduk = bacaDataPenduduk(penduduk, MAX_PENDUDUK, &total, &laki_laki, &perempuan, &islam, &kristen, &katolik, &hindu, &buddha, &konghucu, &kawin, &belum_kawin, &cerai_hidup, &cerai_mati);
                 if (jumlahPenduduk > 0) {
                     printf("Data penduduk berhasil dibaca. Jumlah penduduk: %d\n", jumlahPenduduk);
@@ -108,35 +133,32 @@ void menu() {
                     printf("Tidak ada data penduduk yang dibaca.\n");
                 }
                 break;
-            case 2:
+            }
+            case 2: {
                 if (jumlahPenduduk > 0) {
-                    system("CLS");
-                    printf("Laporan Data Demografis:\n");
-                    printf("Total penduduk: %d\n", total);
-
-                    printf("Laki-laki: %d (%.2f%%)\n", laki_laki, (100.0 * laki_laki / total));
-                    printf("Perempuan: %d (%.2f%%)\n\n", perempuan, (100.0 * perempuan / total));
+                    int total = 0;
+                    int laki_laki = 0;
+                    int perempuan = 0;
+                    int islam = 0;
+                    int kristen = 0;
+                    int katolik = 0;
+                    int hindu = 0;
+                    int buddha = 0;
+                    int konghucu = 0;
+                    int belum_kawin = 0;
+                    int kawin = 0;
+                    int cerai_hidup = 0;
+                    int cerai_mati = 0;
                     
-                    printf("Laporan Data Agama di Provinsi Jawa Barat:\n"); 
-                    printf("Total penduduk: %d\n", total);
-
-                    printf("Islam: %d (%.2f%%)\n", islam, (100.0 * islam / total));
-                    printf("Kristen: %d (%.2f%%)\n", kristen, (100.0 * kristen / total));
-                    printf("Katolik: %d (%.2f%%)\n", katolik, (100.0 * katolik / total));
-                    printf("Hindu: %d (%.2f%%)\n", hindu, (100.0 * hindu / total));
-                    printf("Buddha: %d (%.2f%%)\n", buddha, (100.0 * buddha / total));
-                    printf("Konghucu: %d (%.2f%%)\n\n", konghucu, (100.0 * konghucu / total));
-
-                    printf("Laporan Data Status Perkawinan di Provinsi Jawa Barat:\n");
-                    printf("Total penduduk: %d\n", total);
-                    printf("Belum Kawin: %d (%.2f%%)\n", belum_kawin, (total > 0) ? (100.0 * belum_kawin / total) : 0);
-                    printf("Kawin: %d (%.2f%%)\n", kawin, (total > 0) ? (100.0 * kawin / total) : 0);
-                    printf("Cerai Hidup: %d (%.2f%%)\n", cerai_hidup, (total > 0) ? (100.0 * cerai_hidup / total) : 0);
-                    printf("Cerai Mati: %d (%.2f%%)\n", cerai_mati, (total > 0) ? (100.0 * cerai_mati / total) : 0);
+                    // Baca ulang data untuk mendapatkan statistik terbaru
+                    jumlahPenduduk = bacaDataPenduduk(penduduk, MAX_PENDUDUK, &total, &laki_laki, &perempuan, &islam, &kristen, &katolik, &hindu, &buddha, &konghucu, &kawin, &belum_kawin, &cerai_hidup, &cerai_mati);
+                    system("CLS");
+                    hitungPersentaseDemografis(total, laki_laki, perempuan, islam, kristen, katolik, hindu, buddha, konghucu, kawin, belum_kawin, cerai_hidup, cerai_mati);
                 } else {
                     printf("Data penduduk belum dibaca. Silakan baca data penduduk terlebih dahulu.\n");
                 }
                 break;
+            }
             case 3:
                 printf("Keluar dari program.\n");
                 break;
@@ -146,6 +168,3 @@ void menu() {
         }
     } while (pilihan != 3);
 }
-
-
-

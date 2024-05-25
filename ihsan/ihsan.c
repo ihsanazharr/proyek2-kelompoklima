@@ -134,6 +134,8 @@ void showKota() {
     //         printf("Terima kasih.\n");
     //     }
     // }
+    getchar();
+    getchar();
 }
 
 

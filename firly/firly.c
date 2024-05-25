@@ -161,7 +161,7 @@ void tampilkanIsiKK(DataPenduduk data, char userInput[20])
     printf("====== List data dalam KK %s ======\n\n", userInput);
     enkripsiInteger(userInput, keyInt);
     rewind(file);
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF)
     {
         char buffer[1000];
         while (fgets(buffer, sizeof(buffer), file) != NULL)
@@ -192,7 +192,7 @@ void tampilkanIsiNIK(DataPenduduk data, char userInput[50])
     file = fopen("dataPenduduk.txt", "r");
     rewind(file);
     enkripsiInteger(userInput, keyInt);
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status ,data.namaKota) != EOF)
     {
         char buffer[1000];
         while (fgets(buffer, sizeof(buffer), file) != NULL)
@@ -216,43 +216,39 @@ void tampilkanIsiNIK(DataPenduduk data, char userInput[50])
     fclose(file);
 }
 
-void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination)
-{
+void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination, char *newCity) {
     FILE *file, *temp;
     file = fopen("dataPenduduk.txt", "r");
     temp = fopen("tempData.txt", "w");
-    if (file == NULL || temp == NULL)
-    {
+    if (file == NULL || temp == NULL) {
         printf("Gagal membuka/membuat file!\n");
         exit(1);
     }
 
     char *kawin = "Kawin";
     rewind(file);
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
-    {
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF) {
         char buffer[1000];
-        while (fgets(buffer, sizeof(buffer), file) != NULL)
-        {
-            if (buffer[strlen(buffer) - 1] == '\n')
-            {
+        while (fgets(buffer, sizeof(buffer), file) != NULL) {
+            if (buffer[strlen(buffer) - 1] == '\n') {
                 break;
             }
         }
 
-        if (strcmp(NIKSource, data.NIK) == 0)
-        {
+        if (strcmp(NIKSource, data.NIK) == 0) {
             strcpy(data.noKK, KKDestination);
             strcpy(data.status, kawin);
+            strcpy(data.namaKota, newCity); // Update the city here
         }
 
-        fprintf(temp, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+        fprintf(temp, "%d %s %s %s %s %c %s %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota);
     }
     fclose(file);
     fclose(temp);
     remove("dataPenduduk.txt");
     rename("tempData.txt", "dataPenduduk.txt");
 }
+
 
 void changeStatus(DataPenduduk data, char *NIK)
 {
@@ -267,7 +263,7 @@ void changeStatus(DataPenduduk data, char *NIK)
 
     char *kawin = "Kawin";
     rewind(file);
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status,data.namaKota) != EOF)
     {
         char buffer[1000];
         while (fgets(buffer, sizeof(buffer), file) != NULL)
@@ -283,7 +279,7 @@ void changeStatus(DataPenduduk data, char *NIK)
             strcpy(data.status, kawin);
         }
 
-        fprintf(temp, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+        fprintf(temp, "%d %s %s %s %s %c %s %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota);
     }
     fclose(file);
     fclose(temp);
@@ -291,8 +287,7 @@ void changeStatus(DataPenduduk data, char *NIK)
     rename("temp.txt", "dataPenduduk.txt");
 }
 
-void Pernikahan()
-{
+void Pernikahan() {
     system("cls");
     FILE *file;
     DataPenduduk data;
@@ -308,34 +303,32 @@ void Pernikahan()
     bool found = false;
     bool sah = false;
     bool valid = false;
+    char newCity[50]; // Variable to store the new city
 
     file = fopen("dataPenduduk.txt", "r");
-    if (file == NULL)
-    {
+    if (file == NULL) {
         printf("Error membuka/membuat file!");
         exit(1);
     }
 
-    while (!found)
-    {
+    while (!found) {
         displayDecryptedNoKKList();
         printf("Masukkan No.KK kedua pasangan\n");
         printf("No KK Pertama: ");
         fflush(stdin);
         scanf("%s", userInput1);
-        if (searchKK(userInput1) == false)
-        {
+        if (searchKK(userInput1) == false) {
             printf("No KK tersebut tidak ditemukan\n");
             continue;
         }
         printf("No KK Kedua: ");
         fflush(stdin);
         scanf("%s", userInput2);
-        if (searchKK(userInput2) == false)
-        {
+        if (searchKK(userInput2) == false) {
             printf("No KK tersebut tidak ditemukan\n");
             continue;
         }
+
         strcpy(userInputCpy1, userInput1);
         strcpy(userInputCpy2, userInput2);
         dekripsiInteger(userInputCpy1, keyInt);
@@ -344,21 +337,16 @@ void Pernikahan()
     }
 
     found = false;
-    while (!sah)
-    {
-        while (!valid)
-        {
+    while (!sah) {
+        while (!valid) {
             system("cls");
             tampilkanIsiKK(data, userInputCpy1);
             printf("Masukkan NIK calon pengantin pertama: ");
             fflush(stdin);
             scanf("%s", userInput3);
-            if (searchNIK(userInput3, userInputCpy1) == true)
-            {
+            if (searchNIK(userInput3, userInputCpy1) == true) {
                 valid = true;
-            }
-            else
-            {
+            } else {
                 printf("NIK tersebut tidak terdaftar dalam KK!\n");
                 valid = false;
                 Sleep(2000);
@@ -366,19 +354,15 @@ void Pernikahan()
         }
 
         valid = false;
-        while (!valid)
-        {
+        while (!valid) {
             system("cls");
             tampilkanIsiKK(data, userInputCpy2);
             printf("Masukkan NIK calon pengantin kedua: ");
             fflush(stdin);
             scanf("%s", userInput4);
-            if (searchNIK(userInput4, userInputCpy2) == true)
-            {
+            if (searchNIK(userInput4, userInputCpy2) == true) {
                 valid = true;
-            }
-            else
-            {
+            } else {
                 printf("NIK tersebut tidak terdaftar dalam KK!\n");
                 Sleep(2000);
             }
@@ -387,20 +371,16 @@ void Pernikahan()
         gender1 = getGenderFromNIK(userInput3);
         gender2 = getGenderFromNIK(userInput4);
 
-        if (gender1 == gender2)
-        {
+        if (gender1 == gender2) {
             printf("Tidak bisa menikahi sesama jenis!\n");
             Sleep(3000);
             sah = false;
-        }
-        else
-        {
+        } else {
             system("cls");
             printf("Mohon Tunggu...");
             Sleep(1000);
             valid = false;
-            while (!valid)
-            {
+            while (!valid) {
                 system("cls");
                 tampilkanIsiNIK(data, userInput3);
                 printf("\nAkan menikah dengan\n\n");
@@ -411,20 +391,28 @@ void Pernikahan()
                 printf("Opsi: ");
                 fflush(stdin);
                 scanf("%d", &input);
-                switch (input)
-                {
-                case 1:
-                    changeKK(data, userInput3, userInput2);
-                    changeStatus(data, userInput3);
-                    valid = true;
-                    sah = true;
-                    break;
-                case 2:
-                    changeKK(data, userInput4, userInput1);
-                    changeStatus(data, userInput4);
-                    valid = true;
-                    sah = true;
-                    break;
+
+                // Ask for new city
+                printf("Masukkan kota baru: ");
+                fflush(stdin);
+                fgets(newCity, sizeof(newCity), stdin);
+                enkripsiHuruf(newCity, keyStr);
+
+                newCity[strcspn(newCity, "\n")] = '\0'; // Remove newline character
+
+                switch (input) {
+                    case 1:
+                        changeKK(data, userInput3, userInput2, newCity); // Pass new city
+                        changeStatus(data, userInput3);
+                        valid = true;
+                        sah = true;
+                        break;
+                    case 2:
+                        changeKK(data, userInput4, userInput1, newCity); // Pass new city
+                        changeStatus(data, userInput4);
+                        valid = true;
+                        sah = true;
+                        break;
                 }
             }
         }
@@ -436,6 +424,7 @@ void Pernikahan()
     printf("Pernikahan berhasil!\n");
     Sleep(2000);
 }
+
 
 void Kematian()
 {
@@ -639,6 +628,16 @@ void Kelahiran()
             data.agama[i] = '_';
         }
     }
+    printf("Kota: ");
+    fgets(data.namaKota, sizeof(data.namaKota), stdin);
+    data.namaKota[strcspn(data.namaKota, "\n")] = '\0';
+    for (int i = 0; data.namaKota[i]; i++)
+    {
+        if (data.namaKota[i] == ' ')
+        {
+            data.namaKota[i] = '_';
+        }
+    }
 
     char *status;
     status = "Belum_Kawin";
@@ -647,8 +646,9 @@ void Kelahiran()
     enkripsiInteger(data.NIK, keyInt);
     enkripsiInteger(data.noKK, keyInt);
     enkripsiHuruf(data.alamat, keyStr);
+    enkripsiHuruf(data.namaKota, keyStr);
     file = fopen("dataPenduduk.txt", "a");
-    fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+    fprintf(file, "%d %s %s %s %s %c %s %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status,data.namaKota);
     printf("Data Berhasil Ditambahkan");
     Sleep(2000);
     fclose(file);

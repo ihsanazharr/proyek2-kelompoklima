@@ -49,8 +49,9 @@ typedef struct FamilyTreeNode {
     char tempat_lahir[50];
     char agama[20];
     char status[20];
-    char noKK[50]; // Tambah no KK
+    char noKK[50]; 
     char tanggalLahir[50];
+    char namaKota[50]; // Tambahkan namaKota
     struct KKTreeNode *parent;
     struct FamilyTreeNode *firstChild;
     struct FamilyTreeNode *nextSibling;
@@ -108,7 +109,7 @@ bool searchNIK(char NIK[50], char KK[20]);
 char getGenderFromNIK(char NIK[50]);
 void tampilkanIsiKK(DataPenduduk data, char userInput[20]);
 void tampilkanIsiNIK(DataPenduduk data, char userInput[50]);
-void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination);
+void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination, char *newCity);
 void changeStatus(DataPenduduk data, char *NIK);
 void Pernikahan();
 void Kematian();

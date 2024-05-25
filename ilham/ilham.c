@@ -31,28 +31,45 @@ Node* tambahPenduduk(Node *root, DataPenduduk data) {
 }
 
 // Fungsi rekursif untuk mencetak pohon secara terstruktur
-void printTree(Node *node, int level, char *lastPrintedKK) {
+void printTree(Node *node, int level, char *lastPrintedKota, char *lastPrintedNoKK) {
     if (node == NULL) {
         return;
     }
-    //print no KK jika berbeda dengan no KK terakhir
-    if (strcmp(node->data.noKK, lastPrintedKK) != 0) {
-        printf("|- Kartu Keluarga %s\n", node->data.noKK);
-        strcpy(lastPrintedKK, node->data.noKK);
+
+    // Print nama kota jika node adalah node Kota dan berbeda dengan yang terakhir dicetak
+    if (node->data.namaKota != NULL && strcmp(node->data.namaKota, lastPrintedKota) != 0) {
+        char decryptedKota[50];
+        strcpy(decryptedKota, node->data.namaKota);
+        dekripsiHuruf(decryptedKota, keyStr); // Dekripsi nama kota
+        printf("|- Kota: %s\n", decryptedKota);
+        strcpy(lastPrintedKota, node->data.namaKota); // Update nama kota terakhir yang dicetak
     }
 
-    // Print nama penduduk
-    printf("|   |- %s\n", node->data.nama);
+    // Print nomor KK jika node adalah node KK dan berbeda dengan yang terakhir dicetak
+    if (node->data.noKK != NULL && strcmp(node->data.noKK, lastPrintedNoKK) != 0) {
+        char decryptedNoKK[20];
+        strcpy(decryptedNoKK, node->data.noKK);
+        dekripsiInteger(decryptedNoKK, keyInt); // Dekripsi nomor KK
+        printf("|   |- %s\n", decryptedNoKK);
+        strcpy(lastPrintedNoKK, node->data.noKK); // Update nomor KK terakhir yang dicetak
+    }
 
-    // Recursively print children
+    // Print NIK dan nama penduduk jika node adalah node Penduduk
+    if (node->data.NIK != NULL && node->data.nama != NULL) {
+        char decryptedNIK[50];
+        strcpy(decryptedNIK, node->data.NIK);
+        dekripsiInteger(decryptedNIK, 0); // Dekripsi NIK
+        printf("|       |- NIK_%s\n", decryptedNIK);
+        printf("|          |- %s\n", node->data.nama);
+    }
+
+    // Print children recursively
     if (node->child != NULL) {
-        printTree(node->child, level + 1, lastPrintedKK);
+        printTree(node->child, level + 1, lastPrintedKota, lastPrintedNoKK);
     }
 
     // Move to the next sibling
-    if (node->sibling != NULL) {
-        printTree(node->sibling, level, lastPrintedKK);
-    }
+    printTree(node->sibling, level, lastPrintedKota, lastPrintedNoKK);
 }
 
 // Fungsi utama untuk menampilkan struktur pohon
@@ -61,31 +78,33 @@ void tampilkanTree() {
 
     FILE *file;
     DataPenduduk data;
-    Node *root = NULL;
+    Node *rootProvinsi = NULL;
 
     file = fopen("dataPenduduk.txt", "r");
     if (file == NULL) {
         printf("File tidak dapat dibuka\n");
         return;
     }
-                                                        
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK,data.noKK, data.nama,data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF) {
+    
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF) {
         dekripsiHuruf(data.alamat, keyStr);
         dekripsiInteger(data.NIK, keyInt);
         dekripsiInteger(data.noKK, keyInt);
-        root = tambahPenduduk(root, data);
+        // Mencetak data penduduk ke dalam struktur pohon dengan hierarki provinsi, kota, dan keluarga
+        rootProvinsi = tambahPenduduk(rootProvinsi, data);
     }
 
     fclose(file);
 
-    if (root == NULL) {
+    if (rootProvinsi == NULL) {
         printf("Tidak ada data yang tersedia.\n");
         return;
     }
 
     printf("Struktur Pohon Kartu Keluarga dan Penduduk Provinsi Jawa Barat:\n");
-    char lastPrintedKK[20] = "";
-    printTree(root, 0, lastPrintedKK);
+    char lastPrintedKota[50] = ""; // Variabel untuk menyimpan nama kota terakhir yang dicetak
+    char lastPrintedNoKK[20] = ""; // Variabel untuk menyimpan nomor KK terakhir yang dicetak
+    printTree(rootProvinsi, 0, lastPrintedKota, lastPrintedNoKK);
 
     // Hapus bagian ini jika tidak ingin menunggu input dari pengguna
     char userChoice;
