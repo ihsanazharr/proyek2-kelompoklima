@@ -103,6 +103,7 @@ void tampilkanIsiKK(DataPenduduk data, char userInput[20]);
 void tampilkanIsiNIK(DataPenduduk data, char userInput[50]);
 void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination);
 void changeStatus(DataPenduduk data, char *NIK);
+void logKejadianPenting (char noKK1[20], char noKK2[20], char NIK1[50], char NIK2[50], char *kejadianPenting);
 void Pernikahan();
 void Kematian();
 void Kelahiran();

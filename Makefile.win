@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o Untitled1.o firly/firly.o
-LINKOBJ  = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o Untitled1.o firly/firly.o
+OBJ      = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o rindi.o
+LINKOBJ  = main.o disdukcapil.o maul/addKK.o ihsan/ihsan.o ilham/ilham.o rindi.o
 LIBS     = -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib" -L"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -pg
 INCS     = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
 CXXINCS  = -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"C:/Program Files (x86)/Embarcadero/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
@@ -39,5 +39,5 @@ ihsan/ihsan.o: ihsan/ihsan.c
 ilham/ilham.o: ilham/ilham.c
 	$(CC) -c ilham/ilham.c -o ilham/ilham.o $(CFLAGS)
 
-firly/firly.o: firly/firly.c
-	$(CC) -c firly/firly.c -o firly/firly.o $(CFLAGS)
+rindi.o: rindi.c
+	$(CC) -c rindi.c -o rindi.o $(CFLAGS)

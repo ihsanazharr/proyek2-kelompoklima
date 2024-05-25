@@ -1,0 +1,9 @@
+Mon May 20 09:26:30 2024 - Telah terjadi Kelahiran pada KK 12345 dengan NIK 123212
+Mon May 20 09:26:40 2024 - Telah terjadi Kematian pada KK 45678 dengan NIK 123212
+Mon May 20 09:29:27 2024 - Telah terjadi Kematian pada KK 45678 dengan NIK 11234567
+Mon May 20 09:32:04 2024 - Telah terjadi Kematian pada KK 12345 dengan NIK 11234567
+Mon May 20 09:32:35 2024 - Telah terjadi Kematian pada KK 12345 dengan NIK 123451234
+Mon May 20 09:32:58 2024 - Telah terjadi Kelahiran pada KK 12345 dengan NIK 112345
+Mon May 20 09:46:14 2024 - Telah terjadi pernikahan pada KK 89012 dan KK 09489012, dengan NIK pasangan 88901234 dan 889012
+Mon May 20 09:50:55 2024 - Telah terjadi pernikahan pada KK 56789 dan KK 76156789, dengan NIK pasangan 55678901 dan 556789
+Sat May 25 14:51:05 2024 - Telah terjadi pernikahan pada KK 12345 dan KK 12345, dengan NIK pasangan 123451234 dan 11234567

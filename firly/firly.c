@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <conio.h>
+#include <time.h>
 #include "../disdukcapil.h"
 
 extern int keyStr;
@@ -291,6 +292,39 @@ void changeStatus(DataPenduduk data, char *NIK)
     rename("temp.txt", "dataPenduduk.txt");
 }
 
+void removeNewline(char *str) {
+    size_t len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0';
+    }
+}
+
+void logKejadianPenting (char noKK1[20], char noKK2[20], char NIK1[50], char NIK2[50], char *kejadianPenting){
+    FILE *log;
+    log = fopen("logKejadianPenting.txt", "a");
+    if (log == NULL){
+        printf("Gagal membuka file\n");
+        exit(1);
+    }
+
+    time_t now;
+    time (&now);
+    char *local = ctime(&now);
+    removeNewline(local);
+    if (strcmp(kejadianPenting, "Pernikahan") == 0) {
+        printf("TRIGGERED\n");
+        dekripsiInteger(noKK1, keyInt);
+        dekripsiInteger(noKK2, keyInt);
+        dekripsiInteger(NIK1, keyInt);
+        dekripsiInteger(NIK2, keyInt);
+        fprintf(log, "%s - Telah terjadi pernikahan pada KK %s dan KK %s, dengan NIK pasangan %s dan %s\n", local, noKK1, noKK2, NIK1, NIK2);
+        fclose(log);
+        return;
+    }
+    fprintf(log, "%s - Telah terjadi %s pada KK %s dengan NIK %s\n", local, kejadianPenting, noKK1, NIK1);
+    fclose(log);
+}
+
 void Pernikahan()
 {
     system("cls");
@@ -414,12 +448,14 @@ void Pernikahan()
                 switch (input)
                 {
                 case 1:
+                    logKejadianPenting(userInput1, userInput2, userInput3, userInput4, "Pernikahan");
                     changeKK(data, userInput3, userInput2);
                     changeStatus(data, userInput3);
                     valid = true;
                     sah = true;
                     break;
                 case 2:
+                    logKejadianPenting(userInput1, userInput2, userInput3, userInput4, "Pernikahan");
                     changeKK(data, userInput4, userInput1);
                     changeStatus(data, userInput4);
                     valid = true;
@@ -513,6 +549,7 @@ void Kematian()
     if (found)
     {
         dekripsiInteger(userInput2, keyInt);
+        logKejadianPenting(userInput1, "0", userInput2, "0", "Kematian");
         printf("Data dengan NIK %s telah dihapus.\n", userInput2);
         Sleep(2000);
         rewind(file);
@@ -649,6 +686,9 @@ void Kelahiran()
     enkripsiHuruf(data.alamat, keyStr);
     file = fopen("dataPenduduk.txt", "a");
     fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+    dekripsiInteger(data.noKK, keyInt);
+    dekripsiInteger(data.NIK, keyInt);
+    logKejadianPenting(data.noKK, "0", data.NIK, "0", "Kelahiran");
     printf("Data Berhasil Ditambahkan");
     Sleep(2000);
     fclose(file);
@@ -695,3 +735,4 @@ void kejadianPenting()
 
     } while (userInput != '0');
 }
+

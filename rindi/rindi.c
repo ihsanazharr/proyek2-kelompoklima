@@ -112,12 +112,14 @@ void menu() {
                 if (jumlahPenduduk > 0) {
                     system("CLS");
                     printf("Laporan Data Demografis:\n");
-                    printf("Total penduduk: %d\n\n", total);
+                    printf("Total penduduk: %d\n", total);
 
                     printf("Laki-laki: %d (%.2f%%)\n", laki_laki, (100.0 * laki_laki / total));
                     printf("Perempuan: %d (%.2f%%)\n\n", perempuan, (100.0 * perempuan / total));
                     
-                    printf("Laporan Data Agama di Provinsi Jawa Barat:\n");                    
+                    printf("Laporan Data Agama di Provinsi Jawa Barat:\n"); 
+                    printf("Total penduduk: %d\n", total);
+
                     printf("Islam: %d (%.2f%%)\n", islam, (100.0 * islam / total));
                     printf("Kristen: %d (%.2f%%)\n", kristen, (100.0 * kristen / total));
                     printf("Katolik: %d (%.2f%%)\n", katolik, (100.0 * katolik / total));
