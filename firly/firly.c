@@ -684,7 +684,7 @@ void kejadianPenting()
             Kematian();
             break;
 
-        case 4:
+        case 0:
             menuAwal();
             break;
         default:
