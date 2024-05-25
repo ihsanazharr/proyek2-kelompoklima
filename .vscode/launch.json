@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/LENOVO/Documents/POLBAN/New folder/proyek2-kelompoklima",
-      "program": "c:/Users/LENOVO/Documents/POLBAN/New folder/proyek2-kelompoklima/build/Debug/outDebug",
+      "cwd": "c:/Users/IlhamFR/Desktop/proyek2-kelompoklima",
+      "program": "c:/Users/IlhamFR/Desktop/proyek2-kelompoklima/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

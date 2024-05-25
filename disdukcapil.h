@@ -10,13 +10,15 @@
 #define MAX_USERNAME_LENGTH 50
 #define MAX_PASSWORD_LENGTH 50
 
-typedef struct Admin {
+typedef struct Admin
+{
     char username[MAX_USERNAME_LENGTH];
     char password[MAX_PASSWORD_LENGTH];
     int jumlahGeser; // tambahan subvar untuk jumlah geser
 } Admin;
 
-typedef struct ProvinsiTreeNode {
+typedef struct ProvinsiTreeNode
+{
     int id;
     char namaProvinsi[50];
     struct ProvinsiTreeNode *parent;
@@ -24,7 +26,8 @@ typedef struct ProvinsiTreeNode {
     struct ProvinsiTreeNode *nextSibling;
 } DataProvinsi;
 
-typedef struct KotaTreeNode {
+typedef struct KotaTreeNode
+{
     int id;
     char namaKota[50];
     struct ProvinsiTreeNode *parent;
@@ -32,7 +35,8 @@ typedef struct KotaTreeNode {
     struct KotaTreeNode *nextSibling;
 } DataKota;
 
-typedef struct KKTreeNode {
+typedef struct KKTreeNode
+{
     int id;
     char noKK[20];
     struct KotaTreeNode *parent;
@@ -40,7 +44,8 @@ typedef struct KKTreeNode {
     struct KKTreeNode *nextSibling;
 } DataKK;
 
-typedef struct FamilyTreeNode {
+typedef struct FamilyTreeNode
+{
     int id;
     char NIK[50];
     char nama[MAX_NAMA_LENGTH];
@@ -49,14 +54,16 @@ typedef struct FamilyTreeNode {
     char tempat_lahir[50];
     char agama[20];
     char status[20];
-    char noKK[50]; // Tambah no KK
+    char noKK[50];
     char tanggalLahir[50];
+    char namaKota[50]; // Tambahkan namaKota
     struct KKTreeNode *parent;
     struct FamilyTreeNode *firstChild;
     struct FamilyTreeNode *nextSibling;
 } DataPenduduk;
 
-typedef struct AktivitasPengguna {
+typedef struct AktivitasPengguna
+{
     char username[MAX_USERNAME_LENGTH];
     bool loggedIn;
 } AktivitasPengguna;
@@ -79,6 +86,7 @@ void enkripsiHuruf(char *kalimat, int key);
 void dekripsiHuruf(char *kalimat, int key);
 void enkripsiInteger(char *num, int key);
 void dekripsiInteger(char *num, int key);
+void removeNewline(char *str);
 
 // Add Kota function
 void tambahKota(DataProvinsi *provinsi);
@@ -99,6 +107,7 @@ void catatAktivitas(char *aksi, char *NIK);
 void catatLogin();
 void catatEdit();
 void showKota();
+void logKejadianPenting(char *noKK1, char *noKK2, char *NIK1, char *NIK2, char *kejadianPenting);
 
 // Important events functions
 void kejadianPenting();
@@ -108,7 +117,7 @@ bool searchNIK(char NIK[50], char KK[20]);
 char getGenderFromNIK(char NIK[50]);
 void tampilkanIsiKK(DataPenduduk data, char userInput[20]);
 void tampilkanIsiNIK(DataPenduduk data, char userInput[50]);
-void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination);
+void changeKK(DataPenduduk data, char *NIKSource, char *KKDestination, char *newCity);
 void changeStatus(DataPenduduk data, char *NIK);
 void Pernikahan();
 void Kematian();

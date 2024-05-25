@@ -110,7 +110,7 @@ void showKota() {
     bubbleSort(kota, count);
 
     printf("==============================================================================================\n");
-    printf("| %-5s | %-20s |\n", "ID", "Nama Lengkap");
+    printf("| %-5s | %-20s |\n", "ID", "Nama Kota");
     printf("==============================================================================================\n");
 
     for (int i = 0; i < count; i++) {
@@ -134,6 +134,8 @@ void showKota() {
     //         printf("Terima kasih.\n");
     //     }
     // }
+    getchar();
+    getchar();
 }
 
 
