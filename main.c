@@ -1,5 +1,4 @@
 #include "disdukcapil.h"
-#include <stdio.h>
 
 int main()
 {

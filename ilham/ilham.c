@@ -1,75 +1,124 @@
 #include "../disdukcapil.h"
 
-typedef struct Node {
-   DataPenduduk data;
-   struct Node *parent;
-   struct Node *child;
-   struct Node *sibling;
-} Node;
+typedef struct KeluargaTreeNode {
+    char noKK[20];
+    struct KeluargaTreeNode *nextSibling;
+    struct PendudukTreeNode *firstChild;
+} DataKeluarga;
+
+typedef struct PendudukTreeNode {
+    DataPenduduk data;
+    struct PendudukTreeNode *nextSibling;
+} DataPendudukNode;
 
 extern int keyStr;
 extern int keyInt;
 
-// Fungsi rekursif untuk menambahkan penduduk ke struktur tree
-Node* tambahPenduduk(Node *root, DataPenduduk data) {
-    Node *newNode = (Node*)malloc(sizeof(Node));
+// Fungsi untuk membuat node baru
+DataPendudukNode* createPendudukNode(DataPenduduk data) {
+    DataPendudukNode *newNode = (DataPendudukNode*)malloc(sizeof(DataPendudukNode));
     newNode->data = data;
-    newNode->child = NULL;
-    newNode->sibling = NULL;
-    newNode->parent = root;
+    newNode->nextSibling = NULL;
+    return newNode;
+}
+
+DataKeluarga* createKeluargaNode(char *noKK) {
+    DataKeluarga *newNode = (DataKeluarga*)malloc(sizeof(DataKeluarga));
+    strcpy(newNode->noKK, noKK);
+    newNode->nextSibling = NULL;
+    newNode->firstChild = NULL;
+    return newNode;
+}
+
+DataKota* createKotaNode(char *namaKota) {
+    DataKota *newNode = (DataKota*)malloc(sizeof(DataKota));
+    strcpy(newNode->namaKota, namaKota);
+    newNode->nextSibling = NULL;
+    newNode->firstChild = NULL;
+    return newNode;
+}
+
+// Fungsi untuk menambahkan kota ke dalam tree
+DataKota* addKota(DataKota *root, char *namaKota) {
+    DataKota *newNode = createKotaNode(namaKota);
 
     if (root == NULL) {
         return newNode;
     }
 
-    Node *curr = root;
-    while (curr->sibling != NULL) {
-        curr = curr->sibling;
+    DataKota *curr = root;
+    while (curr->nextSibling != NULL) {
+        curr = curr->nextSibling;
     }
-    curr->sibling = newNode;
+    curr->nextSibling = newNode;
     return root;
 }
 
-// Fungsi rekursif untuk mencetak pohon secara terstruktur
-void printTree(Node *node, int level, char *lastPrintedKota, char *lastPrintedNoKK) {
-    if (node == NULL) {
+// Fungsi untuk menambahkan KK ke dalam node kota
+DataKeluarga* addKK(DataKota *kotaNode, char *noKK) {
+    DataKeluarga *newNode = createKeluargaNode(noKK);
+
+    if (kotaNode->firstChild == NULL) {
+        kotaNode->firstChild = newNode;
+    } else {
+        DataKeluarga *curr = kotaNode->firstChild;
+        while (curr->nextSibling != NULL) {
+            curr = curr->nextSibling;
+        }
+        curr->nextSibling = newNode;
+    }
+    return newNode;
+}
+
+// Fungsi untuk menambahkan penduduk ke node KK
+void tambahPenduduk(DataKeluarga *kkNode, DataPenduduk data) {
+    DataPendudukNode *newNode = createPendudukNode(data);
+
+    if (kkNode->firstChild == NULL) {
+        kkNode->firstChild = newNode;
+    } else {
+        DataPendudukNode *curr = kkNode->firstChild;
+        while (curr->nextSibling != NULL) {
+            curr = curr->nextSibling;
+        }
+        curr->nextSibling = newNode;
+    }
+}
+
+// Fungsi untuk menampilkan tree dengan hierarki yang benar
+void printTree(DataProvinsi *root, int level) {
+    if (root == NULL) {
         return;
     }
 
-    // Print nama kota jika node adalah node Kota dan berbeda dengan yang terakhir dicetak
-    if (node->data.namaKota != NULL && strcmp(node->data.namaKota, lastPrintedKota) != 0) {
-        char decryptedKota[50];
-        strcpy(decryptedKota, node->data.namaKota);
-        dekripsiHuruf(decryptedKota, keyStr); // Dekripsi nama kota
-        printf("|- Kota: %s\n", decryptedKota);
-        strcpy(lastPrintedKota, node->data.namaKota); // Update nama kota terakhir yang dicetak
-    }
+    printf("|- Provinsi: %s\n", root->namaProvinsi);
 
-    // Print nomor KK jika node adalah node KK dan berbeda dengan yang terakhir dicetak
-    if (node->data.noKK != NULL && strcmp(node->data.noKK, lastPrintedNoKK) != 0) {
-        char decryptedNoKK[20];
-        strcpy(decryptedNoKK, node->data.noKK);
-        dekripsiInteger(decryptedNoKK, keyInt); // Dekripsi nomor KK
-        printf("|   |- %s\n", decryptedNoKK);
-        strcpy(lastPrintedNoKK, node->data.noKK); // Update nomor KK terakhir yang dicetak
-    }
+    DataKota *kotaNode = root->firstChild;
+    while (kotaNode != NULL) {
+        for (int i = 0; i < level; i++) {
+            printf("  ");
+        }
+        printf("|- Kota: %s\n", kotaNode->namaKota);
 
-    // Print NIK dan nama penduduk jika node adalah node Penduduk
-    if (node->data.NIK != NULL && node->data.nama != NULL) {
-        char decryptedNIK[50];
-        strcpy(decryptedNIK, node->data.NIK);
-        dekripsiInteger(decryptedNIK, 0); // Dekripsi NIK
-        printf("|       |- NIK_%s\n", decryptedNIK);
-        printf("|          |- %s\n", node->data.nama);
-    }
+        DataKeluarga *kkNode = kotaNode->firstChild;
+        while (kkNode != NULL) {
+            for (int i = 0; i < level + 1; i++) {
+                printf("  ");
+            }
+            printf("|- KK: %s\n", kkNode->noKK);
 
-    // Print children recursively
-    if (node->child != NULL) {
-        printTree(node->child, level + 1, lastPrintedKota, lastPrintedNoKK);
+            DataPendudukNode *pendudukNode = kkNode->firstChild;
+            while (pendudukNode != NULL) {
+                for (int i = 0; i < level + 2; i++) {
+                    printf("  ");
+                }
+                printf("|- NIK: %s, Nama: %s\n", pendudukNode->data.NIK, pendudukNode->data.nama);
+                pendudukNode = pendudukNode->nextSibling;
+            }
+            kkNode = kkNode->nextSibling;
+        }
+        kotaNode = kotaNode->nextSibling;
     }
-
-    // Move to the next sibling
-    printTree(node->sibling, level, lastPrintedKota, lastPrintedNoKK);
 }
 
 // Fungsi utama untuk menampilkan struktur pohon
@@ -78,7 +127,9 @@ void tampilkanTree() {
 
     FILE *file;
     DataPenduduk data;
-    Node *rootProvinsi = NULL;
+    DataProvinsi *root = (DataProvinsi*)malloc(sizeof(DataProvinsi));
+    strcpy(root->namaProvinsi, "Jawa Barat");
+    root->firstChild = NULL;
 
     file = fopen("dataPenduduk.txt", "r");
     if (file == NULL) {
@@ -87,24 +138,46 @@ void tampilkanTree() {
     }
     
     while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF) {
+        // Dekripsi data
         dekripsiHuruf(data.alamat, keyStr);
         dekripsiInteger(data.NIK, keyInt);
-        dekripsiInteger(data.noKK, keyInt);
-        // Mencetak data penduduk ke dalam struktur pohon dengan hierarki provinsi, kota, dan keluarga
-        rootProvinsi = tambahPenduduk(rootProvinsi, data);
+        dekripsiInteger(data.noKK, 0);
+        dekripsiHuruf(data.namaKota, keyStr);
+
+        // Cari atau tambah node kota
+        DataKota *kotaNode = root->firstChild;
+        while (kotaNode != NULL && strcmp(kotaNode->namaKota, data.namaKota) != 0) {
+            kotaNode = kotaNode->nextSibling;
+        }
+        if (kotaNode == NULL) {
+            kotaNode = addKota(root->firstChild, data.namaKota);
+            if (root->firstChild == NULL) {
+                root->firstChild = kotaNode;
+            }
+        }
+
+        // Cari atau tambah node KK
+        DataKeluarga *kkNode = kotaNode->firstChild;
+        while (kkNode != NULL && strcmp(kkNode->noKK, data.noKK) != 0) {
+            kkNode = kkNode->nextSibling;
+        }
+        if (kkNode == NULL) {
+            kkNode = addKK(kotaNode, data.noKK);
+        }
+
+        // Tambah penduduk ke node KK
+        tambahPenduduk(kkNode, data);
     }
 
     fclose(file);
 
-    if (rootProvinsi == NULL) {
+    if (root == NULL) {
         printf("Tidak ada data yang tersedia.\n");
         return;
     }
 
     printf("Struktur Pohon Kartu Keluarga dan Penduduk Provinsi Jawa Barat:\n");
-    char lastPrintedKota[50] = ""; // Variabel untuk menyimpan nama kota terakhir yang dicetak
-    char lastPrintedNoKK[20] = ""; // Variabel untuk menyimpan nomor KK terakhir yang dicetak
-    printTree(rootProvinsi, 0, lastPrintedKota, lastPrintedNoKK);
+    printTree(root, 1);
 
     // Hapus bagian ini jika tidak ingin menunggu input dari pengguna
     char userChoice;

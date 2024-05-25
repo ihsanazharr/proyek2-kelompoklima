@@ -1,46 +1,38 @@
-[Sat May 25 09:14:12 2024
-] Pengguna admin melakukan login.
-[Sat May 25 09:14:19 2024
+[Sat May 25 10:26:51 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tsfvmfy
-[Sat May 25 09:14:34 2024
+[Sat May 25 10:27:02 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 89012345
-[Sat May 25 09:15:26 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940787869797778
-[Sat May 25 09:16:29 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940787876967778
-[Sat May 25 09:17:24 2024
+[Sat May 25 10:27:47 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940788776767778
+[Sat May 25 10:28:29 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940787869757770
+[Sat May 25 10:29:17 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:18:07 2024
+[Sat May 25 10:29:35 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 88990011
-[Sat May 25 09:19:02 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0948686960585559
-[Sat May 25 09:19:43 2024
-] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 22334455
-[Sat May 25 09:20:01 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:21:22 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940788679657770
-[Sat May 25 09:29:40 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:30:35 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:30:54 2024
+[Sat May 25 10:30:25 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0949067860504448
+[Sat May 25 10:31:25 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tgygj
+[Sat May 25 10:31:46 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 00112233
-[Sat May 25 09:31:07 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:32:21 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 09486951394448
-[Sat May 25 09:48:22 2024
-] Pengguna admin melakukan login.
-[Sat May 25 09:52:37 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:55:51 2024
-] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
-[Sat May 25 09:56:16 2024
+[Sat May 25 10:32:32 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940786970606668
+[Sat May 25 10:36:34 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tgygj
+[Sat May 25 10:36:44 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 11009988
-[Sat May 25 09:57:00 2024
-] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 094868505400005
-[Sat May 25 10:18:29 2024
+[Sat May 25 10:37:44 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0904861495493330
+[Sat May 25 10:38:22 2024
 ] Pengguna admin melakukan login.
-[Sat May 25 10:21:45 2024
+[Sat May 25 10:46:42 2024
+] Pengguna admin melakukan login.
+[Sat May 25 10:53:44 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:14:39 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:21:10 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:24:13 2024
 ] Pengguna admin melakukan login.

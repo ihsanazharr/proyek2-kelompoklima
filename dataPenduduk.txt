@@ -1,5 +1,5 @@
-0 0940787869797778 56789012 Nining_Suningsih 10/09/1998 P Bsdsf_Uahsywjsf HS Islam Kawin Tsfvmfy
-1 0940787876967778 56789012 Jojo_Joestar 01/09/1998 L Bsdsf_Uahsywjsf HS Islam Kawin Tsfvmfy
-2 0948686960585559 99001122 Budiyono_Siregar 01/09/1997 L Kstvs_Sdse Garut Kristen Kawin Tsfvmfy
-3 0940788679657770 99001122 Mimin_Nuraemin 01/01/1997 P Bsdsf_Laemj_Lwfysz Garut Islam Kawin Tsfvmfy
-4 094868505400005 88776655 Roni_Makaron 10/10/1998 L Bsdsf_Uatmflm Garut Islam Belum_Kawin Ysjml
+0 0940788776767778 56789012 Gugun_Gunawan 10/10/1998 L Bsdsf_Ksjaesvm Bandung Islam Belum_Kawin Tsfvmfy
+1 0940787869757770 56789012 Juju_Suhartini 01/02/1998 P Bsdsf_Uatmflm Bandung Islam Belum_Kawin Tsfvmfy
+2 0949067860504448 55667788 Shimano_Usep 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
+3 0940786970606668 88776655 Husein_Hidayat 09/10/1997 L Tgygj_Laemj HS Islam Kawin Tgygj
+4 0904861495493330 88776655 Mimin_Suramin 21/10/1993 P Bsdsf_Uatmflm Bogor Islam Kawin Tgygj
