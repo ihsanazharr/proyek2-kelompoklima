@@ -1,4 +1,80 @@
-[Mon May 20 09:50:23 2024
+[Sat May 25 10:26:51 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tsfvmfy
+[Sat May 25 10:27:02 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 89012345
+[Sat May 25 10:27:47 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940788776767778
+[Sat May 25 10:28:29 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940787869757770
+[Sat May 25 10:29:17 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
+[Sat May 25 10:29:35 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 88990011
+[Sat May 25 10:30:25 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0949067860504448
+[Sat May 25 10:31:25 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tgygj
+[Sat May 25 10:31:46 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 00112233
+[Sat May 25 10:32:32 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0940786970606668
+[Sat May 25 10:36:34 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tgygj
+[Sat May 25 10:36:44 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 11009988
+[Sat May 25 10:37:44 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 0904861495493330
+[Sat May 25 10:38:22 2024
 ] Pengguna admin melakukan login.
-[Sat May 25 14:50:13 2024
+[Sat May 25 10:46:42 2024
+] Pengguna admin melakukan login.
+[Sat May 25 10:53:44 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:14:39 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:21:10 2024
+] Pengguna admin melakukan login.
+[Sat May 25 11:24:13 2024
+] Pengguna admin melakukan login.
+[Sat May 25 12:25:29 2024
+] Pengguna admin melakukan login.
+[Sat May 25 12:47:34 2024
+] Pengguna admin melakukan login.
+[Sat May 25 13:01:32 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:18:18 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:22:10 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:22:47 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:35:53 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:40:49 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:44:57 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:45:45 2024
+] Pengguna admin melakukan login.
+[Sat May 25 15:47:07 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:48:21 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:49:09 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:49:42 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:52:30 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:54:40 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:57:04 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:58:21 2024
+] Pengguna admin melakukan login.
+[Sat May 25 16:59:34 2024
+] Pengguna admin melakukan login.
+[Sat May 25 17:01:33 2024
+] Pengguna admin melakukan login.
+[Sat May 25 17:55:49 2024
 ] Pengguna admin melakukan login.

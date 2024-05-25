@@ -1,6 +1,7 @@
 #include "disdukcapil.h"
 #include "ihsan/ihsan.c"
 #include "firly/firly.c"
+#include "maul/maul.c"
 #include "rindi/rindi.c"
 #include "ilham/ilham.c"
 #include <stdlib.h>
@@ -93,6 +94,10 @@ void addAdmin()
 {
     // Membungkus password & username menjadi struct
     Admin admin;
+
+    // Clear the input buffer
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {}
 
     // input username
     printf("Masukkan Username : ");
@@ -220,11 +225,12 @@ void menuAwal()
         printf("4. Delete Data Penduduk\n");
         printf("5. Tambah Admin\n");
         printf("6. Statistik Penduduk\n");
-        printf("7. Tampilkan History\n"); // Opsi baru untuk menampilkan history
+        printf("7. Tampilkan History\n");
         printf("8. Tambah Kota\n");
         printf("9. Lihat Kota\n");
         printf("10. Kejadian Penting\n");
         printf("11. Tampilkan Tree\n");
+        printf("12. Tambah KK\n");  // Tambahkan opsi ini
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -261,7 +267,7 @@ void menuAwal()
             menu(); // Menampilkan history saat opsi 6 dipilih
             break;
         case 7:
-            tampilkanHistory(); // Menampilkan history saat opsi 6 dipilih
+            tampilkanHistory(); // Menampilkan history saat opsi 7 dipilih
             break;
         case 8:
             tambahKota(&provinsi); // struktur tree
@@ -278,6 +284,10 @@ void menuAwal()
             tampilkanTree();
             system("cls");
             break;
+        case 12:
+            tambahKK(&kota);  // Panggil fungsi addkk saat opsi 12 dipilih
+            system("cls");
+            break;
         case 0:
             pilihanMenuAwal();
             system("cls");
@@ -286,8 +296,9 @@ void menuAwal()
             printf("Masukkan tidak valid, coba kembali.\n");
             break;
         }
-    } while (pilihan != 11);
+    } while (pilihan != 0);
 }
+
 
 void dekripsiPassword(char *passwordCompare, int jumlahGeser)
 {
@@ -313,6 +324,9 @@ void addPenduduk(DataKota *kota)
     int cek = 0;
     char fnama[100];
     int count = 0, a;
+    char kkLine[100], kotaLine[100];
+    int kkTerdaftar = 0, kotaTerdaftar = 0;
+    int dummyId;  // Untuk membaca ID dari file
 
     file = fopen("dataPenduduk.txt", "r");
     if (file != NULL)
@@ -336,9 +350,37 @@ void addPenduduk(DataKota *kota)
     printf("NIK: ");
     scanf("%s", dat->NIK);
 
+    // Cek validitas No. KK
     fflush(stdin);
     printf("No. KK: ");
     scanf("%s", dat->noKK);
+
+    // Enkripsi noKK sebelum memeriksa keberadaannya dalam file
+    enkripsiInteger(dat->noKK, keyInt);
+
+    // Cek validitas No. KK
+    file = fopen("dataKK.txt", "r");
+    if (file != NULL)
+    {
+        while (fgets(kkLine, sizeof(kkLine), file) != NULL)
+        {
+            sscanf(kkLine, "%d %s", &dummyId, fnama); // Baca ID dan noKK
+            if (strcmp(dat->noKK, fnama) == 0)
+            {
+                kkTerdaftar = 1;
+                break;
+            }
+        }
+        fclose(file);
+    }
+
+    if (!kkTerdaftar)
+    {
+        printf("No. KK tidak terdaftar\n");
+        free(dat);
+        menuAwal();
+        return;
+    }
 
     fflush(stdin);
     printf("Nama Lengkap: ");
@@ -403,6 +445,44 @@ void addPenduduk(DataKota *kota)
             dat->status[i] = '_';
         }
     }
+       fflush(stdin);
+    printf("Kota: ");
+    fgets(dat->namaKota, sizeof(dat->namaKota), stdin);
+    dat->namaKota[strcspn(dat->namaKota, "\n")] = '\0';
+    for (int i = 0; dat->namaKota[i]; i++)
+    {
+        if (dat->namaKota[i] == ' ')
+        {
+            dat->namaKota[i] = '_';
+        }
+    }
+
+    // Enkripsi namaKota sebelum memeriksa keberadaannya dalam file
+    enkripsiHuruf(dat->namaKota, keyStr);
+
+    // Cek validitas Kota
+    file = fopen("dataKota.txt", "r");
+    if (file != NULL)
+    {
+        while (fgets(kotaLine, sizeof(kotaLine), file) != NULL)
+        {
+            sscanf(kotaLine, "%d %s", &dummyId, fnama); // Baca ID dan namaKota
+            if (strcmp(dat->namaKota, fnama) == 0)
+            {
+                kotaTerdaftar = 1;
+                break;
+            }
+        }
+        fclose(file);
+    }
+
+    if (!kotaTerdaftar)
+    {
+        printf("Kota tidak terdaftar\n");
+        free(dat);
+        menuAwal();
+        return;
+    }
 
     printf("=================================================\n");
 
@@ -437,7 +517,7 @@ void addPenduduk(DataKota *kota)
     {
         file = fopen("dataPenduduk.txt", "a");
         enkripsiHuruf(dat->alamat, keyStr);
-        fprintf(file, "%d %s %s %s %s %c %s %s %s %s\n", dat->id, dat->NIK, dat->noKK, dat->nama, dat->tanggalLahir, dat->jk, dat->alamat, dat->tempat_lahir, dat->agama, dat->status);
+        fprintf(file, "%d %s %s %s %s %c %s %s %s %s %s\n", dat->id, dat->NIK, dat->noKK, dat->nama, dat->tanggalLahir, dat->jk, dat->alamat, dat->tempat_lahir, dat->agama, dat->status, dat->namaKota);
         fclose(file);
         printf("Data berhasil tersimpan\n");
 
@@ -653,7 +733,7 @@ void editPenduduk()
         return;
     }
 
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF)
     {
         if (strcmp(data.NIK, NIK) == 0)
         {
@@ -716,12 +796,12 @@ void editPenduduk()
             }
             fflush(stdin);
 
-            fprintf(tempFile, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+            fprintf(tempFile, "%d %s %s %s %s %c %s %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota);
             found = 1;
         }
         else
         {
-            fprintf(tempFile, "%d %s %s %s %s %c %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status);
+            fprintf(tempFile, "%d %s %s %s %s %c %s %s %s %s %s\n", data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, data.jk, data.alamat, data.tempat_lahir, data.agama, data.status,data.namaKota);
         }
     }
 
@@ -768,7 +848,7 @@ void showPenduduk()
     }
 
     int count = 0;
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status) != EOF)
+    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF)
     {
         dekripsiHuruf(data.alamat, keyStr);
         dekripsiInteger(data.NIK, keyInt);

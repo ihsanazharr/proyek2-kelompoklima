@@ -1,8 +1,6 @@
-0 0940766905990985 08706511669901698 Ilham_Darma 22/01/2023 L Ksjaesvm_Laemj Bandung None Belum_Kawin
-1 059604649191 08706511669901698 Test 22/22/2222 L Cvgso dkoAWokd KDOwa dkoaw
-2 0659687996857779 69596879506667869 Gugun 23/01/2005 L Bsvsf Badung None None
-4 098109109109171 89012 Ihsan 02/02/2005 L uaesza cimahi islam belum_kawin
-5 0944799279727779 89012 Jarwo 01/01/2001 L Tsfvmfy Cimahi Islam Kawin
-6 890128901 89012 Saya_Siapa 12/11/1002 L Tsfvmfy_Tsjsl Bandung Islam Belum_Kawin
-7 889012 09489012 Rizky_aifuq 11/22/2001 L Bd.Tsfvmfy_tsjsl BAndung Islam Kawin
-8 88901234 89012 Aku_Siapa 11/22/2004 P Bd.Uahszwml_Csdwj Bandung Islam Belum_Kawin
+0 0940788776767778 56789012 Gugun_Gunawan 10/10/1998 L Bsdsf_Ksjaesvm Bandung Islam Belum_Kawin Tsfvmfy
+1 0940787869757770 56789012 Juju_Suhartini 01/02/1998 P Bsdsf_Uatmflm Bandung Islam Belum_Kawin Tsfvmfy
+2 0949067860504448 55667788 Shimano_Usep 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
+3 112345 55667788 Budi 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
+4 0940786970606668 88776655 Husein_Hidayat 09/10/1997 L Tgygj_Laemj HS Islam Kawin Tgygj
+5 0904861495493330 88776655 Mimin_Suramin 21/10/1993 P Bsdsf_Uatmflm Bogor Islam Kawin Tgygj
