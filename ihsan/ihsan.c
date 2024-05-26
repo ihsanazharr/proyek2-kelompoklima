@@ -8,6 +8,69 @@
 static int keyStr = 18; // Tidak boleh >= 26
 static int keyInt = 7;  // Tidak boleh >= 10
 
+DataKK* searchKartuKeluargaByNoKK(DataProvinsi *root, const char *noKK) {
+    if (root == NULL) {
+        return NULL;
+    }
+
+    DataKota *kotaNode = root->firstChild;
+    while (kotaNode != NULL) {
+        DataKK *kkNode = kotaNode->firstChild;
+        while (kkNode != NULL) {
+            if (strcmp(kkNode->noKK, noKK) == 0) {
+                return kkNode;
+            }
+            kkNode = kkNode->nextSibling;
+        }
+        kotaNode = kotaNode->nextSibling;
+    }
+    return NULL;
+}
+
+// Fungsi untuk menampilkan data penduduk dari node KK
+void tampilkanDataPendudukDariKK(DataKK *kkNode) {
+    if (kkNode == NULL) {
+        printf("Kartu Keluarga tidak ditemukan.\n");
+        return;
+    }
+
+    DataPenduduk *pendudukNode = kkNode->firstChild;
+    while (pendudukNode != NULL) {
+        printf("NIK: %s\n", pendudukNode->NIK);
+        printf("Nama: %s\n", pendudukNode->nama);
+        printf("Jenis Kelamin: %c\n", pendudukNode->jk);
+        printf("Alamat: %s\n", pendudukNode->alamat);
+        printf("Tempat Lahir: %s\n", pendudukNode->tempat_lahir);
+        printf("Agama: %s\n", pendudukNode->agama);
+        printf("Status: %s\n", pendudukNode->status);
+        printf("No KK: %s\n", pendudukNode->noKK);
+        printf("Tanggal Lahir: %s\n", pendudukNode->tanggalLahir);
+        printf("Nama Kota: %s\n", pendudukNode->namaKota);
+        printf("-----------------------------\n");
+
+        pendudukNode = pendudukNode->nextSibling;
+    }
+}
+
+void menuCariKartuKeluarga(DataProvinsi *root) {
+    system("cls");
+    char noKK[20];
+    printf("Masukkan no KK: ");
+    scanf("%s", noKK);
+
+    DataKK *kkNode = searchKartuKeluargaByNoKK(root, noKK);
+    tampilkanDataPendudukDariKK(kkNode);
+
+    char userChoice;
+    printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+    scanf(" %c", &userChoice);
+    if (userChoice == 'Y' || userChoice == 'y') {
+        menuAwal();
+    } else {
+        menuCariKartuKeluarga(root);
+    }
+}
+
 void tambahKota(DataProvinsi* provinsi) {
     DataKota* kota = (DataKota*)malloc(sizeof(DataKota));
     kota->parent = provinsi;

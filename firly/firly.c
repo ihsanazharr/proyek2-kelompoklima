@@ -207,6 +207,8 @@ void tampilkanIsiNIK(DataPenduduk data, char userInput[50])
         if (strcmp(data.NIK, userInput) == 0)
         {
             dekripsiInteger(data.NIK, keyInt);
+            dekripsiInteger(data.noKK, keyInt);
+            printf("No.KK           :    %s\n", data.noKK);
             printf("NIK             :    %s\n", data.NIK);
             printf("Nama            :    %s\n", data.nama);
             printf("Jenis Kelamin   :    %c\n", data.jk);
@@ -361,6 +363,7 @@ void Pernikahan()
             exit(1);
         }
 
+        found = false;
         while (!found)
         {
             system("cls");
@@ -368,21 +371,23 @@ void Pernikahan()
             printf("Masukkan No.KK kedua pasangan\n");
             printf("No KK Pertama: ");
             fflush(stdin);
-            scanf("%s", userInput1);
+            scanf(" %s", userInput1);
             if (searchKK(userInput1) == false)
             {
-                printf("No KK tersebut tidak ditemukan\n");
+                printf("No KK tersebut tidak ditemukan, kembali ke menu awal\n");
                 Sleep(2000);
-                continue;
+                kejadianPenting();
+                return;
             }
             printf("No KK Kedua: ");
             fflush(stdin);
-            scanf("%s", userInput2);
+            scanf(" %s", userInput2);
             if (searchKK(userInput2) == false)
             {
-                printf("No KK tersebut tidak ditemukan\n");
+                printf("No KK tersebut tidak ditemukan, kembali ke menu awal\n");
                 Sleep(2000);
-                continue;
+                kejadianPenting();
+                return;
             }
 
             if (strcmp(userInput1, userInput2) == 0)
@@ -391,17 +396,20 @@ void Pernikahan()
                 Sleep(2000);
                 continue;
             }
-
+            else
+            {
+                found = true;
+            }
             strcpy(userInputCpy1, userInput1);
             strcpy(userInputCpy2, userInput2);
             dekripsiInteger(userInputCpy1, keyInt);
             dekripsiInteger(userInputCpy2, keyInt);
-            found = true;
         }
 
-        found = false;
+        sah = false;
         while (!sah)
         {
+            valid = false;
             while (!valid)
             {
                 system("cls");
@@ -446,8 +454,32 @@ void Pernikahan()
             if (gender1 == gender2)
             {
                 printf("Tidak bisa menikahi sesama jenis!\n");
-                Sleep(3000);
-                sah = false;
+                Sleep(1500);
+                printf("Kembali ke menu awal? (Y/N): ");
+                valid = false;
+                while (!valid)
+                {
+                    fflush(stdin);
+                    scanf(" %c", &confirm);
+                    if (confirm == 'Y' || confirm == 'y')
+                    {
+                        menuAwal();
+                        return;
+                    }
+                    else if (confirm == 'N' || confirm == 'n')
+                    {
+                        sah = true;
+                        valid = true;
+                        again = true;
+                        fclose(file);
+                    }
+                    else
+                    {
+                        printf("Input tidak valid!\n");
+                        Sleep(2000);
+                        valid = false;
+                    }
+                }
             }
             else
             {
@@ -501,34 +533,34 @@ void Pernikahan()
                         break;
                     }
                 }
-            }
-        }
-        fclose(file);
-        remove("temp.txt");
-        remove("dataPenduduk.txt");
-        rename("tempData.txt", "dataPenduduk.txt");
-        printf("Pernikahan berhasil!\n\n");
-        valid = false;
-        printf("Apakah anda ingin menambahkan data pernikahan lagi? (Y/N): ");
-        while (!valid)
-        {
-            fflush(stdin);
-            scanf(" %c", &confirm);
-            if (confirm == 'Y' || confirm == 'y')
-            {
-                again = true;
-                valid = true;
-            }
-            else if (confirm == 'N' || confirm == 'n')
-            {
-                menuAwal();
-                return;
-            }
-            else
-            {
-                printf("Input tidak valid!\n");
-                Sleep(2000);
+                fclose(file);
+                remove("temp.txt");
+                remove("dataPenduduk.txt");
+                rename("tempData.txt", "dataPenduduk.txt");
+                printf("Pernikahan berhasil!\n\n");
                 valid = false;
+                printf("Apakah anda ingin menambahkan data pernikahan lagi? (Y/N): ");
+                while (!valid)
+                {
+                    fflush(stdin);
+                    scanf(" %c", &confirm);
+                    if (confirm == 'Y' || confirm == 'y')
+                    {
+                        again = true;
+                        valid = true;
+                    }
+                    else if (confirm == 'N' || confirm == 'n')
+                    {
+                        menuAwal();
+                        return;
+                    }
+                    else
+                    {
+                        printf("Input tidak valid!\n");
+                        Sleep(2000);
+                        valid = false;
+                    }
+                }
             }
         }
     }

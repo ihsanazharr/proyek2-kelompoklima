@@ -230,7 +230,8 @@ void menuAwal()
         printf("9. Lihat Kota\n");
         printf("10. Kejadian Penting\n");
         printf("11. Tampilkan Tree\n");
-        printf("12. Tambah KK\n");  // Tambahkan opsi ini
+        printf("12. Tambah KK\n"); 
+        printf("13. Cari Kartu Keluarga\n");  
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -286,6 +287,10 @@ void menuAwal()
             break;
         case 12:
             tambahKK(&kota);  // Panggil fungsi addkk saat opsi 12 dipilih
+            system("cls");
+            break;
+        case 13:
+            menuCariKartuKeluarga(&provinsi);
             system("cls");
             break;
         case 0:

@@ -14,3 +14,7 @@ Sat May 25 17:06:19 2024 - Telah terjadi pernikahan pada KK 11009988 dan KK 8899
 Sat May 25 17:46:34 2024 - Telah terjadi Kelahiran pada KK 11009988 dengan NIK 123445
 Sat May 25 17:47:29 2024 - Telah terjadi Kelahiran pada KK 11009988 dengan NIK 12345
 Sat May 25 17:56:05 2024 - Telah terjadi Kematian pada KK 11009988 dengan NIK 45678
+Sun May 26 15:15:40 2024 - Telah terjadi pernikahan pada KK 11009988 dan KK 88990011, dengan NIK pasangan 45678 dan 445678
+Sun May 26 15:17:09 2024 - Telah terjadi pernikahan pada KK 11009988 dan KK 88990011, dengan NIK pasangan 45678 dan 445678
+Sun May 26 15:18:09 2024 - Telah terjadi pernikahan pada KK 11009988 dan KK 88990011, dengan NIK pasangan 45678 dan 445678
+Sun May 26 15:20:59 2024 - Telah terjadi pernikahan pada KK 11009988 dan KK 88990011, dengan NIK pasangan 45678 dan 445678
