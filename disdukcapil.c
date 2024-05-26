@@ -14,8 +14,6 @@
 #include <string.h>
 #define MAX_LINE_LENGTH 1000
 
-// Procedure tambah admin
-
 AktivitasPengguna aktifPengguna;
 
 void gotoxy(int x, int y)
@@ -39,7 +37,6 @@ void loading()
     printf("               MOHON TUNGGU SEBENTAR");
     gotoxy(30, 12);
     printf("              =======================");
-
     Sleep(500);
     gotoxy(30, 11);
     printf("                     . ");
@@ -65,31 +62,15 @@ int pilihanMenuAwal()
     gotoxy(30, 3);
     printf("                           DI                               \n");
     gotoxy(30, 4);
-    printf("            /$$$$$$  /$$   /$$  /$$$$$$  /$$$$$$                     \n");
+    printf("             SISTEM DISDUKCAPIL BERBASIS CLI                 \n\n");
     gotoxy(30, 5);
-    printf("           /$$__  $$| $$  /$$/ /$$__  $$|_  $$_/                     \n");
-    gotoxy(30, 6);
-    printf("          | $$  \ $$| $$ /$$/ | $$  \__/  | $$          \n");
-    gotoxy(30, 7);
-    printf("          | $$$$$$$$| $$$$$/  |  $$$$$$   | $$                       \n");
-    gotoxy(30, 8);
-    printf("          | $$__  $$| $$  $$   \\____ $$  | $$                       \n");
-    gotoxy(30, 9);
-    printf("          | $$  | $$| $$\\  $$  /$$\\ $$  | $$                       \n");
-    gotoxy(30, 10);
-    printf("          | $$  | $$| $$ \\  $$ |$$$$$$/ /$$$$$$                    \n");
-    gotoxy(30, 11);
-    printf("          |__/  |__/|__/  \\__/ \\______/ |______/                    \n");
-    gotoxy(30, 12); 
-    printf("  SISTEM ADMINISTRASI KEPENDUDUKAN DAN PENCATATAN SIPIL    \n\n");
-    gotoxy(30, 13);
     printf("               ===========================                   \n\n");
-    gotoxy(30, 14);
+    gotoxy(30, 7);
     printf("                1. MASUK                             \n");
-    gotoxy(30, 15);
+    gotoxy(30, 8);
     printf("                2. KELUAR                            \n");
 
-    gotoxy(30, 16);
+    gotoxy(30, 11);
     printf("          PILIHAN	: ");
     scanf("%d", &input);
     scanf("%c", &terminate);
@@ -262,7 +243,7 @@ void menuAwal()
 {
     int pilihan;
     DataProvinsi provinsi;
-    provinsi.firstChild = NULL;
+    // provinsi.firstChild = ;
 
     do
     {

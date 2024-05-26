@@ -5,3 +5,6 @@
 4 0940786970606668 88776655 Husein_Hidayat 09/10/1997 L Tgygj_Laemj HS Islam Kawin Tgygj
 5 0904861495493330 88776655 Mimin_Suramin 21/10/1993 P Bsdsf_Uatmflm Bogor Islam Kawin Tgygj
 6 21098 56789 Tuti 01/01/2001 P Uatajm Bandung Islam Kawin Tsfvmfy
+7 8888999900001111 56789012 Dayat 02/02/2002 L Ywywjcsdgfy Cimahi Islam Kawin Tsfvmfy
+8 9999000011112222 56789012 Asep_Tono 03/03/2003 L Uaosjmys Bandung Islam Belum_Kawin Ywywjcsdgfy
+9 8901234554321098 55667799 Udin_Petot 05/05/1995 L Uaesza Cimahi Islam Kawin Ywywjcsdgfy

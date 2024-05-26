@@ -160,3 +160,33 @@
 ] Pengguna admin melakukan login.
 [Sun May 26 14:25:32 2024
 ] Pengguna admin melakukan login.
+[Sun May 26 21:34:22 2024
+] Pengguna admin melakukan login.
+[Sun May 26 21:36:52 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Kmcstmea
+[Sun May 26 21:37:30 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 88990011
+[Sun May 26 21:45:27 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: 9
+[Sun May 26 21:45:37 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Uaosjmys
+[Sun May 26 21:47:54 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 89012345
+[Sun May 26 21:48:11 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ywywjcsdgfy
+[Sun May 26 21:49:30 2024
+] Pengguna admin melakukan aksi: Menambahkan data penduduk pada data dengan NIK: 8888999900001111
+[Sun May 26 21:55:10 2024
+] Pengguna admin melakukan login.
+[Sun May 26 22:02:51 2024
+] Pengguna admin melakukan login.
+[Sun May 26 22:05:49 2024
+] Pengguna admin melakukan login.
+[Sun May 26 22:06:20 2024
+] Pengguna admin melakukan login.
+[Sun May 26 22:08:32 2024
+] Pengguna admin melakukan login.
+[Sun May 26 22:10:41 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 88990022
+[Sun May 26 22:12:26 2024
+] Pengguna admin melakukan login.
