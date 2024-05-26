@@ -94,16 +94,25 @@ void addAdmin()
 {
     // Membungkus password & username menjadi struct
     Admin admin;
+    int usernameExists;
 
     // Clear the input buffer
     int c;
     while ((c = getchar()) != '\n' && c != EOF) {}
 
-    // input username
-    printf("Masukkan Username : ");
-    fgets(admin.username, sizeof(admin.username), stdin);
-    // Remove newline character from input
-    admin.username[strcspn(admin.username, "\n")] = '\0';
+    do {
+        // Input username
+        printf("Masukkan Username : ");
+        fgets(admin.username, sizeof(admin.username), stdin);
+        admin.username[strcspn(admin.username, "\n")] = '\0'; // Remove newline character from input
+
+        // Check if username already exists
+        usernameExists = checkUsernameExists(admin.username);
+        if (usernameExists)
+        {
+            printf("Username sudah ada. Silakan masukkan username yang lain.\n");
+        }
+    } while (usernameExists);
 
     // input password
     printf("Masukkan Password : ");
@@ -118,6 +127,31 @@ void addAdmin()
 
     // Memberikan keterangan bahwa penambahan admin berhasil
     printf("Admin dengan username %s berhasil ditambahkan.\n", admin.username);
+}
+
+int checkUsernameExists(const char* username)
+{
+    FILE *file = fopen("admin.txt", "r");
+    if (file == NULL)
+    {
+        return 0; // File doesn't exist, no usernames to check
+    }
+
+    char existingUsername[50];
+    char existingPassword[50];
+    int existingJumlahGeser;
+
+    while (fscanf(file, "%s %s %d", existingUsername, existingPassword, &existingJumlahGeser) != EOF)
+    {
+        if (strcmp(existingUsername, username) == 0)
+        {
+            fclose(file);
+            return 1; // Username exists
+        }
+    }
+
+    fclose(file);
+    return 0; // Username does not exist
 }
 
 // Function untuk generate kunci random & arah random
@@ -887,21 +921,15 @@ void showPenduduk()
     char userChoice;
     printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
     scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y')
-    {
+    if (userChoice == 'Y' || userChoice == 'y') {
         searchByName(penduduk, count);
-    }
-    else
-    {
+    } else {
         printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
         scanf(" %c", &userChoice);
-        if (userChoice == 'Y' || userChoice == 'y')
-        {
+        if (userChoice == 'Y' || userChoice == 'y') {
             menuAwal();
-        }
-        else
-        {
-            printf("Terima kasih.\n");
+        } else {
+            showPenduduk();
         }
     }
 }
@@ -933,25 +961,19 @@ void searchByName(DataPenduduk penduduk[], int count)
         printf("Data dengan nama yang mengandung \"%s\" tidak ditemukan.\n", searchName);
     }
 
-    // Meminta pengguna untuk kembali ke menu
-    printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
+    // Meminta pengguna untuk kembali ke menu atau ke pencarian nama
     char userChoice;
+    printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
     scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y')
-    {
+    if (userChoice == 'Y' || userChoice == 'y') {
         searchByName(penduduk, count);
-    }
-    else
-    {
+    } else {
         printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
         scanf(" %c", &userChoice);
-        if (userChoice == 'Y' || userChoice == 'y')
-        {
+        if (userChoice == 'Y' || userChoice == 'y') {
             menuAwal();
-        }
-        else
-        {
-            printf("Terima kasih.\n");
+        } else {
+            showPenduduk();
         }
     }
 }
@@ -1103,13 +1125,10 @@ void tampilkanHistory()
     char userChoice;
     printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
     scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y')
-    {
+    if (userChoice == 'Y' || userChoice == 'y') {
         menuAwal();
-    }
-    else
-    {
-        printf("Terima kasih.\n");
+    } else {
+        tampilkanHistory();
     }
 }
 
