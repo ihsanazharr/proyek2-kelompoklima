@@ -243,7 +243,6 @@ void menuAwal()
 {
     int pilihan;
     DataProvinsi provinsi;
-    // provinsi.firstChild = ;
 
     do
     {
@@ -302,6 +301,7 @@ void menuAwal()
             tampilkanHistory(); // Menampilkan history saat opsi 7 dipilih
             break;
         case 8:
+            provinsi.firstChild = NULL;
             tambahKota(&provinsi); // struktur tree
             break;
         case 9:
