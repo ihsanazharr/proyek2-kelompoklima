@@ -4,6 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 #include "../disdukcapil.h"
+#define MAX_LINE_LENGTH 1000
 
 static int keyStr = 18; // Tidak boleh >= 26
 static int keyInt = 7;  // Tidak boleh >= 10
@@ -55,6 +56,22 @@ void tampilkanDataPendudukDariKK(DataKK *kkNode) {
 void menuCariKartuKeluarga(DataProvinsi *root) {
     system("cls");
     char noKK[20];
+    FILE *file, *temp;
+    DataPenduduk data;
+    char userChoose;
+    bool found = false;
+    int n = 0;
+
+    file = fopen("dataKK.txt", "r");
+    temp = fopen("tempDataKK.txt", "w");
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error membuka/membuat file!");
+        exit(1);
+    }
+
+    displayDecryptedNoKK();
+
     printf("Masukkan no KK: ");
     scanf("%s", noKK);
 
@@ -141,7 +158,34 @@ void tambahKota(DataProvinsi* provinsi) {
     }
 }
 
+void displayDecryptedNoKK()
+{
+    FILE *file = fopen("dataKK.txt", "r");
+    if (file == NULL)
+    {
+        printf("File tidak dapat dibuka!");
+        exit(1);
+    }
 
+    DataKK data;
+    char line[MAX_LINE_LENGTH];
+    printf("=================================================\n");
+    printf("\tDaftar Nomor Kartu Kekuarga (Terdekripsi)\n");
+    printf("=================================================\n");
+
+    while (fgets(line, sizeof(line), file) != NULL)
+    {
+        // Menggunakan sscanf untuk membaca data dari satu baris
+        sscanf(line, "%d %s ", &data.id, data.noKK);
+        char decryptedNoKK[18];
+        strcpy(decryptedNoKK, data.noKK);
+        dekripsiInteger(decryptedNoKK, keyInt);
+        printf("%s (Normal: %s)\n", decryptedNoKK, data.noKK);
+    }
+    printf("=================================================\n");
+
+    fclose(file);
+}
 
 void showKota() {
     // system("cls"); // Clear screen
@@ -168,7 +212,6 @@ void showKota() {
         printf("Tidak ada data yang tersedia.\n");
         return;
     }
-
     // Sorting
     bubbleSort(kota, count);
 

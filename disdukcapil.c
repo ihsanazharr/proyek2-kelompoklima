@@ -399,13 +399,24 @@ void addPenduduk(DataKota *kota)
     printf("=================================================\n");
     dat->id = count;
 
-    printf("NIK: ");
-    scanf("%s", dat->NIK);
+    // Input NIK with validation
+    do {
+        printf("NIK: ");
+        scanf("%s", dat->NIK);
+        if (strlen(dat->NIK) != 16) {
+            printf("NIK harus 16 digit!\n");
+        }
+    } while (strlen(dat->NIK) != 16);
 
-    // Cek validitas No. KK
-    fflush(stdin);
-    printf("No. KK: ");
-    scanf("%s", dat->noKK);
+    // Input No. KK with validation
+    do {
+        fflush(stdin);
+        printf("No. KK: ");
+        scanf("%s", dat->noKK);
+        if (strlen(dat->noKK) != 16) {
+            printf("No. KK harus 16 digit!\n");
+        }
+    } while (strlen(dat->noKK) != 16);
 
     // Enkripsi noKK sebelum memeriksa keberadaannya dalam file
     enkripsiInteger(dat->noKK, keyInt);
@@ -591,6 +602,7 @@ void addPenduduk(DataKota *kota)
         addPenduduk(kota); // Rekursif untuk menambah data lagi jika dipilih
     }
 }
+
 
 void enkripsiHuruf(char *kalimat, int key)
 {
