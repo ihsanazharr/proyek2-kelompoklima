@@ -104,29 +104,33 @@ void hitungPersentaseDemografis(int total, int laki_laki, int perempuan, int isl
         printf("1. Jenis Kelamin\n");
         printf("2. Agama\n");
         printf("3. Status Perkawinan\n");
-        printf("4. Kembali ke Menu Utama\n");
+        printf("0. Kembali\n");
         printf("Pilih opsi: ");
         scanf("%d", &pilihan);
         getchar();  // Menangani newline setelah scanf
 
         switch (pilihan) {
             case 1:
+                system("cls");
                 hitungPersentaseJenisKelamin(total, laki_laki, perempuan);
                 break;
             case 2:
+                system("cls");
                 hitungPersentaseAgama(total, islam, kristen, katolik, hindu, buddha, konghucu);
                 break;
             case 3:
+                system("cls");
                 hitungPersentaseStatus(total, kawin, belum_kawin, cerai_hidup, cerai_mati);
                 break;
-            case 4:
+            case 0:
+                system("cls");
                 printf("Kembali ke Menu Utama.\n");
                 break;
             default:
                 printf("Pilihan tidak valid. Silakan coba lagi.\n");
                 break;
         }
-    } while (pilihan != 4);
+    } while (pilihan != 0);
 }
 
 // Fungsi utama yang menjalankan menu program
@@ -140,13 +144,14 @@ void menu() {
         printf("Menu Utama:\n");
         printf("1. Baca Data Penduduk\n");
         printf("2. Hitung Persentase Demografis Jawa Barat\n");
-        printf("3. Keluar\n");
+        printf("0. Keluar\n");
         printf("Pilih opsi: ");
         scanf("%d", &pilihan);
         getchar();  // Menangani newline setelah scanf
 
         switch (pilihan) {
             case 1: {
+                system("cls");
                 // Reset statistik sebelum membaca data baru
                 jumlahPenduduk = 0;
                 int total = 0;
@@ -170,6 +175,7 @@ void menu() {
                 break;
             }
             case 2: {
+                system("cls");
                 // Menghitung dan mencetak persentase demografis
                 int total = 0;
                 int laki_laki = 0;
@@ -196,5 +202,5 @@ void menu() {
                 printf("Pilihan tidak valid. Silakan coba lagi.\n");
                 break;
         }
-    } while (pilihan != 3);
+    } while (pilihan != 0);
 }
