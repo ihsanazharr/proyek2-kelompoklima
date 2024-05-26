@@ -4,3 +4,4 @@
 3 112345 55667788 Budi 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
 4 0940786970606668 88776655 Husein_Hidayat 09/10/1997 L Tgygj_Laemj HS Islam Kawin Tgygj
 5 0904861495493330 88776655 Mimin_Suramin 21/10/1993 P Bsdsf_Uatmflm Bogor Islam Kawin Tgygj
+6 21098 56789 Tuti 01/01/2001 P Uatajm Bandung Islam Kawin Tsfvmfy

@@ -73,6 +73,7 @@ void gotoxy(int x, int y);
 int pilihanMenuAwal();
 void menuAwal();
 void addAdmin();
+int checkUsernameExists(const char* username);
 void enkripsiPassword(char *password, int jumlahGeser);
 void generateAngkaGeser(int *jumlahgeser);
 void simpanFileAdmin(Admin admin);
