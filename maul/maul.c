@@ -41,10 +41,32 @@ void tambahKK(DataKota* kota) {
 
     kk->id = count;
 
-    fflush(stdin);
-    printf("Masukan No KK : ");
-    fgets(kk->noKK, sizeof(kk->noKK), stdin);
-    kk->noKK[strcspn(kk->noKK, "\n")] = '\0';
+    while (1) {
+        fflush(stdin);
+        printf("Masukkan No KK (16 digit): ");
+        fgets(kk->noKK, sizeof(kk->noKK), stdin);
+        kk->noKK[strcspn(kk->noKK, "\n")] = '\0';
+
+        if (strlen(kk->noKK) != 16) {
+            printf("Nomor KK harus terdiri dari 16 digit. Silakan coba lagi.\n");
+            continue;
+        }
+
+        bool valid = true;
+        for (int i = 0; i < 16; i++) {
+            if (kk->noKK[i] < '0' || kk->noKK[i] > '9') {
+                valid = false;
+                break;
+            }
+        }
+
+        if (!valid) {
+            printf("Nomor KK harus terdiri dari angka. Silakan coba lagi.\n");
+            continue;
+        }
+
+        break;
+    }
 
     for (int i = 0; kk->noKK[i]; i++) {
         if (kk->noKK[i] == ' ') {
@@ -73,13 +95,13 @@ void tambahKK(DataKota* kota) {
         return;
     } else {
         file = fopen("dataKK.txt", "a");
-        enkripsiInteger(kk->noKK, keyint);
         if (file == NULL) {
             printf("Gagal membuka dataKK.txt untuk penulisan\n");
             free(kk);
             return;
         }
 
+        enkripsiInteger(kk->noKK, keyint);
         if (fprintf(file, "%d %s\n", kk->id, kk->noKK) < 0) {
             printf("Gagal menulis ke file\n");
             fclose(file); // Tutup file sebelum keluar dari fungsi

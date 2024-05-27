@@ -1,11 +1,2 @@
-0 0940788776767778 56789012 Gugun_Gunawan 10/10/1998 L Bsdsf_Ksjaesvm Bandung Islam Belum_Kawin Tsfvmfy
-1 0940787869757770 56789012 Juju_Suhartini 01/02/1998 P Bsdsf_Uatmflm Bandung Islam Belum_Kawin Tsfvmfy
-2 0949067860504448 55667788 Shimano_Usep 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
-3 112345 55667788 Budi 08/10/1990 L Bsdsf_Uatwtwj Cibeber Kristen Belum_Kawin Ysjml
-4 0940786970606668 88776655 Husein_Hidayat 09/10/1997 L Tgygj_Laemj HS Islam Kawin Tgygj
-5 0904861495493330 88776655 Mimin_Suramin 21/10/1993 P Bsdsf_Uatmflm Bogor Islam Kawin Tgygj
-6 21098 56789 Tuti 01/01/2001 P Uatajm Bandung Islam Kawin Tsfvmfy
-7 8888999900001111 56789012 Dayat 02/02/2002 L Ywywjcsdgfy Cimahi Islam Kawin Tsfvmfy
-8 9999000011112222 56789012 Asep_Tono 03/03/2003 L Uaosjmys Bandung Islam Belum_Kawin Ywywjcsdgfy
-9 8901234554321098 55667799 Udin_Petot 05/05/1995 L Uaesza Cimahi Islam Kawin Ywywjcsdgfy
-10 4561238904561239 5678901235678901 hasem 05/06/2005 P Uaesza BCimahi islam belum_kawin Ysjml
+
+1 8901234554321098 5678567856785678 Suyitno 09/09/1989 L Tsfvmfy Cimahi Islam Kawin Tsfvmfy
