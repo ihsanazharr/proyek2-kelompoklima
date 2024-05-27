@@ -53,6 +53,8 @@ typedef struct FamilyTreeNode
     struct FamilyTreeNode *nextSibling;
 } DataPenduduk;
 
+void showPenduduk();
+
 void displayDecryptedNikList();
 
 void tambahKota(DataProvinsi *provinsi);

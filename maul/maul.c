@@ -117,7 +117,7 @@ void tambahKK(DataKota* kota) {
     }
 
     char pilihUser;
-    printf("\nApakah ingin menambah data lagi? [Y/N] : ");
+    printf("\nApakah ingin menambah data lagi? [Y / not Y] : ");
     scanf(" %c", &pilihUser);
     getchar(); // Untuk mengkonsumsi karakter newline yang tersisa oleh scanf
     if (pilihUser == 'Y' || pilihUser == 'y') {
@@ -178,7 +178,7 @@ void hapusKK()
     if (found)
     {
         printf("Data dengan noKK %s ditemukan.\n", userInputCpy);
-        printf("Apakah Anda yakin ingin menghapus kk ini? [Y/N]: ");
+        printf("Apakah Anda yakin ingin menghapus kk ini? [Y / not Y]: ");
         scanf(" %c", &userChoose);
         if (userChoose == 'Y' || userChoose == 'y')
         {
@@ -285,7 +285,7 @@ void hapusKota()
     if (found)
     {
         printf("Data dengan namaKota %s ditemukan.\n", userInputCpy);
-        printf("Apakah Anda yakin ingin menghapus kota ini? [Y/N]: ");
+        printf("Apakah Anda yakin ingin menghapus kota ini? [Y / not Y]: ");
         scanf(" %c", &userChoose);
         if (userChoose == 'Y' || userChoose == 'y')
         {

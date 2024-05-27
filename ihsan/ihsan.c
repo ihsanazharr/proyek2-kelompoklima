@@ -17,7 +17,7 @@ void showPenduduk() {
 
     FILE *file;
     DataPenduduk data;
-    DataPenduduk penduduk[100]; // Assuming a maximum of 100 records
+    DataPenduduk penduduk[100]; 
 
     file = fopen("dataPenduduk.txt", "r");
     if (file == NULL) {
@@ -55,17 +55,17 @@ void showPenduduk() {
 
     // Meminta pengguna untuk mencari data berdasarkan nama atau No. KK atau kembali ke menu
     char userChoice;
-    printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
+    printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y / not Y]: ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y') {
         searchByName(penduduk, count);
     } else {
-        printf("Apakah Anda ingin mencari data berdasarkan No. KK? [Y/N]: ");
+        printf("Apakah Anda ingin mencari data berdasarkan No. KK? [Y / not Y]: ");
         scanf(" %c", &userChoice);
         if (userChoice == 'Y' || userChoice == 'y') {
             searchByNoKK(penduduk, count);
         } else {
-            printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+            printf("Apakah Anda ingin kembali ke menu? [Y / not Y]: ");
             scanf(" %c", &userChoice);
             if (userChoice == 'Y' || userChoice == 'y') {
                 menuAwal();
@@ -99,12 +99,12 @@ void searchByNoKK(DataPenduduk penduduk[], int count) {
 
     // Meminta pengguna untuk kembali ke menu atau ke pencarian No. KK
     char userChoice;
-    printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
+    printf("\nApakah Anda ingin mencari data lagi? [ Y / not Y]: ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y') {
         searchByNoKK(penduduk, count);
     } else {
-        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+        printf("Apakah Anda ingin kembali ke menu? [ Y / not Y]: ");
         scanf(" %c", &userChoice);
         if (userChoice == 'Y' || userChoice == 'y') {
             menuAwal();
@@ -143,12 +143,12 @@ void searchByName(DataPenduduk penduduk[], int count)
 
     // Meminta pengguna untuk kembali ke menu atau ke pencarian nama
     char userChoice;
-    printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
+    printf("\nApakah Anda ingin mencari data lagi? [ Y / not Y ]: ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y') {
         searchByName(penduduk, count);
     } else {
-        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+        printf("Apakah Anda ingin kembali ke menu? [ Y / not Y]: ");
         scanf(" %c", &userChoice);
         if (userChoice == 'Y' || userChoice == 'y') {
             menuAwal();
@@ -221,7 +221,7 @@ void tambahKota(DataProvinsi* provinsi) {
 
     // Pilihan untuk menambah data lagi
     char pilihanUser;
-    printf("\nApakah Anda ingin menambah data lagi? (Y/N): ");
+    printf("\nApakah Anda ingin menambah data lagi? ( Y / not Y ): ");
     scanf(" %c", &pilihanUser);
     if (pilihanUser == 'Y' || pilihanUser == 'y') {
         tambahKota(provinsi); // Rekursif untuk menambah data lagi jika dipilih

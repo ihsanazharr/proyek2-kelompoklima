@@ -257,99 +257,94 @@ void loginAdmin()
     }
 }
 
-void menuAwal()
-{
+void menuAwal() {
     int pilihan;
     DataProvinsi provinsi;
+    
+    DataKota *kota = provinsi.firstChild;
 
-    do
-    {
+    do {
         loading();
         system("cls");
         printf("Menu:\n");
-        printf("1. Lihat Data Penduduk\n");
-        printf("2. Edit Penduduk\n");
-        printf("3. Add Penduduk\n");
-        printf("4. Delete Data Penduduk\n");
-        printf("5. Tambah Admin\n");
-        printf("6. Statistik Penduduk\n");
-        printf("7. Tampilkan History\n");
-        printf("8. Tambah Kota\n");
-        printf("9. Lihat Kota\n");
-        printf("10. Kejadian Penting\n");
-        printf("11. Tampilkan Tree\n");
-        printf("12. Tambah KK\n"); 
-        printf("13. Hapus KK\n");  
-        printf("14. Hapus Kota\n");  
+        printf("1. Tambah Kota\n");
+        printf("2. Lihat Kota\n");
+        printf("3. Hapus Kota\n");
+        printf("4. Tambah KK\n");
+        printf("5. Hapus KK\n");
+        printf("6. Tambah Penduduk\n");
+        printf("7. Lihat Data Penduduk\n");
+        printf("8. Edit Penduduk\n");
+        printf("9. Hapus Data Penduduk\n");
+        printf("10. Tambah Admin\n");
+        printf("11. Statistik Penduduk\n");
+        printf("12. Tampilkan History\n");
+        printf("13. Kejadian Penting\n");
+        printf("14. Tampilkan Tree\n");
         printf("0. Keluar\n");
-        printf("Pilih menu: ");
-        scanf("%d", &pilihan);
 
-        switch (pilihan)
-        {
+        int validInput = 0;
+        while (!validInput) {
+            printf("Pilih menu: ");
+            if (scanf("%d", &pilihan) == 1 && pilihan >= 0 && pilihan <= 14) {
+                validInput = 1;
+            } else {
+                printf("Masukkan tidak valid, coba kembali.\n");
+                while (getchar() != '\n'); // Clear the input buffer
+            }
+        }
+
+        switch (pilihan) {
         case 1:
-            showPenduduk();
-            system("cls");
+            provinsi.firstChild = NULL;
+            tambahKota(&provinsi);
             break;
         case 2:
-            editPenduduk();
-            system("cls");
+            showKota();
             break;
         case 3:
-            if (provinsi.firstChild == NULL)
-            {
+            hapusKota();
+            break;
+        case 4:
+            tambahKK(&kota);
+            break;
+        case 5:
+            hapusKK();
+            break;
+        case 6:
+            if (provinsi.firstChild == NULL) {
                 printf("Tidak ada kota yang tersedia. Tambahkan kota terlebih dahulu.\n");
                 break;
             }
             DataKota *kota = provinsi.firstChild;
             addPenduduk(kota);
-            system("cls");
-            break;
-        case 4:
-            deleteData();
-            system("cls");
-            break;
-        case 5:
-            addAdmin();
-            // system("cls");
-            break;
-        case 6:
-            menu(); // Menampilkan history saat opsi 6 dipilih
             break;
         case 7:
-            tampilkanHistory(); // Menampilkan history saat opsi 7 dipilih
+            showPenduduk();
             break;
         case 8:
-            provinsi.firstChild = NULL;
-            tambahKota(&provinsi); // struktur tree
+            editPenduduk();
             break;
         case 9:
-            showKota();
-            system("cls");
+            deleteData();
             break;
         case 10:
-            kejadianPenting();
-            system("cls");
+            addAdmin();
             break;
         case 11:
-            tampilkanTree();
-            system("cls");
+            menu();
             break;
         case 12:
-            tambahKK(&kota);  // Panggil fungsi addkk saat opsi 12 dipilih
-            system("cls");
+            tampilkanHistory();
             break;
         case 13:
-            hapusKK();
-            system("cls");
+            kejadianPenting();
             break;
         case 14:
-            hapusKota();
-            system("cls");
+            tampilkanTree();
             break;
         case 0:
             pilihanMenuAwal();
-            system("cls");
             break;
         default:
             printf("Masukkan tidak valid, coba kembali.\n");
@@ -602,7 +597,7 @@ void addPenduduk(DataKota *kota)
 
     // Pilihan untuk menambah data lagi
     char pilihanUser;
-    printf("\nApakah Anda ingin menambah data lagi? (Y/N): ");
+    printf("\nApakah Anda ingin menambah data lagi? ( Y / not Y): ");
     scanf(" %c", &pilihanUser);
     if (pilihanUser == 'Y' || pilihanUser == 'y')
     {
@@ -718,7 +713,7 @@ void deleteData()
     if (found)
     {
         printf("Data dengan NIK %s ditemukan.\n", userInputCpy);
-        printf("Apakah Anda yakin ingin menghapus data ini? [Y/N]: ");
+        printf("Apakah Anda yakin ingin menghapus data ini? [ Y / not Y ]: ");
         scanf(" %c", &userChoose);
         if (userChoose == 'Y' || userChoose == 'y')
         {
@@ -895,7 +890,7 @@ void editPenduduk()
         catatAktivitas("Mengedit data penduduk", data.NIK);
     }
 
-    printf("\nApakah Anda ingin mengedit data lagi? (Y/N): ");
+    printf("\nApakah Anda ingin mengedit data lagi? ( Y / not Y ): ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y')
     {
@@ -1048,7 +1043,7 @@ void tampilkanHistory()
 
     // Meminta pengguna untuk kembali ke menu
     char userChoice;
-    printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
+    printf("Apakah Anda ingin kembali ke menu? [ Y / not Y]: ");
     scanf(" %c", &userChoice);
     if (userChoice == 'Y' || userChoice == 'y') {
         menuAwal();
