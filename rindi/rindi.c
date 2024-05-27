@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include "../ihsan/ihsan.h"
+#include "../maul/maul.h"
 #include "../disdukcapil.h"
 
 // Fungsi untuk membaca data penduduk dari file

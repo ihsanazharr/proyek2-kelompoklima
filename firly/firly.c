@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <time.h>
 #include <conio.h>
+#include "../ihsan/ihsan.h"
+#include "../maul/maul.h"
 #include "../disdukcapil.h"
 
 extern int keyStr;

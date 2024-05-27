@@ -1,4 +1,6 @@
 #include "../disdukcapil.h"
+#include "../ihsan/ihsan.h"
+#include "../maul/maul.h"
 
 typedef struct KeluargaTreeNode {
     char noKK[20];

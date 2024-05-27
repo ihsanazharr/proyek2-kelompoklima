@@ -1,4 +1,6 @@
 #include "../disdukcapil.h"
+#include "../ihsan/ihsan.h"
+#include "maul.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -249,7 +251,7 @@ void hapusKota()
         exit(1);
     }
 
-    printf("Masukkan no kota yang ingin dihapus: ");
+    printf("Masukkan nama kota yang ingin dihapus: ");
     scanf("%s", userInput);
     strcpy(userInputCpy, userInput);
     enkripsiHuruf(userInput, keystr);

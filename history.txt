@@ -341,3 +341,13 @@
 ] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tsfvmfy
 [Mon May 27 08:55:37 2024
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 8901890189018901
+[Mon May 27 09:10:32 2024
+] Pengguna admin melakukan login.
+[Mon May 27 09:11:02 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 1098109810981098
+[Mon May 27 09:11:21 2024
+] Pengguna admin melakukan aksi: Menghapus kk penduduk pada data dengan NIK: 4321432143214321
+[Mon May 27 09:12:55 2024
+] Pengguna admin melakukan login.
+[Mon May 27 09:13:37 2024
+] Pengguna admin melakukan aksi: Mengedit data penduduk pada data dengan NIK: 8901234554321098

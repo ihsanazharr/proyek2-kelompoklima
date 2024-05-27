@@ -1,7 +1,9 @@
 #include "disdukcapil.h"
 #include "ihsan/ihsan.c"
+#include "ihsan/ihsan.h"
 #include "firly/firly.c"
 #include "maul/maul.c"
+#include "maul/maul.h"
 #include "rindi/rindi.c"
 #include "ilham/ilham.c"
 #include <stdlib.h>

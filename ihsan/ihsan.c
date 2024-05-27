@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include "ihsan.h"
+#include "../maul/maul.h"
 #include "../disdukcapil.h"
 #define MAX_LINE_LENGTH 1000
 
