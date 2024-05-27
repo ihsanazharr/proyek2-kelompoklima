@@ -99,3 +99,110 @@ void tambahKK(DataKota* kota) {
         tambahKK(kota);
     }
 }
+
+void hapusKK()
+{
+    system("cls");
+    FILE *file, *temp;
+    DataKK kk;
+    char userInput[20];
+    char userInputCpy[20];
+    char userChoose;
+    bool found = false;
+    int n = 0;
+
+    file = fopen("dataKK.txt", "r");
+    temp = fopen("tempKK.txt", "w");
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error membuka/membuat file!");
+        exit(1);
+    }
+
+    printf("Masukkan no kk yang ingin dihapus: ");
+    scanf("%s", userInput);
+    strcpy(userInputCpy, userInput);
+    enkripsiInteger(userInput, keyint);
+
+    int i = 0;
+    rewind(file);
+    while (fscanf(file, "%d %s", &kk.id, kk.noKK) != EOF)
+    {
+
+        char buffer[1000];
+        while (fgets(buffer, sizeof(buffer), file) != NULL)
+        {
+            if (buffer[strlen(buffer) - 1] == '\n')
+            {
+                break;
+            }
+        }
+        if (strcmp(userInput, kk.noKK) != 0)
+        {
+            if (found == false)
+            {
+                i++;
+            }
+        }
+        else
+        {
+            found = true;
+        }
+    }
+
+    if (found)
+    {
+        printf("Data dengan noKK %s ditemukan.\n", userInputCpy);
+        printf("Apakah Anda yakin ingin menghapus kk ini? [Y/N]: ");
+        scanf(" %c", &userChoose);
+        if (userChoose == 'Y' || userChoose == 'y')
+        {
+            printf("Data dengan noKK %s telah dihapus.\n", userInputCpy);
+            Sleep(2000);
+            rewind(file);
+            char line[1000];
+            int n = 0;
+            while (fgets(line, sizeof(line), file) != NULL)
+            {
+                if (n == i)
+                {
+                    n++;
+                    continue;
+                }
+                fputs(line, temp);
+                n++;
+            }
+            catatAktivitas("Menghapus kk penduduk", userInputCpy);
+        }
+        else
+        {
+            printf("Penghapusan kk dibatalkan.\n");
+            n = 1;
+            Sleep(2000);
+        }
+    }
+
+    if (!found)
+    {
+        fclose(file);
+        fclose(temp);
+        remove("tempKK.txt");
+        printf("Data tidak ditemukan!!!");
+        Sleep(2000);
+        return;
+    }
+
+    if (n == 1)
+    {
+        fclose(file);
+        fclose(temp);
+        remove("tempKK.txt");
+        Sleep(2000);
+        return;
+    }
+
+    fclose(file);
+    fclose(temp);
+    remove("dataKK.txt");
+    rename("tempKK.txt", "dataKK.txt");
+}

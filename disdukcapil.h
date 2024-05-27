@@ -124,4 +124,6 @@ void Pernikahan();
 void Kematian();
 void Kelahiran();
 
+void hapusKK();
+
 #endif // DISDUKCAPIL_H

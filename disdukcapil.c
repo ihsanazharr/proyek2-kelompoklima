@@ -278,6 +278,7 @@ void menuAwal()
         printf("11. Tampilkan Tree\n");
         printf("12. Tambah KK\n"); 
         printf("13. Cari Kartu Keluarga\n");  
+        printf("14. Hapus KK\n");  
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -338,6 +339,10 @@ void menuAwal()
             break;
         case 13:
             menuCariKartuKeluarga(&provinsi);
+            system("cls");
+            break;
+        case 14:
+            hapusKK();
             system("cls");
             break;
         case 0:

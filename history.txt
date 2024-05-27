@@ -206,3 +206,27 @@
 ] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Hsklwmj
 [Mon May 27 06:53:31 2024
 ] Pengguna admin melakukan login.
+[Mon May 27 07:33:56 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:34:24 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 8901234568901234
+[Mon May 27 07:35:34 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:39:33 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:42:45 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:43:27 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 4561238904561238
+[Mon May 27 07:47:11 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:50:00 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:54:48 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:56:23 2024
+] Pengguna admin melakukan login.
+[Mon May 27 07:56:44 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 890123
+[Mon May 27 07:57:02 2024
+] Pengguna admin melakukan aksi: Menghapus kk penduduk pada data dengan NIK: 123456
