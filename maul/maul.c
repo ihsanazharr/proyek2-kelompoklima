@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdbool.h>
 
+static int keystr = 18;
 static int keyint = 7;
 
 void tambahKK(DataKota* kota) {
@@ -205,4 +206,111 @@ void hapusKK()
     fclose(temp);
     remove("dataKK.txt");
     rename("tempKK.txt", "dataKK.txt");
+}
+
+void hapusKota()
+{
+    system("cls");
+    FILE *file, *temp;
+    DataKota kota;
+    char userInput[20];
+    char userInputCpy[20];
+    char userChoose;
+    bool found = false;
+    int n = 0;
+
+    file = fopen("dataKota.txt", "r");
+    temp = fopen("tempKota.txt", "w");
+    if (file == NULL || temp == NULL)
+    {
+        printf("Error membuka/membuat file!");
+        exit(1);
+    }
+
+    printf("Masukkan no kota yang ingin dihapus: ");
+    scanf("%s", userInput);
+    strcpy(userInputCpy, userInput);
+    enkripsiHuruf(userInput, keystr);
+
+    int i = 0;
+    rewind(file);
+    while (fscanf(file, "%d %s", &kota.id, kota.namaKota) != EOF)
+    {
+
+        char buffer[1000];
+        while (fgets(buffer, sizeof(buffer), file) != NULL)
+        {
+            if (buffer[strlen(buffer) - 1] == '\n')
+            {
+                break;
+            }
+        }
+        if (strcmp(userInput, kota.namaKota) != 0)
+        {
+            if (found == false)
+            {
+                i++;
+            }
+        }
+        else
+        {
+            found = true;
+        }
+    }
+
+    if (found)
+    {
+        printf("Data dengan namaKota %s ditemukan.\n", userInputCpy);
+        printf("Apakah Anda yakin ingin menghapus kota ini? [Y/N]: ");
+        scanf(" %c", &userChoose);
+        if (userChoose == 'Y' || userChoose == 'y')
+        {
+            printf("Data dengan namaKota %s telah dihapus.\n", userInputCpy);
+            Sleep(2000);
+            rewind(file);
+            char line[1000];
+            int n = 0;
+            while (fgets(line, sizeof(line), file) != NULL)
+            {
+                if (n == i)
+                {
+                    n++;
+                    continue;
+                }
+                fputs(line, temp);
+                n++;
+            }
+            catatAktivitas("Menghapus kota penduduk", userInputCpy);
+        }
+        else
+        {
+            printf("Penghapusan kota dibatalkan.\n");
+            n = 1;
+            Sleep(2000);
+        }
+    }
+
+    if (!found)
+    {
+        fclose(file);
+        fclose(temp);
+        remove("tempKota.txt");
+        printf("Data tidak ditemukan!!!");
+        Sleep(2000);
+        return;
+    }
+
+    if (n == 1)
+    {
+        fclose(file);
+        fclose(temp);
+        remove("tempKota.txt");
+        Sleep(2000);
+        return;
+    }
+
+    fclose(file);
+    fclose(temp);
+    remove("dataKota.txt");
+    rename("tempKota.txt", "dataKota.txt");
 }

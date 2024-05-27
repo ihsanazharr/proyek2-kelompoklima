@@ -230,3 +230,31 @@
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 890123
 [Mon May 27 07:57:02 2024
 ] Pengguna admin melakukan aksi: Menghapus kk penduduk pada data dengan NIK: 123456
+[Mon May 27 08:04:57 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:05:08 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Hsdwetsfy
+[Mon May 27 08:05:36 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: skv
+[Mon May 27 08:12:47 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:13:55 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: skv
+[Mon May 27 08:16:02 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:16:22 2024
+] Pengguna admin melakukan aksi: Menghapus kota penduduk pada data dengan NIK: skv
+[Mon May 27 08:17:38 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:18:00 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: tsvma
+[Mon May 27 08:18:18 2024
+] Pengguna admin melakukan aksi: Menghapus kota penduduk pada data dengan NIK: asd
+[Mon May 27 08:18:30 2024
+] Pengguna admin melakukan aksi: Menghapus kota penduduk pada data dengan NIK: badui
+[Mon May 27 08:20:11 2024
+] Pengguna admin melakukan aksi: Menghapus kota penduduk pada data dengan NIK: Ciwaruga
+[Mon May 27 08:22:53 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:23:05 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: skv

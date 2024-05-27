@@ -125,5 +125,6 @@ void Kematian();
 void Kelahiran();
 
 void hapusKK();
+void hapusKota();
 
 #endif // DISDUKCAPIL_H

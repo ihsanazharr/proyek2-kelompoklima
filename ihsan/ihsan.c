@@ -213,7 +213,7 @@ void showKota() {
         return;
     }
     // Sorting
-    bubbleSort(kota, count);
+    // bubbleSort(kota, count);
 
     printf("==============================================================================================\n");
     printf("| %-5s | %-20s |\n", "ID", "Nama Kota");
