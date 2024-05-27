@@ -277,8 +277,7 @@ void menuAwal()
         printf("10. Kejadian Penting\n");
         printf("11. Tampilkan Tree\n");
         printf("12. Tambah KK\n"); 
-        printf("13. Cari Kartu Keluarga\n");  
-        printf("14. Hapus KK\n");  
+        printf("13. Hapus KK\n");  
         printf("0. Keluar\n");
         printf("Pilih menu: ");
         scanf("%d", &pilihan);
@@ -338,10 +337,6 @@ void menuAwal()
             system("cls");
             break;
         case 13:
-            menuCariKartuKeluarga(&provinsi);
-            system("cls");
-            break;
-        case 14:
             hapusKK();
             system("cls");
             break;
@@ -898,113 +893,6 @@ void editPenduduk()
     if (userChoice == 'Y' || userChoice == 'y')
     {
         editPenduduk(); // Rekursif untuk mengedit data lagi jika dipilih
-    }
-}
-
-void showPenduduk()
-{
-    system("cls"); // Clear screen
-
-    FILE *file;
-    DataPenduduk data;
-    DataPenduduk penduduk[100]; // Assuming a maximum of 100 records
-
-    file = fopen("dataPenduduk.txt", "r");
-    if (file == NULL)
-    {
-        printf("File tidak dapat dibuka\n");
-        return;
-    }
-
-    int count = 0;
-    while (fscanf(file, "%d %s %s %s %s %c %s %s %s %s %s", &data.id, data.NIK, data.noKK, data.nama, data.tanggalLahir, &data.jk, data.alamat, data.tempat_lahir, data.agama, data.status, data.namaKota) != EOF)
-    {
-        dekripsiHuruf(data.alamat, keyStr);
-        dekripsiInteger(data.NIK, keyInt);
-        dekripsiInteger(data.noKK, keyInt);
-        penduduk[count++] = data;
-    }
-
-    fclose(file);
-
-    if (count == 0)
-    {
-        printf("Tidak ada data yang tersedia.\n");
-        return;
-    }
-
-    // Sorting
-    bubbleSort(penduduk, count);
-
-    printf("=============================================================================================================================================================================================\n");
-    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status", "No. KK", "Tanggal Lahir");
-    printf("=============================================================================================================================================================================================\n");
-
-    for (int i = 0; i < count; i++)
-    {
-        printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status, penduduk[i].noKK, penduduk[i].tanggalLahir);
-    }
-
-    printf("=============================================================================================================================================================================================\n");
-
-    // Meminta pengguna untuk mencari data berdasarkan nama atau kembali ke menu
-    char userChoice;
-    printf("\nApakah Anda ingin mencari data berdasarkan nama? [Y/N]: ");
-    scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y') {
-        searchByName(penduduk, count);
-    } else {
-        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
-        scanf(" %c", &userChoice);
-        if (userChoice == 'Y' || userChoice == 'y') {
-            menuAwal();
-        } else {
-            showPenduduk();
-        }
-    }
-}
-
-void searchByName(DataPenduduk penduduk[], int count)
-{
-    char searchName[50];
-    printf("Masukkan nama (huruf yang diinginkan): ");
-    scanf("%s", searchName);
-
-    printf("=============================================================================================================================================================================================\n");
-    printf("| %-5s | %-15s | %-20s | %-3s | %-30s | %-20s | %-15s | %-15s | %-15s | %-15s |\n", "ID", "NIK", "Nama Lengkap", "JK", "Alamat", "Tempat Lahir", "Agama", "Status", "No. KK", "Tanggal Lahir");
-    printf("=============================================================================================================================================================================================\n");
-
-    int found = 0;
-    for (int i = 0; i < count; i++)
-    {
-        char result[100];                                        // Menyimpan hasil pencarian nama
-        strcasestr_custom(penduduk[i].nama, searchName, result); // Pencarian tanpa case sensitive
-        if (result[0] != '\0')
-        {
-            printf("| %-5d | %-15s | %-20s | %-3c | %-30s | %-20s | %-15s | %-15s | %-15s | %-15s |\n", penduduk[i].id, penduduk[i].NIK, penduduk[i].nama, penduduk[i].jk, penduduk[i].alamat, penduduk[i].tempat_lahir, penduduk[i].agama, penduduk[i].status, penduduk[i].noKK, penduduk[i].tanggalLahir);
-            found = 1;
-        }
-    }
-
-    if (!found)
-    {
-        printf("Data dengan nama yang mengandung \"%s\" tidak ditemukan.\n", searchName);
-    }
-
-    // Meminta pengguna untuk kembali ke menu atau ke pencarian nama
-    char userChoice;
-    printf("\nApakah Anda ingin mencari data lagi? [Y/N]: ");
-    scanf(" %c", &userChoice);
-    if (userChoice == 'Y' || userChoice == 'y') {
-        searchByName(penduduk, count);
-    } else {
-        printf("Apakah Anda ingin kembali ke menu? [Y/N]: ");
-        scanf(" %c", &userChoice);
-        if (userChoice == 'Y' || userChoice == 'y') {
-            menuAwal();
-        } else {
-            showPenduduk();
-        }
     }
 }
 

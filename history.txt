@@ -230,3 +230,33 @@
 ] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 890123
 [Mon May 27 07:57:02 2024
 ] Pengguna admin melakukan aksi: Menghapus kk penduduk pada data dengan NIK: 123456
+[Mon May 27 08:14:17 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:19:51 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:20:35 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:21:24 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:22:27 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 8901234554321098
+[Mon May 27 08:23:24 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:23:32 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Uaesza
+[Mon May 27 08:23:52 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Ysjml
+[Mon May 27 08:24:51 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:25:33 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Uaesza
+[Mon May 27 08:25:56 2024
+] Pengguna admin melakukan aksi: Menghapus kk penduduk pada data dengan NIK: 1234567887654321
+[Mon May 27 08:28:06 2024
+] Pengguna admin melakukan login.
+[Mon May 27 08:28:32 2024
+] Pengguna admin melakukan aksi: Menambahkan data kota pada data dengan NIK: Tsfvmfy
+[Mon May 27 08:28:51 2024
+] Pengguna admin melakukan aksi: Menambahkan data kk pada data dengan NIK: 8901890189018901
+[Mon May 27 08:29:57 2024
+] Pengguna admin melakukan login.
